@@ -17,3 +17,10 @@ h2{
 .navbar-brand{
     margin:0 2rem;
 }
+button{
+    font-weight: bold;
+    border-radius: 12px;
+}
+button:hover{
+    content: '\2666';
+}
