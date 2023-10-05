@@ -1,17 +1,18 @@
 body {
-  padding-top: 5rem;
+    padding-top: 5rem;
+    font-family: Consolas sans-serif;
 }
 .starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
 }
 
 h1{
-	color:#0000FF;
+    color:#0000FF;
 }
 
 h2{
-	color:#FF0000;
+    color:#FF0000;
 }
 
 .navbar-brand{
@@ -20,7 +21,13 @@ h2{
 button{
     font-weight: bold;
     border-radius: 12px;
+    padding: 10px;
+    border-color: #b9d4f3;
+    background-color: #cbecec;
+    margin:5px;
+    font-size: large;
 }
 button:hover{
-    content: '\2666';
+    background-color: rgb(255, 178, 13);
+    border-color: #f3b9b9;
 }
