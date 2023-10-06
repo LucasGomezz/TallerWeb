@@ -4,8 +4,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta la imagen para cubrir completamente el contenedor */
-    object-position: center; /* Centra la imagen horizontalmente y verticalmente */
+    object-fit: cover;
+    object-position: center;
     z-index: -1;
 }
 
