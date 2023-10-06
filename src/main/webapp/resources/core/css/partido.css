@@ -34,6 +34,10 @@
     bottom: 400px;
     left: 740px;
 }
+
+.jug-vis-1{
+    margin-top: 30px;
+}
 @font-face {
     font-family: 'Digital Display';
     src: url('https://praxeds.github.io/scrimba-basketball-scoreboard/Assets/Digital-Display.woff2') format('woff2'),
@@ -49,4 +53,18 @@
     font-size:40px;
     display:flex;
     justify-content: center;
+}
+.div-menu-tiro{
+    padding: 50px 50px;
+    margin: 5px;
+    background-color: white;
+    border-style:solid;
+    border-width: 3px;
+    border-radius: 12px;
+}
+#barra-tiro {
+    height: 100%;
+    width: 0;
+    background-color: #5cff00;
+    transition: width 1s ease-in-out;
 }

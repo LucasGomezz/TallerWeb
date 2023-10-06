@@ -16,5 +16,10 @@ public class ControladorPartida {
 
             return new ModelAndView("partido");
         }
+    @RequestMapping("/partido-aro")
+    public ModelAndView irAlAro() {
+
+        return new ModelAndView("partido-aro");
+    }
     }
 
