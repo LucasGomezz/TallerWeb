@@ -34,3 +34,19 @@
     bottom: 400px;
     left: 740px;
 }
+@font-face {
+    font-family: 'Digital Display';
+    src: url('https://praxeds.github.io/scrimba-basketball-scoreboard/Assets/Digital-Display.woff2') format('woff2'),
+    url('https://praxeds.github.io/basketball-scoreboard/Assets/Digital-Display.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.score{
+    font-family: 'Digital Display',monospace;
+    color: #ffffff;
+    font-size:40px;
+    display:flex;
+    justify-content: center;
+}
