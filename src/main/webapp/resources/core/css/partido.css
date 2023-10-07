@@ -74,6 +74,7 @@
     justify-content: center;
     background-color: #46c8de;
     align-items: center;
+    margin-top: 200px;
 }
 .partido-resultado-moneda{
     display: flex;
