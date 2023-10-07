@@ -73,6 +73,7 @@
     flex-direction: column;
     justify-content: center;
     background-color: #46c8de;
+    align-items: center;
 }
 .partido-resultado-moneda{
     display: flex;
@@ -82,4 +83,10 @@
 }
 .cant-monedas{
     margin-left: 10px;
+}
+.moneda{
+    margin-left: 30px;
+}
+.boton-resultado{
+    margin-left:25px;
 }
