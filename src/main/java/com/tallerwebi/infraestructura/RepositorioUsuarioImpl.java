@@ -14,9 +14,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public RepositorioUsuarioImpl(SessionFactory sessionFactory){
-        this.sessionFactory = sessionFactory;
-    }
+    public RepositorioUsuarioImpl(SessionFactory sessionFactory){this.sessionFactory = sessionFactory;}
 
     @Override
     public Usuario buscarUsuario(String email, String password) {

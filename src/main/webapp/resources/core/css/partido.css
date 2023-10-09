@@ -69,12 +69,16 @@
     border-radius: 12px;
 }
 .partido-resultado-body{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
     background-color: #46c8de;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 200px;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+
 }
 .partido-resultado-moneda{
     display: flex;
