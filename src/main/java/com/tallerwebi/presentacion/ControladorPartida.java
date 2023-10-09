@@ -21,5 +21,10 @@ public class ControladorPartida {
 
         return new ModelAndView("partido-aro");
     }
+    @RequestMapping("/partido-resultado")
+    public ModelAndView irAlResultado() {
+
+        return new ModelAndView("partido-resultado");
+    }
     }
 

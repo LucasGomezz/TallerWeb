@@ -68,4 +68,26 @@
     border-width: 3px;
     border-radius: 12px;
 }
+.partido-resultado-body{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #46c8de;
+    align-items: center;
+    margin-top: 200px;
+}
+.partido-resultado-moneda{
+    display: flex;
+    flex-direction: row;
+    margin-bottom:30px;
 
+}
+.cant-monedas{
+    margin-left: 10px;
+}
+.moneda{
+    margin-left: 30px;
+}
+.boton-resultado{
+    margin-left:25px;
+}
