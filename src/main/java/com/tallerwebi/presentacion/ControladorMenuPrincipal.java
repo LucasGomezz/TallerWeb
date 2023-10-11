@@ -11,4 +11,14 @@ public class ControladorMenuPrincipal {
 
         return new ModelAndView("menuPrincipal");
     }
+    @RequestMapping("/partido-items")
+    public ModelAndView irAItems() {
+
+        return new ModelAndView("partido-items");
+    }
+    @RequestMapping("/tienda")
+    public ModelAndView irATienda() {
+
+        return new ModelAndView("tienda");
+    }
 }

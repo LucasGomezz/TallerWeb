@@ -26,5 +26,6 @@ public class ControladorPartida {
 
         return new ModelAndView("partido-resultado");
     }
+
     }
 

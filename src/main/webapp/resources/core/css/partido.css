@@ -108,3 +108,30 @@
     position: relative;
     top:60px;
 }
+.partido-item{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:20px;
+}
+.partido-item-todos{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.img-item{
+    margin-bottom:40px;
+}
+.body-partido-items{
+    background-color: #695b5b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.input-number{
+    width:24%;
+    padding: 8px;
+    border-radius: 5px;
+}
