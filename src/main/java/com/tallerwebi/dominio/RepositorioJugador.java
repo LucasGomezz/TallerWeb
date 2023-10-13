@@ -1,12 +1,7 @@
 package com.tallerwebi.dominio;
 
 public interface RepositorioJugador {
-
-    void driblear();
-    void tirar();
-    void pasar();
-    void robar();
-    void tapar();
-    void interceptar();
+    Jugador buscar(Long id);
+    void guardar(Jugador jugador);
 }
 

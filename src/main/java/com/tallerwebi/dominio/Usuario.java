@@ -17,10 +17,6 @@ public class Usuario {
     private Boolean activo = false;
 
 
-    public  Usuario(){
-
-    }
-
     public Long getId() {
         return id;
     }

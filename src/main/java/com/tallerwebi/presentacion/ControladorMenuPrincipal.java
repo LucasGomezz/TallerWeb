@@ -16,9 +16,5 @@ public class ControladorMenuPrincipal {
 
         return new ModelAndView("partido-items");
     }
-    @RequestMapping("/tienda")
-    public ModelAndView irATienda() {
 
-        return new ModelAndView("tienda");
-    }
 }

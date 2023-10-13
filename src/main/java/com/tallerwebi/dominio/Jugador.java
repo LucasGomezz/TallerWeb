@@ -14,17 +14,13 @@ public class Jugador {
     private String nombre;
     //meter todos los stats en una clase Stats?
     private Integer drible;
-    private Integer tiroDoble;
-    private Integer tiroTriple;
+    private Integer tiro;
     private Integer pase;
     private Integer robo;
-    private Integer tape;
+    private Integer tapa;
     private Integer intercepcion;
     private String imagen;
 
-    public Jugador() {
-
-    }
 
     public Long getId() {
         return id;
@@ -50,21 +46,12 @@ public class Jugador {
         this.drible = drible;
     }
 
-    public Integer getTiroDoble() {
-        return tiroDoble;
+    public void setTiro(Integer tiro) {this.tiro = tiro;}
+
+    public Integer getTiro() {
+        return tiro;
     }
 
-    public void setTiroDoble(Integer tiroDoble) {
-        this.tiroDoble = tiroDoble;
-    }
-
-    public Integer getTiroTriple() {
-        return tiroTriple;
-    }
-
-    public void setTiroTriple(Integer tiroTriple) {
-        this.tiroTriple = tiroTriple;
-    }
 
     public Integer getPase() {
         return pase;
@@ -82,12 +69,12 @@ public class Jugador {
         this.robo = robo;
     }
 
-    public Integer getTape() {
-        return tape;
+    public Integer getTapa() {
+        return tapa;
     }
 
-    public void setTape(Integer tape) {
-        this.tape = tape;
+    public void setTapa(Integer tapa) {
+        this.tapa = tapa;
     }
 
     public Integer getIntercepcion() {

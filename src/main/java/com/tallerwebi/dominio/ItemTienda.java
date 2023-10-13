@@ -15,10 +15,6 @@ public class ItemTienda {
     private Integer precio;
     private String imagen;
 
-    public ItemTienda() {
-
-    }
-
     public Long getId() {
         return id;
     }
