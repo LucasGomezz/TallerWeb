@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControladorPartida {
 //Se pueden usar todos los servicios necesarios
     private ServicioJugador servicioJugador;
-//Los controladores se comunica con los servicios y saben si esta todo bien gracias a las exceptions
+//Los controladores se comunica con los servicios y saben si estatodo bien gracias a las exceptions
     @Autowired
     public ControladorPartida(ServicioJugador servicioJugador){this.servicioJugador = servicioJugador;}
 
@@ -23,23 +23,10 @@ public class ControladorPartida {
         }
         @RequestMapping("/partido")
         public ModelAndView irAPartido() {
-            servicioJugador.registrar("carlos",1,1,1,1,1,1,"...");
-            Jugador jugador = servicioJugador.buscarJugador("carlos");
-            ModelMap modelo=new ModelMap();
-            modelo.addAttribute("jugador", jugador);
-            return new ModelAndView("partido",modelo);
+            return new ModelAndView("partido");
         }
     @RequestMapping("/partido-aro")
     public ModelAndView irAlAro() {
-        String nombre = "lucas";
-        Integer drible = 12;
-        Integer tiro = 12;
-        Integer pase = 12;
-        Integer robo = 12;
-        Integer tapa = 12;
-        Integer intercepcion = 12;
-        String imagen  = "Lucas";
-        servicioJugador.registrar(nombre,drible,tiro,pase,robo,tapa,intercepcion,imagen);
 
         return new ModelAndView("partido-aro");
     }
