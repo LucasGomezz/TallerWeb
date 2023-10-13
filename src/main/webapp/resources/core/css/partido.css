@@ -1,3 +1,10 @@
+.container-partido{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
 .cancha-img {
     position: fixed;
     top: 0;
@@ -11,36 +18,29 @@
 
 .div-grande {
     display: flex;
-    position: absolute;
-    bottom: 65px;
-    left: 800px;
-}
-.div-menu{
-    padding: 50px 70px;
-    margin: 5px;
-
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
 }
 .div-dado{
     background-color: white;
-    padding: 28px 50px;
-    margin: 5px;
+    padding: 1rem;
     border-style:solid;
     border-width: 3px;
 }
+
 .div-jugadores{
     display:flex;
     flex-direction: row;
-    position: absolute;
-    bottom: 400px;
-    left: 740px;
+    justify-content: center;
 }
-.jug-loc-2{
-    margin-top: 30px;
+.div-jugadores .img-player{
+    width: 10rem;
+}
+.img-player img{
+    height: 15rem;
 }
 
-.jug-vis-1{
-    margin-top: 30px;
-}
 @font-face {
     font-family: 'Digital Display';
     src: url('https://praxeds.github.io/scrimba-basketball-scoreboard/Assets/Digital-Display.woff2') format('woff2'),
@@ -54,8 +54,7 @@
     font-family: 'Digital Display',monospace;
     color: #ffffff;
     font-size:40px;
-    display:flex;
-    justify-content: center;
+    text-align: center;
 }
 .div-menu-tiro{
     display: flex;
