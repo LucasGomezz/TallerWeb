@@ -26,6 +26,13 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    row-gap: 1.5rem;
+}
+.menuPrincipal a{
+    width: 100%;
+}
+.menuPrincipal a button{
+    width: 100%;
 }
 
 

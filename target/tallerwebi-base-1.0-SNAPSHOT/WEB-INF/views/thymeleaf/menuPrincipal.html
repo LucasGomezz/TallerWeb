@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Menu Principal</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/manuPrincipal.css">
 </head>
 <body>
 
   <div class="menuPrincipal">
-      <a href="partido-items"><button>Juego Rápido</button></a>
-    <button>Torneo</button>
-    <a href="tienda"><button>Tienda</button></a>
+      <a href="partido-items">
+          <button>Juego Rápido</button>
+      </a>
+      <a href="#">
+          <button>Torneo</button>
+      </a>
+      <a href="tienda">
+          <button>Tienda</button>
+      </a>
   </div>
   <img class="fondo" src="images/MENUFONDO.jpg">
 </body>
