@@ -15,11 +15,8 @@ public class ItemTienda {
     private Integer precio;
     private String imagen;
 
-    public ItemTienda(Long id, String nombre, Integer precio, String imagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.imagen = imagen;
+    public ItemTienda() {
+
     }
 
     public Long getId() {
