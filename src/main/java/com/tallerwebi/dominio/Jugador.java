@@ -22,6 +22,20 @@ public class Jugador {
     private Integer intercepcion;
     private String imagen;
 
+    public Jugador(Long id, String nombre, Integer drible, Integer tiroDoble, Integer tiroTriple,
+                   Integer pase, Integer robo, Integer tape, Integer intercepcion, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.drible = drible;
+        this.tiroDoble = tiroDoble;
+        this.tiroTriple = tiroTriple;
+        this.pase = pase;
+        this.robo = robo;
+        this.tape = tape;
+        this.intercepcion = intercepcion;
+        this.imagen = imagen;
+    }
+
     public Long getId() {
         return id;
     }

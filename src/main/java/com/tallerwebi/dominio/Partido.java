@@ -16,6 +16,14 @@ public class Partido {
     @Transient
     private List<Jugador> jugadoresPc;
 
+    public Partido(Long id, Integer puntosUsuario, Integer puntosPc, List<Jugador> jugadoresUsuario, List<Jugador> jugadoresPc) {
+        this.id = id;
+        this.puntosUsuario = puntosUsuario;
+        this.puntosPc = puntosPc;
+        this.jugadoresUsuario = jugadoresUsuario;
+        this.jugadoresPc = jugadoresPc;
+    }
+
     public Long getId() {
         return id;
     }
