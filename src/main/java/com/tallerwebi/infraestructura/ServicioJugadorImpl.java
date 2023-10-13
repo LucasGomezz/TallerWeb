@@ -3,20 +3,27 @@ package com.tallerwebi.infraestructura;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.ServicioJugador;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.annotation.ServletSecurity;
+import javax.transaction.Transactional;
 
-@Service("servicioJugador")
+@Service
+@Transactional
 public class ServicioJugadorImpl implements ServicioJugador {
-    private RepositorioJugador repoJugador;
 
+    private RepositorioJugador repositorioJugador;
+
+    @Autowired
+    public ServicioJugadorImpl(RepositorioJugador repositorioJugador){
+        this.repositorioJugador = repositorioJugador;};
 
     @Override
     public void registrar(String nombre, Integer drible, Integer tiro, Integer pase, Integer robo,
                           Integer tapa, Integer intercepcion, String imagen) {
         Jugador jugador = new Jugador();
-        this.repoJugador.guardar(jugador);
+        this.repositorioJugador.guardar(jugador);
         jugador.setNombre(nombre);
         jugador.setDrible(drible);
         jugador.setTiro(tiro);
@@ -26,6 +33,11 @@ public class ServicioJugadorImpl implements ServicioJugador {
         jugador.setIntercepcion(intercepcion);
         jugador.setImagen(imagen);
 }
+
+    @Override
+    public Jugador buscarJugador(String nombre) {
+        return this.repositorioJugador.buscar(nombre);
+    }
 }
 
 

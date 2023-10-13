@@ -21,7 +21,6 @@ public class Jugador {
     private Integer intercepcion;
     private String imagen;
 
-
     public Long getId() {
         return id;
     }

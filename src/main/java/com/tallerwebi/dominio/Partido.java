@@ -13,10 +13,11 @@ public class Partido {
     private Integer puntosPc;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Usuario usuario;
-    @Transient
-    private List<Jugador> jugadoresUsuario;
-    @Transient
-    private List<Jugador> jugadoresPc;
+
+    @OneToOne
+    private Equipo equipoJugador;
+    @OneToOne
+    private Equipo equipoPc;
 
 
     public Long getId() {
@@ -30,6 +31,7 @@ public class Partido {
     public Integer getPuntosUsuario() {
         return puntosUsuario;
     }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -37,6 +39,7 @@ public class Partido {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
     public void setPuntosUsuario(Integer puntosUsuario) {
         this.puntosUsuario = puntosUsuario;
     }
@@ -49,19 +52,19 @@ public class Partido {
         this.puntosPc = puntosPc;
     }
 
-    public List<Jugador> getJugadoresUsuario() {
-        return jugadoresUsuario;
+    public Equipo getEquipoJugador() {
+        return equipoJugador;
     }
 
-    public void setJugadoresUsuario(List<Jugador> jugadoresUsuario) {
-        this.jugadoresUsuario = jugadoresUsuario;
+    public void setEquipoJugador(Equipo equipoJugador) {
+        this.equipoJugador = equipoJugador;
     }
 
-    public List<Jugador> getJugadoresPc() {
-        return jugadoresPc;
+    public Equipo getEquipoPc() {
+        return equipoPc;
     }
 
-    public void setJugadoresPc(List<Jugador> jugadoresPc) {
-        this.jugadoresPc = jugadoresPc;
+    public void setEquipoPc(Equipo equipoPc) {
+        this.equipoPc = equipoPc;
     }
 }
