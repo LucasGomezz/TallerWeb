@@ -118,14 +118,13 @@
            <version>1.4.2</version>
        </dependency>
        <!-- compile only, deployed container will provide this -->
-        <!--
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${servletapi.version}</version>
             <scope>provided</scope>
         </dependency>
-        -->
     </dependencies>
 
     <build>
