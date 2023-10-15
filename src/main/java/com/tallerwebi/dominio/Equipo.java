@@ -1,7 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 public class Equipo {
 

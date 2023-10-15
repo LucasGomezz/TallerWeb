@@ -3,7 +3,7 @@ package com.tallerwebi.infraestructura;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.Usuario;
-import javax.inject.Inject;
+//import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
