@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!startTime) startTime = timestamp;
                 const tiempoTranscurrido = timestamp - startTime;
                 const porcentajeCompletado = tiempoTranscurrido / llenarDuracion;
-                const valorPorcentaje = Math.ceil(anchoInicial + porcentajeCompletado * (anchoMaximo - anchoInicial));
+                const valorPorcentaje = Math.ceil(anchoInicial + porcentajeCompletado * anchoMaximo);
                 progreso.style.width = valorPorcentaje + '%';
                 valorBarra = valorPorcentaje;
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!startTime) startTime = timestamp;
                 const tiempoTranscurrido = timestamp - startTime;
                 const porcentajeCompletado = tiempoTranscurrido / vaciarDuracion;
-                const valorPorcentaje = Math.floor(anchoMaximo - porcentajeCompletado * (anchoMaximo - anchoInicial));
+                const valorPorcentaje = Math.floor(anchoMaximo - porcentajeCompletado * anchoMaximo);
                 progreso.style.width = valorPorcentaje + '%';
                 valorBarra = valorPorcentaje;
 
