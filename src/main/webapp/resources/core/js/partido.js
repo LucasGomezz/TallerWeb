@@ -3,6 +3,7 @@ const botonTirar = document.querySelector('#tirar');
 const botonPasar = document.querySelector('#pasar');
 
     botonDriblear.addEventListener('click', () => {
+    /**JSON.stringify({parametro: "drible"});*/
 
     });
 

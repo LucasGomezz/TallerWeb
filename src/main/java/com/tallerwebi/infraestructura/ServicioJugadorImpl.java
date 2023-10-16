@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.google.gson.Gson;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.ServicioJugador;
@@ -52,6 +53,8 @@ public class ServicioJugadorImpl implements ServicioJugador {
                 stat2=jugador2.getIntercepcion();
                 break;}
         if(stat1>stat2){
+           /** Gson gson=new Gson();
+            String json=gson.toJson(true);*/
             return true;}
         return false;}
 }
