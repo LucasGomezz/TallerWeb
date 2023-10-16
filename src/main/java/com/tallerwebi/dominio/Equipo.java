@@ -7,6 +7,8 @@ public class Equipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idEquipo;
+
     private String nombre;
     @OneToOne
     private Jugador jugador1;
