@@ -1,7 +1,10 @@
 package com.tallerwebi.dominio;
 
+import java.util.List;
+
 public interface RepositorioEquipo {
-    void agregarJugador(Jugador jugador);
-    Equipo buscar (String nombre);
+    Equipo buscar (Long id);
+    Equipo buscarPorNombre (String id);
     void crear(Equipo equipo);
+    List<Equipo> listAll();
 }

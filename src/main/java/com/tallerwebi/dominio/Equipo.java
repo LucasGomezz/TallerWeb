@@ -17,6 +17,8 @@ public class Equipo {
 
     private String color;
 
+    private String logo;
+
     public String getNombre() {
         return nombre;
     }
@@ -47,5 +49,21 @@ public class Equipo {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Long getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(Long idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 }

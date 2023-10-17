@@ -2,24 +2,37 @@
     margin: 0;
     padding: 0;
 }
-body{
-    width: 100vw;
-    height: 100vh;
-    //poner fondo de madera
+.fondo{
     border: 10px solid #B99F84;
     box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
 }
 .equipos{
     background-color:black;
     display: flex;
     margin: 2em 4em;
-    display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
     padding: 1em;
     font-weight: 600;
     font-size: larger;
     border: 5px solid #926540;
     box-sizing: border-box;
+    color: white;
+    flex-direction: column;
+}
+.nombresEquipos{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    width: 100%;
 }
 .equipos p{
     margin: 10px;

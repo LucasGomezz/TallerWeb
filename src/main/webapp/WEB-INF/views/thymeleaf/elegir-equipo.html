@@ -3,48 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Elegir Equipo</title>
-    <link rel="stylesheet" href="elegirEquipo.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/elegirEquipo.css">
 </head>
 <body>
+<img class="fondo" src="images/pisoCancha.png">
 <div class="equipos">
     <div>
-        <p>Boston Celtics</p>
-        <p>Brooklyn Nets</p>
-        <p>New York Knicks</p>
-        <p>Philadelphia 76ers</p>
-        <p>Toronto Raptors</p>
-        <p>Golden State Warriors</p>
-        <p>LA Clippers</p>
-        <p>Los Angeles Lakers</p>
-        <p>Phoenix Suns</p>
-        <p>Sacramento Kings</p>
+    <h1 th:text="${titulo}"> </h1>
+
     </div>
-    <div>
-        <p>Chicago Bulls</p>
-        <p>Cleveland Cavaliers</p>
-        <p>Detroit Pistons</p>
-        <p>Indiana Pacers</p>
-        <p>Milwaukee Bucks</p>
-        <p>Atlanta Hawks</p>
-        <p>Charlotte Hornets</p>
-        <p>Miami Heat</p>
-        <p>Orlando Magic</p>
-        <p>Washington Wizards</p>
+    <div class="nombresEquipos">
+        <div>
+            <table>
+                <tr th:each="e, iterStat : ${equipos}" th:if="${iterStat.index % 2 == 0}">
+                    <td>
+                        <form>
+                            <input type="hidden" th:value="${e.idEquipo}">
+                            <button th:text="${e.nombre}" />
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table>
+                <tr th:each="e, iterStat : ${equipos}" th:if="${iterStat.index % 2 != 0}">
+                    <td>
+                        <form action="elegir-equipo" method="POST">
+                            <input type="hidden" th:value="${e.idEquipo}">
+                            <button th:text="${e.nombre}" />
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
+
+
 </div>
 <div class="sleccionEquipos">
     <div class="equipoJugador">
         <div class="logo">
-            <img src="" alt="">
+           <!-- <img th:src="${equipo1.getLogo()}" alt="Logo del equipo">-->
         </div>
         <div class="estadisticas">
             <div class="estadisticasJ1">
-                <p>Tiro: </p>
-                <p>Pase: </p>
-                <p>Dribling: </p>
-                <p>Robo: </p>
-                <p>Intercepcion: </p>
-                <p>Tapa: </p>
+               <!-- <p>Tiro: <p th:text="${equipo1.getJugador1().getTiro()}"></p></p>
+                <p>Pase: <p th:text="${equipo1.getJugador1().getPase()}"></p></p>
+                <p>Dribling: <p th:text="${equipo1.getJugador1().getDrible()}"></p></p>
+                <p>Robo: <p th:text="${equipo1.getJugador1().getRobo()}"></p></p>
+                <p>Intercepcion: <p th:text="${equipo1.getJugador1().getIntercepcion()}"></p></p>
+                <p>Tapa: <p th:text="${equipo1.getJugador1().getTapa()}"></p></p>-->
             </div>
             <div class="estadisticasJ2">
                 <p>Tiro: </p>

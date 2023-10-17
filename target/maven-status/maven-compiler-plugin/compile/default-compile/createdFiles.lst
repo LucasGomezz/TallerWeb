@@ -5,4 +5,4 @@ com\tallerwebi\infraestructura\RepositorioJugadorImpl.class
 com\tallerwebi\dominio\ServicioJugador.class
 com\tallerwebi\dominio\Equipo.class
 com\tallerwebi\dominio\ServicioEquipo.class
-com\tallerwebi\infraestructura\RepositoriosEquipoImpl.class
+com\tallerwebi\infraestructura\RepositorioEquipoImpl.class
