@@ -40,7 +40,11 @@ public class ControladorPartida {
         }
     }
 
-
+    @RequestMapping("/partido-items")//Hacer verificacion de que esten los dos equipos
+    public ModelAndView irAItems() {
+        ModelMap modelo = new ModelMap();
+        return new ModelAndView("partido-items",modelo);
+    }
     @RequestMapping(path = "/partido", method = RequestMethod.GET)
     public ModelAndView irAPartido(@RequestParam(required=true) Long idEquipo1, Long idEquipo2) {
         //www.web.unlam.com/partido?idEquipo1=1
@@ -59,13 +63,6 @@ public class ControladorPartida {
         modelo.put("equipo2", equipo2);
 
         return new ModelAndView("partido", modelo);
-    }
-
-    
-    @RequestMapping("/partido-items")
-    public ModelAndView irAItems() {
-        ModelMap modelo = new ModelMap();
-        return new ModelAndView("partido-items",modelo);
     }
 
     @RequestMapping("/partido-aro")

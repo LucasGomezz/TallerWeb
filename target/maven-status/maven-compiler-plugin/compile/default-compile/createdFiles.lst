@@ -1,8 +1,12 @@
 com\tallerwebi\infraestructura\ServicioEquipoImpl.class
 com\tallerwebi\dominio\RepositorioEquipo.class
 com\tallerwebi\infraestructura\ServicioJugadorImpl.class
+com\tallerwebi\infraestructura\RepositorioItemTiendaImpl.class
+com\tallerwebi\dominio\ServicioItemTienda.class
 com\tallerwebi\infraestructura\RepositorioJugadorImpl.class
+com\tallerwebi\infraestructura\ServicioItemTiendaImpl.class
 com\tallerwebi\dominio\ServicioJugador.class
+com\tallerwebi\dominio\RepositorioItemTienda.class
 com\tallerwebi\dominio\Equipo.class
 com\tallerwebi\dominio\ServicioEquipo.class
 com\tallerwebi\infraestructura\RepositorioEquipoImpl.class

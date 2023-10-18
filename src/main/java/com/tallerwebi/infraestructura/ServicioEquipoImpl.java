@@ -16,10 +16,11 @@ public class ServicioEquipoImpl implements ServicioEquipo {
     @Autowired
     private RepositorioJugador repositorioJugador;
 
- /*   @Autowired
-    public ServicioEquipoImpl(RepositorioJugador repositorioJugador){
-        this.repositorioEquipo = repositorioEquipo;
-    }*/
+    @Autowired
+    public ServicioEquipoImpl(RepositorioJugador repositorioJugador, RepositorioEquipo respositorioEquipo){
+        this.repositorioEquipo = respositorioEquipo;
+        this.repositorioJugador= repositorioJugador;
+    }
 
 
     @Override
