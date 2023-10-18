@@ -130,9 +130,15 @@
     </div>
 </div>
 <div>
-    <a href="partido-items">
-        <button class="confirmar">Confirmar</button>
-    </a>
+
+        <form action="partido">
+            <span th:if="${equipo1!= null && equipo2!= null}">
+            <input type="hidden" th:value="${idPartido}" name="idPartido"/>
+            <button class="confirmar">Confirmar</button>
+        </span>
+        </form>
+
+
 </div>
 
 

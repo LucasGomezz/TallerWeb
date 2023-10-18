@@ -39,8 +39,11 @@
 }
 .img-player img{
     height: 15rem;
-}
 
+}
+.img-player{
+    text-align: center;
+}
 @font-face {
     font-family: 'Digital Display';
     src: url('https://praxeds.github.io/scrimba-basketball-scoreboard/Assets/Digital-Display.woff2') format('woff2'),
@@ -133,4 +136,29 @@
     width:40%;
     padding: 8px;
     border-radius: 5px;
+}
+.verde{
+    background-color: black;
+    color: green;
+    border-radius: 10px;
+}
+.rojo{
+    background-color: black;
+    color: red;
+    border-radius: 10px;
+}
+.azul{
+    background-color: black;
+    color: blue;
+    border-radius: 10px;
+}
+.naranja{
+    background-color: black;
+    color: orangered;
+    border-radius: 10px;
+}
+.amarillo{
+    background-color: black;
+    color: yellow;
+    border-radius: 10px;
 }

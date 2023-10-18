@@ -13,23 +13,29 @@
         <h1 class="score mt-3 mb-3">14 - 28</h1>
         <div class="div-jugadores mt-5 ms-5">
             <div class="img-player">
-                <img th:src="${equipo1.getJugador1().getImagen()}" alt="jugador" class="jug-loc-1">
+                <p th:text="${partido.getEquipoJugador().getJugador1().getNombre()}" th:class="${partido.getEquipoJugador().getColor()}"></p>
+                <img th:src="${partido.getEquipoJugador().getJugador1().getImagen()}" alt="jugador" class="jug-loc-1">
             </div>
             <div class="img-player">
-                <img th:src="${equipo1.getJugador2().getImagen()}" alt="jugador" class="jug-loc-2 mt-5">
+                <p th:text="${partido.getEquipoJugador().getJugador2().getNombre()}" th:class="${partido.getEquipoJugador().getColor()}"></p>
+                <img th:src="${partido.getEquipoJugador().getJugador2().getImagen()}" alt="jugador" class="jug-loc-2 mt-5">
             </div>
             <div class="img-player">
-                <img th:src="${equipo2.getJugador1().getImagen()}" alt="jugador" class="jug-vis-1 mt-5">
+                <p th:text="${partido.getEquipoPc().getJugador2().getNombre()}" th:class="${partido.getEquipoPc().getColor()}"></p>
+                <img th:src="${partido.getEquipoPc().getJugador2().getImagen()}" alt="jugador" class="jug-vis-1 mt-5">
             </div>
             <div class="img-player">
-                <img th:src="${equipo2.getJugador1().getImagen()}" alt="jugador" class="jug-vis-2">
+                <p th:text="${partido.getEquipoPc().getJugador1().getNombre()}" th:class="${partido.getEquipoPc().getColor()}"></p>
+                <img th:src="${partido.getEquipoPc().getJugador1().getImagen()}" alt="jugador" class="jug-vis-2">
             </div>
         </div>
 
         <div class="div-grande mb-4">
             <div class="div-menu">
                 <button id="driblear">Driblear</button>
-                <button id="tirar">Tirar</button>
+                <a href="partido-aro">
+                    <button id="tirar">Tirar</button>
+                </a>
                 <button id="pasar">Pasar</button>
             </div>
             <div class="div-dado">
