@@ -13,16 +13,16 @@
         <h1 class="score mt-3 mb-3">14 - 28</h1>
         <div class="div-jugadores mt-5 ms-5">
             <div class="img-player">
-                <img src="images/JUGADOR-LOCAL.png" alt="jugador" class="jug-loc-1">
+                <img th:src="${equipo1.getJugador1().getImagen()}" alt="jugador" class="jug-loc-1">
             </div>
             <div class="img-player">
-                <img src="images/JUGADOR-LOCAL-CON-PELOTA.png" alt="jugador" class="jug-loc-2 mt-5">
+                <img th:src="${equipo1.getJugador2().getImagen()}" alt="jugador" class="jug-loc-2 mt-5">
             </div>
             <div class="img-player">
-                <img src="images/JUGADOR-VISITANTE.png" alt="jugador" class="jug-vis-1 mt-5">
+                <img th:src="${equipo2.getJugador1().getImagen()}" alt="jugador" class="jug-vis-1 mt-5">
             </div>
             <div class="img-player">
-                <img src="images/JUGADOR-VISITANTE.png" alt="jugador" class="jug-vis-2">
+                <img th:src="${equipo2.getJugador1().getImagen()}" alt="jugador" class="jug-vis-2">
             </div>
         </div>
 
@@ -38,6 +38,5 @@
         </div>
     </section>
     <img src="images/CANCHA.jpg" alt="cancha" class="cancha-img">
-    <script src="js/mostrarStats.js"></script>
 </body>
 </html>

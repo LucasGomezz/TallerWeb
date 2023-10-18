@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.ServicioEquipo;
 import com.tallerwebi.dominio.ServicioJugador;
@@ -40,16 +41,22 @@ public class ControladorPartida {
     }
 
 
-/*    @RequestMapping(path = "/partido", method = RequestMethod.GET)
-    public ModelAndView irAPartido(@RequestParam(value = "idEquipo1", required = false) Integer idEquipo1, Integer idEquipo2) {
+   /* @RequestMapping(path = "/partido", method = RequestMethod.GET)
+    public ModelAndView irAPartido(@RequestParam(required=true) Long idEquipo1, Long idEquipo2) {
         //www.web.unlam.com/partido?idEquipo1=1
         //www.web.unlam.com/partido/1/2
         //@ModelAttribute= objeto entero
         //@PathVariable= solo el valor
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
-        modelo.put("equipo1",servicioEquipo.buscarEquipo(idEquipo1));
-        modelo.put("equipo2", servicioEquipo.buscarEquipo(idEquipo2));
+        Equipo equipo1=servicioEquipo.buscarEquipo(idEquipo1);
+        equipo1.getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
+        equipo1.getJugador2().setImagen("images/JUGADOR-LOCAL.png");
+        modelo.put("equipo1",equipo1);
+        Equipo equipo2=servicioEquipo.buscarEquipo(idEquipo2);
+        equipo2.getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
+        equipo2.getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
+        modelo.put("equipo2", equipo2);
 
         return new ModelAndView("partido", modelo);
     }*/
