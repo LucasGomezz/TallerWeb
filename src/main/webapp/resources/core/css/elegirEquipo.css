@@ -101,3 +101,29 @@ img{
     left: 46%;
     bottom: 10rem;
 }
+#botones-equipo{
+    color:white;
+    background-color: black;
+    box-shadow:none;
+    padding:4px;
+    border: 1px solid #fff;
+}
+#botones-equipo:hover{
+    color:black;
+    background-color: white;
+    padding:4px;
+    border: 1px solid #fff;
+}
+#botones-equipo2{
+    color:white;
+    background-color: black;
+    box-shadow:none;
+    padding:4px;
+    border: 1px solid #fff;
+}
+#botones-equipo2:hover{
+    color:black;
+    background-color: white;
+    padding:4px;
+    border: 1px solid #fff;
+}

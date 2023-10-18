@@ -18,9 +18,9 @@
             <table>
                 <tr th:each="e, iterStat : ${equipos}" th:if="${iterStat.index % 2 == 0}">
                     <td>
-                        <form>
+                        <form action="elegir-equipo" method="POST">
                             <input type="hidden" th:value="${e.idEquipo}">
-                            <button th:text="${e.nombre}" />
+                            <button id="botones-equipo" th:text="${e.nombre}" />
                         </form>
                     </td>
                 </tr>
@@ -33,7 +33,7 @@
                     <td>
                         <form action="elegir-equipo" method="POST">
                             <input type="hidden" th:value="${e.idEquipo}">
-                            <button th:text="${e.nombre}" />
+                            <button id="botones-equipo2" th:text="${e.nombre}" />
                         </form>
                     </td>
                 </tr>
