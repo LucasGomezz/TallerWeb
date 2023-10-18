@@ -20,13 +20,13 @@
     margin: 2em 4em;
     justify-content: center;
     align-items: center;
-    padding: 1em;
+    padding: 0.5em;
     font-weight: 600;
     font-size: larger;
     border: 5px solid #926540;
     box-sizing: border-box;
     color: white;
-    flex-direction: column;
+    flex-direction: row;
 }
 .nombresEquipos{
     display: flex;
@@ -101,27 +101,27 @@ img{
     left: 46%;
     bottom: 10rem;
 }
-#botones-equipo{
+#idEquipo{
     color:white;
     background-color: black;
     box-shadow:none;
     padding:4px;
     border: 1px solid #fff;
 }
-#botones-equipo:hover{
+#idEquipo:hover{
     color:black;
     background-color: white;
     padding:4px;
     border: 1px solid #fff;
 }
-#botones-equipo2{
+#idEquipo2{
     color:white;
     background-color: black;
     box-shadow:none;
     padding:4px;
     border: 1px solid #fff;
 }
-#botones-equipo2:hover{
+#idEquipo2:hover{
     color:black;
     background-color: white;
     padding:4px;

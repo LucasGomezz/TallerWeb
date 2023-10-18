@@ -1,8 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.ServicioEquipo;
-import com.tallerwebi.dominio.ServicioItemTienda;
-import com.tallerwebi.dominio.ServicioJugador;
+import com.tallerwebi.infraestructura.servicio.ServicioItemTienda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
