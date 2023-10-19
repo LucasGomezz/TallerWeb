@@ -19,8 +19,7 @@ public class ItemTienda {
 
 
 
-    @ManyToMany(mappedBy = "potenciadores")
-    private List<Jugador> jugadoresBeneficiados;
+
 
 
 
@@ -56,11 +55,5 @@ public class ItemTienda {
         this.imagen = imagen;
     }
 
-    public List<Jugador> getJugadoresBeneficiados() {
-        return jugadoresBeneficiados;
-    }
-
-    public void setJugadoresBeneficiados(List<Jugador> jugadoresBeneficiados) {
-        this.jugadoresBeneficiados = jugadoresBeneficiados;
-    }
+ 
 }
