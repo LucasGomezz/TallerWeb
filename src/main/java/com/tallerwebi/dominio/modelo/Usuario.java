@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -16,6 +18,8 @@ public class Usuario {
     private String rol;
     private Boolean activo = false;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Inventario> inventario;
 
     public Long getId() {
         return id;
@@ -55,4 +59,5 @@ public class Usuario {
     public void activar() {
         activo = true;
     }
+
 }
