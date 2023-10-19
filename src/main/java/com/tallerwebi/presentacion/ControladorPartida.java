@@ -11,6 +11,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ControladorPartida {
 
@@ -78,8 +81,11 @@ public class ControladorPartida {
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
         Partido partido = servicioPartido.buscarPartido(idPartido);
+        PartidoDTO partidoNuevo = new PartidoDTO();
         aplicarImagenesAJugadores(partido);
         modelo.put("partido",partido);
+        modelo.addAttribute("miPuntaje", partidoNuevo.getPuntajeYo().toString());
+        modelo.addAttribute("puntajeRival", partidoNuevo.getPuntajeRival().toString());
         return new ModelAndView("partido", modelo);
     }
 
@@ -90,6 +96,22 @@ public class ControladorPartida {
         Equipo equipo2 = partido.getEquipoPc();
         equipo2.getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
         equipo2.getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
+    }
+
+    @RequestMapping( value = "/obtenerPuntaje", method = RequestMethod.GET)
+    @ResponseBody
+    public PartidoDTO obtenerPuntaje() {
+        PartidoDTO partidoNuevo = new PartidoDTO();
+        return partidoNuevo;
+    }
+    List<PartidoDTO> partido = new ArrayList<>();
+
+    @RequestMapping( value = "/sumar", method = RequestMethod.POST)
+    @ResponseBody
+    public PartidoDTO sumarPuntaje(Integer puntajeYo, Integer puntajeRival) {
+        PartidoDTO puntajes = servicioPartido.sumar(puntajeYo, puntajeRival);
+        partido.add(puntajes);
+        return puntajes;
     }
 
     @RequestMapping("/partido-aro")

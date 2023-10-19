@@ -9,8 +9,12 @@
     <title>Partido</title>
 </head>
 <body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <section class="container-partido">
-        <h1 class="score mt-3 mb-3">14 - 28</h1>
+        <h1 class="score mt-3 mb-3">
+            <span id="puntajeYo" th:text="${miPuntaje}"></span>
+            -
+            <span id="puntajeRival" th:text="${puntajeRival}"></span></h1>
         <div class="div-jugadores mt-5 ms-5">
             <div class="img-player">
                 <p th:text="${partido.getEquipoJugador().getJugador1().getNombre()}" th:class="${partido.getEquipoJugador().getColor()}"></p>
@@ -33,9 +37,7 @@
         <div class="div-grande mb-4">
             <div class="div-menu">
                 <button id="driblear">Driblear</button>
-                <a href="partido-aro">
-                    <button id="tirar">Tirar</button>
-                </a>
+                <button id="tirar">Tirar</button>
                 <button id="pasar">Pasar</button>
             </div>
             <div class="div-dado">
@@ -44,5 +46,6 @@
         </div>
     </section>
     <img src="images/CANCHA.jpg" alt="cancha" class="cancha-img">
+    <script src="js/partido.js"></script>
 </body>
 </html>

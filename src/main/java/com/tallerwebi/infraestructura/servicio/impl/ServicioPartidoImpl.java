@@ -6,10 +6,12 @@ import com.tallerwebi.dominio.modelo.Equipo;
 import com.tallerwebi.dominio.repositorio.RepositorioPartido;
 import com.tallerwebi.infraestructura.servicio.ServicioEquipo;
 import com.tallerwebi.infraestructura.servicio.ServicioPartido;
+import com.tallerwebi.presentacion.PartidoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -65,5 +67,35 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Equipo equipo = servicioEquipo.buscarEquipo(idEquipo);
         partido.setEquipoPc(equipo);
 
+    }
+
+    @Override
+    public PartidoDTO sumar(Integer puntajeYo, Integer puntajeRival) {
+        Integer porcentaje = probabilidad();
+        PartidoDTO partidoDTO = new PartidoDTO();
+        if(porcentaje >= 60){
+            partidoDTO.setPuntajeRival(puntajeRival += 2);
+            partidoDTO.setPuntajeYo(puntajeYo);
+            return partidoDTO;
+        }else{
+            partidoDTO.setPuntajeYo(puntajeYo += 2);
+            partidoDTO.setPuntajeRival(puntajeRival);
+            return partidoDTO;
+        }
+    }
+
+    @Override
+    public PartidoDTO guardarResultados(Integer puntajeYo, Integer puntajeRival) {
+        PartidoDTO partido = new PartidoDTO();
+        partido.setPuntajeYo(puntajeYo);
+        partido.setPuntajeRival(puntajeRival);
+        return partido;
+    }
+
+    private Integer probabilidad(){
+        Random random = new Random();
+        Integer numeroAleatorio = random.nextInt(10) + 1;
+        Integer porcentaje = numeroAleatorio * 10;
+        return porcentaje;
     }
 }
