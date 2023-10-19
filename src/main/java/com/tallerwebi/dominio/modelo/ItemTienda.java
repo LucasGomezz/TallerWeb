@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class ItemTienda {
@@ -14,6 +16,13 @@ public class ItemTienda {
     private String nombre;
     private Integer precio;
     private String imagen;
+
+
+
+    @ManyToMany(mappedBy = "potenciadores")
+    private List<Jugador> jugadoresBeneficiados;
+
+
 
     public Long getId() {
         return id;
@@ -45,5 +54,13 @@ public class ItemTienda {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public List<Jugador> getJugadoresBeneficiados() {
+        return jugadoresBeneficiados;
+    }
+
+    public void setJugadoresBeneficiados(List<Jugador> jugadoresBeneficiados) {
+        this.jugadoresBeneficiados = jugadoresBeneficiados;
     }
 }

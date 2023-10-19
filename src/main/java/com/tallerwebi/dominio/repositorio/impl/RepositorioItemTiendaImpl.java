@@ -23,7 +23,6 @@ public class RepositorioItemTiendaImpl implements RepositorioItemTienda {
         final Session session = sessionFactory.getCurrentSession();
         return(ItemTienda) session.createCriteria(ItemTienda.class).add(Restrictions.eq("id", id)).uniqueResult();
     }
-
     @Override
     public void crear(ItemTienda itemTienda) {
         sessionFactory.getCurrentSession().save(itemTienda);
@@ -31,5 +30,13 @@ public class RepositorioItemTiendaImpl implements RepositorioItemTienda {
     @Override
     public List<ItemTienda> listAll() {
         return sessionFactory.getCurrentSession().createCriteria(ItemTienda.class).list();
+    }
+    @Override
+    public void eliminar(ItemTienda itemTienda) {
+        sessionFactory.getCurrentSession().delete(itemTienda);
+    }
+    @Override
+    public void actualizar(ItemTienda itemTienda) {
+        sessionFactory.getCurrentSession().update(itemTienda);
     }
 }
