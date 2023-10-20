@@ -39,34 +39,19 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public Long inicializarPartido() {
-        return inicializarPartido(0,0,null, null);
-        //Se tienen que pasar los equipos seleccionados
-    }
-
-    @Override
-    public Long inicializarPartido(Integer puntosUsuario, Integer puntosPc, Equipo equipoJugador, Equipo equipoPc) {
+    public Long inicializarPartido(Long idEquipo1,Long idEquipo2){
         Partido partido=new Partido();
-        partido.setPuntosPc(puntosPc);
-        partido.setPuntosUsuario(puntosUsuario);
+        partido.setPuntosPc(0);
+        partido.setPuntosUsuario(0);
+        Equipo equipoJugador = servicioEquipo.buscarEquipo(idEquipo1);
+        equipoJugador.getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
+        equipoJugador.getJugador2().setImagen("images/JUGADOR-LOCAL.png");
+        Equipo equipoPc = servicioEquipo.buscarEquipo(idEquipo2);
+        equipoPc.getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
+        equipoPc.getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
         partido.setEquipoJugador(equipoJugador);
         partido.setEquipoPc(equipoPc);
-        return repositorioPartido.crear(partido);
-    }
-
-    @Override
-    public void guardarEquipoJugador(Long idEquipo, Long idPartido) {
-        Partido partido = buscarPartido(idPartido);
-        Equipo equipo = servicioEquipo.buscarEquipo(idEquipo);
-        partido.setEquipoJugador(equipo);
-
-    }
-    @Override
-    public void guardarEquipoPc(Long idEquipo, Long idPartido) {
-        Partido partido = buscarPartido(idPartido);
-        Equipo equipo = servicioEquipo.buscarEquipo(idEquipo);
-        partido.setEquipoPc(equipo);
-
+        return repositorioPartido.guardar(partido);
     }
 
     @Override
@@ -90,6 +75,11 @@ public class ServicioPartidoImpl implements ServicioPartido {
         partido.setPuntajeYo(puntajeYo);
         partido.setPuntajeRival(puntajeRival);
         return partido;
+    }
+
+    @Override
+    public void actualizarPartido(Partido partido) {
+        repositorioPartido.actualizar(partido);
     }
 
     private Integer probabilidad(){

@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface RepositorioPartido {
     Partido buscar (Long id);
-    Long crear(Partido partido);
+    Long guardar(Partido partido);
+    void actualizar(Partido partido);
     List<Partido> listAll();
 }

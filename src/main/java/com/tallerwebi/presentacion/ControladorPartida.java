@@ -24,45 +24,36 @@ public class ControladorPartida {
 
     //Los controladores se comunica con los servicios y saben si estatodo bien gracias a las exceptions
     @Autowired
-    public ControladorPartida(ServicioJugador servicioJugador, ServicioEquipo servicioEquipo,ServicioPartido servicioPartido) {
+    public ControladorPartida(ServicioJugador servicioJugador, ServicioEquipo servicioEquipo, ServicioPartido servicioPartido) {
         this.servicioJugador = servicioJugador;
         this.servicioEquipo = servicioEquipo;
         this.servicioPartido = servicioPartido;
     }
 
-    @RequestMapping(value="/iniciarPartida",method = {RequestMethod.GET})
-    public ModelAndView iniciarPartida(){
-        Long id = servicioPartido.inicializarPartido();
-        return new ModelAndView("redirect:/elegir-equipo?idPartido=" + id);
-    }
 
-    @RequestMapping(value = "/elegir-equipo", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView elegirEquipo(@RequestParam(value = "idPartido",required = true) Long idPartido) {
+    @RequestMapping(value = "/elegir-equipo", method = {RequestMethod.GET})
+    public ModelAndView elegirEquipo(@RequestParam(required = false) Long idEquipo1, @RequestParam(required = false) Long idEquipo2) {
         ModelMap modelo = new ModelMap();
-
-        Partido partido = servicioPartido.buscarPartido(idPartido);
-        modelo.put("equipo1", partido.getEquipoJugador());
-        modelo.put("equipo2", partido.getEquipoPc());
         modelo.put("equipos", servicioEquipo.listAll());
-        modelo.put("idPartido", idPartido);
+        modelo.put("idEquipo1", idEquipo1);
+        modelo.put("idEquipo2", idEquipo2);
+        modelo.put("equipo1", servicioEquipo.buscarEquipo(idEquipo1));
+        modelo.put("equipo2", servicioEquipo.buscarEquipo(idEquipo2));
+
 
         return new ModelAndView("elegir-equipo", modelo);
     }
 
-    @RequestMapping(value = "/elegirEquipoUno", method = {RequestMethod.POST})
-    public ModelAndView elegirEquipoUno(@RequestParam(required = true) Long idEquipo, @RequestParam(required = true) Long idPartido) {
-        ModelMap modelo = new ModelMap();
-        modelo.put("equipos", servicioEquipo.listAll());
-        servicioPartido.guardarEquipoJugador(idEquipo,idPartido);
-        return new ModelAndView("redirect:/elegir-equipo?idPartido=" + idPartido, modelo);
-    }
-
-    @RequestMapping(value = "/elegirEquipoDos", method = {RequestMethod.POST})
-    public ModelAndView elegirEquipoDos(@RequestParam(required = true) Long idEquipo2, @RequestParam(required = true) Long idPartido) {
-        ModelMap modelo = new ModelMap();
-        modelo.put("equipos", servicioEquipo.listAll());
-        servicioPartido.guardarEquipoPc(idEquipo2,idPartido);
-        return new ModelAndView("redirect:/elegir-equipo?idPartido=" + idPartido, modelo);
+    @RequestMapping(value = "/seleccionarEquipo", method = {RequestMethod.POST})
+    public ModelAndView seleccionarEquipo(@RequestParam(required = false) Long idEquipo1, @RequestParam(required = false) Long idEquipo2) {
+        String redirect = "redirect:/elegir-equipo";
+        if (idEquipo1 != null) {
+            redirect += "?idEquipo1=" + idEquipo1;
+        }
+        if (idEquipo2 != null) {
+            redirect += (idEquipo1 != null ? "&" : "?") + "idEquipo2=" + idEquipo2;
+        }
+        return new ModelAndView(redirect);
     }
 
 
@@ -72,6 +63,13 @@ public class ControladorPartida {
         return new ModelAndView("partido-items", modelo);
     }
 
+    @RequestMapping(value="/iniciarPartida",method = {RequestMethod.GET})
+    public ModelAndView iniciarPartida(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2){
+        Long idPartido = servicioPartido.inicializarPartido(idEquipo1, idEquipo2);
+        return new ModelAndView("redirect:partido?idPartido=" + idPartido);
+    }
+
+
     @RequestMapping(path = "/partido", method = RequestMethod.GET)
     public ModelAndView irAPartido(@RequestParam(required = true) Long idPartido) {
         //www.web.unlam.com/partido?idEquipo1=1
@@ -80,33 +78,26 @@ public class ControladorPartida {
         //@PathVariable= solo el valor
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
-        Partido partido = servicioPartido.buscarPartido(idPartido);
         PartidoDTO partidoNuevo = new PartidoDTO();
-        aplicarImagenesAJugadores(partido);
-        modelo.put("partido",partido);
+
+        modelo.put("partido", servicioPartido.buscarPartido(idPartido));
         modelo.addAttribute("miPuntaje", partidoNuevo.getPuntajeYo().toString());
         modelo.addAttribute("puntajeRival", partidoNuevo.getPuntajeRival().toString());
         return new ModelAndView("partido", modelo);
     }
 
-    private static void aplicarImagenesAJugadores(Partido partido) {
-        Equipo equipo1 = partido.getEquipoJugador();
-        equipo1.getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
-        equipo1.getJugador2().setImagen("images/JUGADOR-LOCAL.png");
-        Equipo equipo2 = partido.getEquipoPc();
-        equipo2.getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
-        equipo2.getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
-    }
 
-    @RequestMapping( value = "/obtenerPuntaje", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/obtenerPuntaje", method = RequestMethod.GET)
     @ResponseBody
     public PartidoDTO obtenerPuntaje() {
         PartidoDTO partidoNuevo = new PartidoDTO();
         return partidoNuevo;
     }
+
     List<PartidoDTO> partido = new ArrayList<>();
 
-    @RequestMapping( value = "/sumar", method = RequestMethod.POST)
+    @RequestMapping(value = "/sumar", method = RequestMethod.POST)
     @ResponseBody
     public PartidoDTO sumarPuntaje(Integer puntajeYo, Integer puntajeRival) {
         PartidoDTO puntajes = servicioPartido.sumar(puntajeYo, puntajeRival);
@@ -115,7 +106,8 @@ public class ControladorPartida {
     }
 
     @RequestMapping("/partido-aro")
-    public ModelAndView irAlAro() {
+    public ModelAndView irAlAro(@ModelAttribute PartidoDTO partidoDTO) {
+        //servicioPartido.tirarAro(partidoDTO);//actualizar el partidoDTO despues de cada accion
         ModelMap modelo = new ModelMap();
         return new ModelAndView("partido-aro", modelo);
     }

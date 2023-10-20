@@ -9,10 +9,11 @@ import java.util.List;
 public interface ServicioPartido {
     Partido buscarPartido(Long id);
     List<Partido> listAll();
-    Long inicializarPartido();
-    Long inicializarPartido(Integer puntosUsuario, Integer puntosPc, Equipo equipoJugador, Equipo equipoPc);
-    void guardarEquipoJugador(Long idEquipo,Long idPartido);
-    void guardarEquipoPc(Long idEquipo,Long idPartido);
+
+    Long inicializarPartido(Long idEquipo1,Long idEquipo2);
+
      PartidoDTO sumar(Integer puntajeYo, Integer puntajeRival);
     PartidoDTO guardarResultados(Integer puntajeYo, Integer puntajeRival);
+
+    void actualizarPartido(Partido partido);
 }

@@ -24,8 +24,11 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
     }
 
     @Override
-    public Long crear(Partido partido) {
+    public Long guardar(Partido partido) {
             return (Long) sessionFactory.getCurrentSession().save(partido);
+    }
+    @Override
+    public void actualizar(Partido partido) {   sessionFactory.getCurrentSession().update(partido);
     }
 
     @Override

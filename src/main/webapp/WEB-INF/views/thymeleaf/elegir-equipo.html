@@ -13,13 +13,13 @@
         <h3>Equipo Jugador</h3>
     </div>
     <div class="nombresEquipos">
-        <form action="elegirEquipoUno" method="POST">
-            <input type="hidden" th:value="${idPartido}" name="idPartido"/>
+        <form action="seleccionarEquipo" method="POST">
+            <input type="hidden" name="idEquipo2" th:value="${idEquipo2}">
             <div>
                 <table>
                     <tr th:each="e : ${equipos}">
                         <td>
-                            <button type="submit" th:value="${e.idEquipo}" name="idEquipo" id="idEquipo"
+                            <button type="submit" th:value="${e.idEquipo}" name="idEquipo1" id="idEquipo"
                                     th:text="${e.nombre}"/>
                         </td>
                     </tr>
@@ -31,19 +31,19 @@
         <h3>Equipo Maquina</h3>
     </div>
     <div class="nombresEquipos">
-    <form action="elegirEquipoDos" method="POST">
-        <input type="hidden" th:value="${idPartido}" name="idPartido"/>
-        <div >
-            <table>
-                <tr th:each="e : ${equipos}">
-                    <td>
-                        <button type="submit" th:value="${e.idEquipo}" name="idEquipo2" id="idEquipo2"
-                                th:text="${e.nombre}"/>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </form>
+        <form action="seleccionarEquipo" method="POST">
+            <input type="hidden" name="idEquipo1" th:value="${idEquipo1}">
+            <div>
+                <table>
+                    <tr th:each="e : ${equipos}">
+                        <td>
+                            <button type="submit" th:value="${e.idEquipo}" name="idEquipo2" id="idEquipo2"
+                                    th:text="${e.nombre}"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </div>
 </div>
 <div class="sleccionEquipos">
@@ -131,12 +131,13 @@
 </div>
 <div>
 
-        <form action="partido">
+    <form action="iniciarPartida">
             <span th:if="${equipo1!= null && equipo2!= null}">
-            <input type="hidden" th:value="${idPartido}" name="idPartido"/>
-            <button class="confirmar">Confirmar</button>
-        </span>
-        </form>
+                <input type="hidden" name="idEquipo1" th:value="${idEquipo1}">
+                <input type="hidden" name="idEquipo2" th:value="${idEquipo2}">
+                <button class="confirmar">Confirmar</button>
+            </span>
+    </form>
 
 
 </div>
