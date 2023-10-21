@@ -36,9 +36,14 @@
 
         <div class="div-grande mb-4">
             <div class="div-menu">
-                <button id="driblear">Driblear</button>
-                <button id="tirar">Tirar</button>
-                <button id="pasar">Pasar</button>
+                <form action="acciones" method="POST">
+                    <input type="hidden" name="idPartido" th:value="${partido.getId()}">
+                    <input type="hidden" name="idEquipo2" th:value="${partido.getEquipoPc().getIdEquipo()}">
+                    <input type="hidden" name="idEquipo1" th:value="${partido.getEquipoJugador().getIdEquipo()}">
+                    <button type="submit" value="'driblear'" name="tipoAccion" id="driblear">Driblear</button>
+                    <button type="submit" value="'tirar'" name="tipoAccion" id="tirar">Tirar</button>
+                    <button type="submit" value="'pasar'" name="tipoAccion" id="pasar">Pasar</button>
+                </form>
             </div>
             <div class="div-dado">
                 <img src="images/DADO.jpg" alt="dado" height="80px">

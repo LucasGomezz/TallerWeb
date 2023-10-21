@@ -57,7 +57,7 @@ public class ControladorPartida {
     }
 
 
-    @RequestMapping("/partido-items")//Hacer verificacion de que esten los dos equipos
+    @RequestMapping("/partido-items")
     public ModelAndView irAItems() {
         ModelMap modelo = new ModelMap();
         return new ModelAndView("partido-items", modelo);
@@ -66,6 +66,7 @@ public class ControladorPartida {
     @RequestMapping(value="/iniciarPartida",method = {RequestMethod.GET})
     public ModelAndView iniciarPartida(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2){
         Long idPartido = servicioPartido.inicializarPartido(idEquipo1, idEquipo2);
+        servicioPartido.setPosicion(1);
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
@@ -86,7 +87,23 @@ public class ControladorPartida {
         return new ModelAndView("partido", modelo);
     }
 
+    @RequestMapping(value="/acciones", method= RequestMethod.POST)
+    public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion, Long idEquipo1, Long idEquipo2, Long idPartido){
+        Boolean resultado=servicioPartido.compararStats(tipoAccion, idEquipo1, idEquipo2);
+        return new ModelAndView("redirect:posicion?resultado="+resultado+"&idPartido="+idPartido);
+    }
 
+    @RequestMapping(value="/posicion", method= RequestMethod.POST)
+    public ModelAndView calcularPosicion(@RequestParam(required = true) Boolean resultado, Long idPartido){
+        Integer posicion=servicioPartido.getPosicion();
+        if(resultado==true){
+            if(posicion<4){posicion++;}
+        }else{
+            if(posicion>1){posicion--;}
+        }
+        servicioPartido.setPosicion(posicion);
+        return new ModelAndView("redirect:partido?idPartido="+idPartido);
+    }
 
     @RequestMapping(value = "/obtenerPuntaje", method = RequestMethod.GET)
     @ResponseBody

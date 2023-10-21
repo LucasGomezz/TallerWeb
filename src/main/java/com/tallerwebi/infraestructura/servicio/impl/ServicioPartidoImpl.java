@@ -1,6 +1,7 @@
 package com.tallerwebi.infraestructura.servicio.impl;
 
 
+import com.tallerwebi.dominio.modelo.Jugador;
 import com.tallerwebi.dominio.modelo.Partido;
 import com.tallerwebi.dominio.modelo.Equipo;
 import com.tallerwebi.dominio.repositorio.RepositorioPartido;
@@ -20,6 +21,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
     RepositorioPartido repositorioPartido;
     @Autowired
     ServicioEquipo servicioEquipo;
+    Integer posicionPartido=1;
 
     @Autowired
     public ServicioPartidoImpl(RepositorioPartido repositorioPartido, ServicioEquipo servicioEquipo){
@@ -88,4 +90,54 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer porcentaje = numeroAleatorio * 10;
         return porcentaje;
     }
+    public Boolean compararStats(String accion, Long idEquipo1, Long idEquipo2) {
+        Integer stat1 = 0;
+        Integer stat2 = 0;
+        switch (accion) {
+            case "driblear":
+                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible();
+                break;
+            case "tirar":
+                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro();
+                break;
+            case "pasar":
+                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase();
+                break;
+            case "robar":
+                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo();
+                break;
+            case "tapar":
+                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa();
+                break;
+            case "interceptar":
+                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion();
+                break;
+
+            default:
+                break;
+        }
+
+        if (stat1 > stat2) {
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void setPosicion(Integer posicion) {
+        posicionPartido=posicion;
+    }
+
+    @Override
+    public Integer getPosicion() {
+        return posicionPartido;
+    }
+
 }

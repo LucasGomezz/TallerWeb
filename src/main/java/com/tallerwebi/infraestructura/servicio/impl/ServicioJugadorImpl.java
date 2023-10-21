@@ -25,46 +25,6 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
 
-    public Boolean compararStats(Jugador jugador1, Jugador jugador2, String stat) {
-        Integer stat1 = 0;
-        Integer stat2 = 0;
-        switch (stat) {
-            case "drible":
-                stat1 = jugador1.getDrible();
-                stat2 = jugador2.getDrible();
-                break;
-            case "tiro":
-                stat1 = jugador1.getTiro();
-                stat2 = jugador2.getTiro();
-                break;
-            case "pase":
-                stat1 = jugador1.getPase();
-                stat2 = jugador2.getPase();
-                break;
-            case "robo":
-                stat1 = jugador1.getRobo();
-                stat2 = jugador2.getRobo();
-                break;
-            case "tapa":
-                stat1 = jugador1.getTapa();
-                stat2 = jugador2.getTapa();
-                break;
-            case "intercepcion":
-                stat1 = jugador1.getIntercepcion();
-                stat2 = jugador2.getIntercepcion();
-                break;
-
-            default:
-                break;
-        }
-
-        if (stat1 > stat2) {
-
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void inicializarJugador() {
         inicializarJugador("Jason Tatum", 71, 73, 75, 77, 80, 84, "");
