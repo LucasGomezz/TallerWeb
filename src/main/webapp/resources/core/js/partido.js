@@ -1,21 +1,28 @@
-const botonDriblear = document.querySelector('#driblear');
-const botonTirar = document.querySelector('#tirar');
-const botonPasar = document.querySelector('#pasar');
 const Yo = document.querySelector('#puntajeYo');
 const Rival = document.querySelector('#puntajeRival');
 
-    botonDriblear.addEventListener('click', () => {
-    /**JSON.stringify({parametro: "drible"});*/
 
-    });
 
-    botonTirar.addEventListener('click', () => {
+function ponerPosicion(){
+    var posicion = parseInt(document.getElementById("posicion").textContent);
+    var divJugadores = document.querySelector(".div-jugadores");
+    switch(posicion){
+        case 1:
+            divJugadores.style.position = "relative";
+            divJugadores.style.right = "26em";
+            break;
+        case 2:
+            divJugadores.style.position = "relative";
+            divJugadores.style.right = "1em";
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
 
-    });
+    }
+}
 
-    botonPasar.addEventListener('click', () => {
-
-    });
 
 function sumarPuntos() {
     $(botonTirar).on("click", function () {
@@ -49,4 +56,4 @@ function sumarPuntos() {
 }
 
 sumarPuntos();
-
+ponerPosicion();

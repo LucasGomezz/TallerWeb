@@ -96,27 +96,27 @@ public class ServicioPartidoImpl implements ServicioPartido {
         switch (accion) {
             case "driblear":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo();
                 break;
             case "tirar":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa();
                 break;
             case "pasar":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion();
                 break;
             case "robar":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible();
                 break;
             case "tapar":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro();
                 break;
             case "interceptar":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion();
+                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase();
                 break;
 
             default:

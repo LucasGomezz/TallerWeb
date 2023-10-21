@@ -38,6 +38,7 @@
             <div class="div-menu">
                 <form action="acciones" method="POST">
                     <input type="hidden" name="idPartido" th:value="${partido.getId()}">
+                    <input type="hidden" name="posicion" th:value="${posicion}" id="posicion">
                     <input type="hidden" name="idEquipo2" th:value="${partido.getEquipoPc().getIdEquipo()}">
                     <input type="hidden" name="idEquipo1" th:value="${partido.getEquipoJugador().getIdEquipo()}">
                     <button type="submit" value="'driblear'" name="tipoAccion" id="driblear">Driblear</button>

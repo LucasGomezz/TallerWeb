@@ -80,7 +80,7 @@ public class ControladorPartida {
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
         PartidoDTO partidoNuevo = new PartidoDTO();
-
+        modelo.put("posicion",servicioPartido.getPosicion());
         modelo.put("partido", servicioPartido.buscarPartido(idPartido));
         modelo.addAttribute("miPuntaje", partidoNuevo.getPuntajeYo().toString());
         modelo.addAttribute("puntajeRival", partidoNuevo.getPuntajeRival().toString());
@@ -93,7 +93,7 @@ public class ControladorPartida {
         return new ModelAndView("redirect:posicion?resultado="+resultado+"&idPartido="+idPartido);
     }
 
-    @RequestMapping(value="/posicion", method= RequestMethod.POST)
+    @RequestMapping(value="/posicion", method= {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView calcularPosicion(@RequestParam(required = true) Boolean resultado, Long idPartido){
         Integer posicion=servicioPartido.getPosicion();
         if(resultado==true){
@@ -102,6 +102,7 @@ public class ControladorPartida {
             if(posicion>1){posicion--;}
         }
         servicioPartido.setPosicion(posicion);
+
         return new ModelAndView("redirect:partido?idPartido="+idPartido);
     }
 
