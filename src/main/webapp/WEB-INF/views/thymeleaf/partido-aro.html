@@ -10,7 +10,11 @@
 <img src="images/ARO.jpg" alt="aro" class="cancha-img">
 
 <div class="div-menu-tiro">
-    <button id="tirar">Tirar</button>
+    <form action="tira" method="post">
+        <input type="hidden" name="resultadoBarra" id="resultadoBarra" value="">
+        <button id="tirar">Tirar</button>
+    </form>
+
     <div class="barra-progreso">
         <div class="progreso" id="progreso"></div>
     </div>

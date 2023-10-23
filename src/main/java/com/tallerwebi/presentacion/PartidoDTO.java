@@ -3,10 +3,13 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.modelo.Equipo;
 
 public class PartidoDTO {
+    private Long idPartido;
     private Integer puntajeJugador = 0;
     private Integer puntajePc = 0;
     private Equipo equipoJugador;
     private Equipo equipoPC;
+    private Integer posicion = 1;
+    private Boolean tengoLaPelota = true;
 
     public Integer getPuntajeJugador() {
         return puntajeJugador;
@@ -38,5 +41,29 @@ public class PartidoDTO {
 
     public void setEquipoPC(Equipo equipoPC) {
         this.equipoPC = equipoPC;
+    }
+
+    public Integer getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Integer posicion) {
+        this.posicion = posicion;
+    }
+
+    public Long getIdPartido() {
+        return idPartido;
+    }
+
+    public void setIdPartido(Long idPartido) {
+        this.idPartido = idPartido;
+    }
+
+    public Boolean getTengoLaPelota() {
+        return tengoLaPelota;
+    }
+
+    public void setTengoLaPelota(Boolean tengoLaPelota) {
+        this.tengoLaPelota = tengoLaPelota;
     }
 }

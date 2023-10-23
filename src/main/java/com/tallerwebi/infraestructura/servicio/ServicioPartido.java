@@ -18,7 +18,5 @@ public interface ServicioPartido {
 
     Boolean compararStats(String accion, Long idEquipo1, Long idEquipo2);
 
-    void setPosicion(Integer posicion);
 
-    Integer getPosicion();
 }

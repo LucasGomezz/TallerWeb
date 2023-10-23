@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const vaciarDuracion = 1000;
     const anchoInicial = 1;
     const anchoMaximo = 100;
-    var pararBarra = false;
-    var valorBarra = 1;
+    let pararBarra = false;
+    let valorBarra = 1;
+    let resultadoBarra = document.getElementById('resultadoBarra');
+
 
     function llenarBarra() {
         let startTime = null;
@@ -52,8 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function tirar() {
         pararBarra = true;
-        alert(valorBarra);
+       /** $.ajax({
+            url: '/tira',
+            method: 'GET',
+            data: { valorBarra: valorBarra}
+        });
+        return false;*/
+       resultadoBarra.value = valorBarra;
     }
+
 
     boton.addEventListener('click', tirar);
 

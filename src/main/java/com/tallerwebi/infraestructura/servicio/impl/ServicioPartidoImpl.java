@@ -21,7 +21,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
     RepositorioPartido repositorioPartido;
     @Autowired
     ServicioEquipo servicioEquipo;
-    Integer posicionPartido = 1;
+
 
     @Autowired
     public ServicioPartidoImpl(RepositorioPartido repositorioPartido, ServicioEquipo servicioEquipo){
@@ -123,20 +123,12 @@ public class ServicioPartidoImpl implements ServicioPartido {
                 break;
         }
         if (stat1 > stat2) {
-
             return true;
         }
         return false;
     }
 
-    @Override
-    public void setPosicion(Integer posicion) {
-        posicionPartido=posicion;
-    }
 
-    @Override
-    public Integer getPosicion() {
-        return posicionPartido;
-    }
+
 
 }
