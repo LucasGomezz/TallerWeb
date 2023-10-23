@@ -4,8 +4,8 @@ const Rival = document.querySelector('#puntajeRival');
 
 
 function ponerPosicion(){
-    var posicion = parseInt(document.getElementById("posicion").textContent);
-    var divJugadores = document.querySelector(".div-jugadores");
+    let posicion = parseInt(document.getElementById("posicion").textContent);
+    let divJugadores = document.querySelector(".div-jugadores");
     switch(posicion){
         case 1:
             divJugadores.style.position = "relative";

@@ -9,14 +9,32 @@
     <title>Partido</title>
 </head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
     <section class="container-partido">
         <h1 class="score mt-3 mb-3">
             <span id="puntajeYo" th:text="${miPuntaje}"></span>
             -
             <span id="puntajeRival" th:text="${puntajeRival}"></span></h1>
-        <div class="div-jugadores mt-5 ms-5">
+        <div th:if="${posicion == 1 || posicion == 2}" th:class="${posicion == 1} ? 'div-jugadoresUno' :  'div-jugadoresDos'" >
+            <div class = "img-player">
+                <p th:text="${partido.getEquipoJugador().getJugador1().getNombre()}" th:class="${partido.getEquipoJugador().getColor()}"></p>
+                <img th:src="${partido.getEquipoJugador().getJugador1().getImagen()}" alt="jugador" class="jug-loc-1">
+            </div>
             <div class="img-player">
+                <p th:text="${partido.getEquipoJugador().getJugador2().getNombre()}" th:class="${partido.getEquipoJugador().getColor()}"></p>
+                <img th:src="${partido.getEquipoJugador().getJugador2().getImagen()}" alt="jugador" class="jug-loc-2 mt-5">
+            </div>
+            <div class="img-player">
+                <p th:text="${partido.getEquipoPc().getJugador2().getNombre()}" th:class="${partido.getEquipoPc().getColor()}"></p>
+                <img th:src="${partido.getEquipoPc().getJugador2().getImagen()}" alt="jugador" class="jug-vis-1 mt-5">
+            </div>
+            <div class="img-player">
+                <p th:text="${partido.getEquipoPc().getJugador1().getNombre()}" th:class="${partido.getEquipoPc().getColor()}"></p>
+                <img th:src="${partido.getEquipoPc().getJugador1().getImagen()}" alt="jugador" class="jug-vis-2">
+            </div>
+        </div>
+        <div th:if="${posicion == 3 || posicion == 4}" th:class="${posicion == 3} ? 'div-jugadoresTres' : 'div-jugadoresCuatro'">
+            <div class = "img-player">
                 <p th:text="${partido.getEquipoJugador().getJugador1().getNombre()}" th:class="${partido.getEquipoJugador().getColor()}"></p>
                 <img th:src="${partido.getEquipoJugador().getJugador1().getImagen()}" alt="jugador" class="jug-loc-1">
             </div>
@@ -34,6 +52,7 @@
             </div>
         </div>
 
+
         <div class="div-grande mb-4">
             <div class="div-menu">
                 <form action="acciones" method="POST">
@@ -41,9 +60,9 @@
                     <input type="hidden" name="posicion" th:value="${posicion}" id="posicion">
                     <input type="hidden" name="idEquipo2" th:value="${partido.getEquipoPc().getIdEquipo()}">
                     <input type="hidden" name="idEquipo1" th:value="${partido.getEquipoJugador().getIdEquipo()}">
-                    <button type="submit" value="'driblear'" name="tipoAccion" id="driblear">Driblear</button>
-                    <button type="submit" value="'tirar'" name="tipoAccion" id="tirar">Tirar</button>
-                    <button type="submit" value="'pasar'" name="tipoAccion" id="pasar">Pasar</button>
+                    <button type="submit" value="driblear" name="tipoAccion" id="driblear">Driblear</button>
+                    <button type="submit" value="tirar" name="tipoAccion" id="tirar">Tirar</button>
+                    <button type="submit" value="pasar" name="tipoAccion" id="pasar">Pasar</button>
                 </form>
             </div>
             <div class="div-dado">

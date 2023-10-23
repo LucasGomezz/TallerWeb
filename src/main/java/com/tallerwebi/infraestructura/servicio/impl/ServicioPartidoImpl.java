@@ -21,7 +21,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
     RepositorioPartido repositorioPartido;
     @Autowired
     ServicioEquipo servicioEquipo;
-    Integer posicionPartido=1;
+    Integer posicionPartido = 1;
 
     @Autowired
     public ServicioPartidoImpl(RepositorioPartido repositorioPartido, ServicioEquipo servicioEquipo){
@@ -51,8 +51,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Equipo equipoPc = servicioEquipo.buscarEquipo(idEquipo2);
         equipoPc.getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
         equipoPc.getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
-        partido.setEquipoJugador(equipoJugador);
         partido.setEquipoPc(equipoPc);
+        partido.setEquipoJugador(equipoJugador);
         return repositorioPartido.guardar(partido);
     }
 
@@ -61,12 +61,12 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer porcentaje = probabilidad();
         PartidoDTO partidoDTO = new PartidoDTO();
         if(porcentaje >= 60){
-            partidoDTO.setPuntajeRival(puntajeRival += 2);
-            partidoDTO.setPuntajeYo(puntajeYo);
+            partidoDTO.setPuntajePc(puntajeRival += 2);
+            partidoDTO.setPuntajeJugador(puntajeYo);
             return partidoDTO;
         }else{
-            partidoDTO.setPuntajeYo(puntajeYo += 2);
-            partidoDTO.setPuntajeRival(puntajeRival);
+            partidoDTO.setPuntajeJugador(puntajeYo += 2);
+            partidoDTO.setPuntajePc(puntajeRival);
             return partidoDTO;
         }
     }
@@ -74,8 +74,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
     @Override
     public PartidoDTO guardarResultados(Integer puntajeYo, Integer puntajeRival) {
         PartidoDTO partido = new PartidoDTO();
-        partido.setPuntajeYo(puntajeYo);
-        partido.setPuntajeRival(puntajeRival);
+        partido.setPuntajeJugador(puntajeYo);
+        partido.setPuntajePc(puntajeRival);
         return partido;
     }
 
@@ -122,7 +122,6 @@ public class ServicioPartidoImpl implements ServicioPartido {
             default:
                 break;
         }
-
         if (stat1 > stat2) {
 
             return true;

@@ -63,8 +63,8 @@ public class ControladorPartida {
         return new ModelAndView("partido-items", modelo);
     }
 
-    @RequestMapping(value="/iniciarPartida",method = {RequestMethod.GET})
-    public ModelAndView iniciarPartida(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2){
+    @RequestMapping(value = "/iniciarPartida", method = {RequestMethod.GET})
+    public ModelAndView iniciarPartida(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2) {
         Long idPartido = servicioPartido.inicializarPartido(idEquipo1, idEquipo2);
         servicioPartido.setPosicion(1);
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
@@ -80,30 +80,34 @@ public class ControladorPartida {
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
         PartidoDTO partidoNuevo = new PartidoDTO();
-        modelo.put("posicion",servicioPartido.getPosicion());
+        modelo.put("posicion", servicioPartido.getPosicion());
         modelo.put("partido", servicioPartido.buscarPartido(idPartido));
-        modelo.addAttribute("miPuntaje", partidoNuevo.getPuntajeYo().toString());
-        modelo.addAttribute("puntajeRival", partidoNuevo.getPuntajeRival().toString());
+        modelo.addAttribute("miPuntaje", partidoNuevo.getPuntajeJugador().toString());
+        modelo.addAttribute("puntajeRival", partidoNuevo.getPuntajePc().toString());
         return new ModelAndView("partido", modelo);
     }
 
-    @RequestMapping(value="/acciones", method= RequestMethod.POST)
-    public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion, Long idEquipo1, Long idEquipo2, Long idPartido){
-        Boolean resultado=servicioPartido.compararStats(tipoAccion, idEquipo1, idEquipo2);
-        return new ModelAndView("redirect:posicion?resultado="+resultado+"&idPartido="+idPartido);
+    @RequestMapping(value = "/acciones", method = RequestMethod.POST)
+    public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion, Long idEquipo1, Long idEquipo2, Long idPartido) {
+        Boolean resultado = servicioPartido.compararStats(tipoAccion, idEquipo1, idEquipo2);
+        return new ModelAndView("redirect:posicion?resultado=" + resultado + "&idPartido=" + idPartido);
     }
 
-    @RequestMapping(value="/posicion", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView calcularPosicion(@RequestParam(required = true) Boolean resultado, Long idPartido){
-        Integer posicion=servicioPartido.getPosicion();
-        if(resultado==true){
-            if(posicion<4){posicion++;}
-        }else{
-            if(posicion>1){posicion--;}
+    @RequestMapping(value = "/posicion", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView calcularPosicion(@RequestParam(required = true) Boolean resultado, Long idPartido) {
+        Integer posicion = servicioPartido.getPosicion();
+        if (resultado) {
+            if (posicion < 4) {
+                posicion++;
+            }
+        } else {
+            if (posicion > 1) {
+                posicion--;
+            }
         }
         servicioPartido.setPosicion(posicion);
 
-        return new ModelAndView("redirect:partido?idPartido="+idPartido);
+        return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
     @RequestMapping(value = "/obtenerPuntaje", method = RequestMethod.GET)

@@ -19,7 +19,7 @@
                 <table>
                     <tr th:each="e : ${equipos}">
                         <td>
-                            <button type="submit" th:value="${e.idEquipo}" name="idEquipo1" id="idEquipo"
+                            <button type="submit" th:if="${idEquipo2!=e.idEquipo}"  th:value="${e.idEquipo}" name="idEquipo1" id="idEquipo"
                                     th:text="${e.nombre}"/>
                         </td>
                     </tr>
@@ -37,7 +37,7 @@
                 <table>
                     <tr th:each="e : ${equipos}">
                         <td>
-                            <button type="submit" th:value="${e.idEquipo}" name="idEquipo2" id="idEquipo2"
+                            <button type="submit" th:if="${idEquipo1!=e.idEquipo}" th:value="${e.idEquipo}" name="idEquipo2" id="idEquipo2"
                                     th:text="${e.nombre}"/>
                         </td>
                     </tr>
@@ -133,15 +133,14 @@
 
     <form action="iniciarPartida">
             <span th:if="${equipo1!= null && equipo2!= null}">
-                <input type="hidden" name="idEquipo1" th:value="${idEquipo1}">
-                <input type="hidden" name="idEquipo2" th:value="${idEquipo2}">
+                <input type="hidden" name="idEquipo1" th:value="${idEquipo1}" id="idEquipo1-hidden">
+                <input type="hidden" name="idEquipo2" th:value="${idEquipo2}" id="idEquipo2-hidden">
                 <button class="confirmar">Confirmar</button>
             </span>
     </form>
 
 
 </div>
-<script src="js/elegir-equipo.js"></script>
 
 </body>
 </html>

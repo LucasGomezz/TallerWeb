@@ -1,22 +1,42 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.modelo.Equipo;
+
 public class PartidoDTO {
-    private Integer puntajeYo = 0;
-    private Integer puntajeRival = 0;
+    private Integer puntajeJugador = 0;
+    private Integer puntajePc = 0;
+    private Equipo equipoJugador;
+    private Equipo equipoPC;
 
-    public Integer getPuntajeYo() {
-        return this.puntajeYo;
+    public Integer getPuntajeJugador() {
+        return puntajeJugador;
     }
 
-    public void setPuntajeYo(Integer puntajeYo) {
-        this.puntajeYo = puntajeYo;
+    public void setPuntajeJugador(Integer puntajeJugador) {
+        this.puntajeJugador = puntajeJugador;
     }
 
-    public Integer getPuntajeRival() {
-        return puntajeRival;
+    public Integer getPuntajePc() {
+        return puntajePc;
     }
 
-    public void setPuntajeRival(Integer puntajeRival) {
-        this.puntajeRival = puntajeRival;
+    public void setPuntajePc(Integer puntajePc) {
+        this.puntajePc = puntajePc;
+    }
+
+    public Equipo getEquipoJugador() {
+        return equipoJugador;
+    }
+
+    public void setEquipoJugador(Equipo equipoJugador) {
+        this.equipoJugador = equipoJugador;
+    }
+
+    public Equipo getEquipoPC() {
+        return equipoPC;
+    }
+
+    public void setEquipoPC(Equipo equipoPC) {
+        this.equipoPC = equipoPC;
     }
 }
