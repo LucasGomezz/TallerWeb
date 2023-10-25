@@ -16,7 +16,6 @@ public class Partido {
     private Equipo equipoJugador;
     @OneToOne
     private Equipo equipoPc;
-    private String hola;
 
 
     public Long getId() {

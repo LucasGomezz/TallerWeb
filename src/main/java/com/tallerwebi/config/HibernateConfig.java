@@ -19,8 +19,8 @@ public class HibernateConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/javadunk");
-        dataSource.setUsername("root");
-        dataSource.setPassword("1234");
+        dataSource.setUsername("");
+        dataSource.setPassword("");
         return dataSource;
     }
 
