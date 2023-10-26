@@ -139,18 +139,7 @@ public class ControladorPartida {
         PartidoDTO partidoNuevo = new PartidoDTO();
         return partidoNuevo;
     }
-
-    List<PartidoDTO> partido = new ArrayList<>();
-
-    @RequestMapping(value = "/sumar", method = RequestMethod.POST)
-    @ResponseBody
-    public PartidoDTO sumarPuntaje(Integer puntajeYo, Integer puntajeRival) {
-        PartidoDTO puntajes = servicioPartido.sumar(puntajeYo, puntajeRival);
-        partido.add(puntajes);
-        return puntajes;
-    }
-
-
+    
 
     @RequestMapping("/partido-resultado")
     public ModelAndView irAlResultado() {
