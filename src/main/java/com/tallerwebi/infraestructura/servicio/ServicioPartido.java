@@ -16,7 +16,7 @@ public interface ServicioPartido {
 
     void actualizarPartido(Partido partido);
 
-    Boolean compararStats(String accion, Long idEquipo1, Long idEquipo2);
+    Boolean compararStats(Integer dado, String accion, Long idEquipo1, Long idEquipo2);
 
 
 }

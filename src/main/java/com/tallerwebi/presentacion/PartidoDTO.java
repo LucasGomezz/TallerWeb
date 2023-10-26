@@ -2,6 +2,8 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.modelo.Equipo;
 
+import java.util.Random;
+
 public class PartidoDTO {
     private Long idPartido;
     private Integer puntajeJugador = 0;
@@ -65,5 +67,11 @@ public class PartidoDTO {
 
     public void setTengoLaPelota(Boolean tengoLaPelota) {
         this.tengoLaPelota = tengoLaPelota;
+    }
+
+    public Integer tirarDado(){
+        Random rand = new Random();
+        Integer dado= rand.nextInt(20) + 1;
+        return dado;
     }
 }

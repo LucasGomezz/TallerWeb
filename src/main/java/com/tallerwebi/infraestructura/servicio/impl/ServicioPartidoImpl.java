@@ -90,9 +90,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer porcentaje = numeroAleatorio * 10;
         return porcentaje;
     }
-    public Boolean compararStats(String accion, Long idEquipo1, Long idEquipo2) {
+    public Boolean compararStats(Integer dado, String accion, Long idEquipo1, Long idEquipo2) {
         Integer stat1 = 0;
         Integer stat2 = 0;
+        //HACER LOGICA DADO
         switch (accion) {
             case "driblear":
                 stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible();

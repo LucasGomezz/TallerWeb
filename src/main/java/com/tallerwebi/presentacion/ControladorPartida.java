@@ -102,10 +102,12 @@ public class ControladorPartida {
     public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion) {
         Long idPartido = partidoNuevo.getIdPartido();
         if (!tipoAccion.equals("tirar")) {
-            Boolean resultado = servicioPartido.compararStats(tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
+            Integer dado=partidoNuevo.tirarDado();
+            Boolean resultado = servicioPartido.compararStats(dado,tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
             return new ModelAndView("redirect:posicion?resultado=" + true + "&idPartido=" + idPartido);
         } else {
-            Boolean resultado = servicioPartido.compararStats(tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
+            Integer dado=partidoNuevo.tirarDado();
+            Boolean resultado = servicioPartido.compararStats(dado,tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
             if(resultado){
             return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);}
             else{
