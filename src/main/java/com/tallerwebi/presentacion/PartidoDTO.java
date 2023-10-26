@@ -11,6 +11,7 @@ public class PartidoDTO {
     private Equipo equipoJugador;
     private Equipo equipoPC;
     private Integer posicion = 1;
+    private Integer dado;
     private Boolean tengoLaPelota = true;
 
     public Integer getPuntajeJugador() {
@@ -69,9 +70,17 @@ public class PartidoDTO {
         this.tengoLaPelota = tengoLaPelota;
     }
 
+    public Integer getDado() {
+        return dado;
+    }
+
+    public void setDado(Integer dado) {
+        this.dado = dado;
+    }
+
     public Integer tirarDado(){
         Random rand = new Random();
-        Integer dado= rand.nextInt(20) + 1;
+        dado= rand.nextInt(20) + 1;
         return dado;
     }
 }
