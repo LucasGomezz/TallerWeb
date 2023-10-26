@@ -106,7 +106,11 @@ public class ControladorPartida {
             return new ModelAndView("redirect:posicion?resultado=" + true + "&idPartido=" + idPartido);
         } else {
             Boolean resultado = servicioPartido.compararStats(tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
-            return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);
+            if(resultado){
+            return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);}
+            else{
+                return new ModelAndView("redirect:partido?idPartido=" + idPartido);
+            }
         }
     }
     @RequestMapping(value = "/partido-aro", method = RequestMethod.GET)
@@ -139,7 +143,7 @@ public class ControladorPartida {
         PartidoDTO partidoNuevo = new PartidoDTO();
         return partidoNuevo;
     }
-    
+
 
     @RequestMapping("/partido-resultado")
     public ModelAndView irAlResultado() {
