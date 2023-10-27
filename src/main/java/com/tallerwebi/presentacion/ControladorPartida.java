@@ -86,17 +86,12 @@ public class ControladorPartida {
         partidoNuevo.setEquipoPC(servicioPartido.buscarPartido(idPartido).getEquipoPc());
         partidoNuevo.setIdPartido(idPartido);
         modelo.put("partido", partidoNuevo);
-        modelo.addAttribute("miPuntaje", partidoNuevo.getPuntajeJugador().toString());
-        modelo.addAttribute("puntajeRival", partidoNuevo.getPuntajePc().toString());
-        return new ModelAndView("partido", modelo);
+        if(partidoNuevo.getPuntajeJugador()<21 || partidoNuevo.getPuntajePc()<21){
+        return new ModelAndView("partido", modelo);}
+        else{
+         return new ModelAndView("partido-resultado");
+        }
     }
-
-//    @RequestMapping(value = "/acciones", method = RequestMethod.POST)
-//    public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion, Long idEquipo1, Long idEquipo2, Long idPartido, @ModelAttribute("partido") PartidoDTO partidoEntero)  {
-//        Boolean resultado = servicioPartido.compararStats(tipoAccion, idEquipo1, idEquipo2);
-//        partidoEntero.getIdPartido();
-//        return new ModelAndView("redirect:posicion?resultado=" + resultado + "&idPartido=" + idPartido);
-//    }
 
     @RequestMapping(value = "/acciones", method = RequestMethod.POST)
     public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion) {
@@ -157,7 +152,13 @@ public class ControladorPartida {
     @RequestMapping("/partido-resultado")
     public ModelAndView irAlResultado() {
         ModelMap modelo = new ModelMap();
-
+        String mensaje;
+        if(partidoNuevo.getPuntajeJugador()> partidoNuevo.getPuntajePc()){
+            mensaje="GANASTE";
+        }else{
+            mensaje="PERDISTE";
+        }
+        modelo.put("mensaje", mensaje);
         return new ModelAndView("partido-resultado", modelo);
     }
 

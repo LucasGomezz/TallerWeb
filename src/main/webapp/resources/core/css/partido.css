@@ -126,7 +126,8 @@
 
 }
 .cant-monedas{
-    margin-left: 10px;
+    margin-top: 1em;
+    margin-left: 1em;
 }
 .moneda{
     margin-left: 30px;
@@ -198,4 +199,7 @@
     background-color: black;
     color: yellow;
     border-radius: 10px;
+}
+.mensaje{
+    margin-bottom: 1em;
 }

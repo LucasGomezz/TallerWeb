@@ -8,10 +8,10 @@
 </head>
 <body class="partido-resultado-body">
     <div class="partido-resultado">
-        <h1>VICTORIA</h1>
+        <h1 th:text="${mensaje}" class="mensaje"></h1>
         <div class="partido-resultado-moneda">
             <img src="images/MONEDA.png" alt="moneda" height="60px" class="moneda">
-            <h2 class="cant-monedas">500</h2>
+            <h2 class="cant-monedas" th:text="${mensaje == 'GANASTE' ? '500' : '100'}"></h2>
         </div>
         <a href="menuPrincipal"><button class="boton-resultado">Home</button></a>
     </div>
