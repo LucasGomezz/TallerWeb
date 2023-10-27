@@ -104,13 +104,20 @@ public class ControladorPartida {
         if (!tipoAccion.equals("tirar")) {
             Integer dado=partidoNuevo.tirarDado();
             Boolean resultado = servicioPartido.compararStats(dado,tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
-            return new ModelAndView("redirect:posicion?resultado=" + true + "&idPartido=" + idPartido);
+            if(resultado){
+            partidoNuevo.setTengoLaPelota(true);
+            return new ModelAndView("redirect:posicion?resultado=" + true + "&idPartido=" + idPartido);}
+            else{
+            partidoNuevo.setTengoLaPelota(false);
+            return new ModelAndView("redirect:posicion?resultado=" + false + "&idPartido=" + idPartido);}
         } else {
             Integer dado=partidoNuevo.tirarDado();
             Boolean resultado = servicioPartido.compararStats(dado,tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
             if(resultado){
-            return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);}
+                partidoNuevo.setTengoLaPelota(true);
+                return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);}
             else{
+                partidoNuevo.setTengoLaPelota(false);
                 return new ModelAndView("redirect:partido?idPartido=" + idPartido);
             }
         }
@@ -163,6 +170,8 @@ public class ControladorPartida {
                 partidoNuevo.setPuntajeJugador(partidoNuevo.getPuntajeJugador() + 3);
             }
         }
+        partidoNuevo.setTengoLaPelota(false);
+        partidoNuevo.setPosicion(4);
         Long idPartido = partidoNuevo.getIdPartido();
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }

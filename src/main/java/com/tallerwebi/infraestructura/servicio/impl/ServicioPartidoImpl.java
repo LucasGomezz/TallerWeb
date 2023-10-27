@@ -90,40 +90,47 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer porcentaje = numeroAleatorio * 10;
         return porcentaje;
     }
-    public Boolean compararStats(Integer dado, String accion, Long idEquipo1, Long idEquipo2) {
-        Integer stat1 = 0;
-        Integer stat2 = 0;
-        //HACER LOGICA DADO
+    public Integer tirarDado(){
+        Random rand = new Random();
+        //PONGO EN 10 PARA BAJAR LA DIFICULTAD
+        Integer dado= rand.nextInt(10) + 1;
+        return dado;
+    }
+
+    public Boolean compararStats(Integer dadoJugador, String accion, Long idEquipo1, Long idEquipo2) {
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        Integer dadoPc=tirarDado();
         switch (accion) {
             case "driblear":
-                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo();
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible()+dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo()+dadoPc;
                 break;
             case "tirar":
-                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa();
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro()+dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa()+dadoPc;
                 break;
             case "pasar":
-                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion();
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase()+dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion()+dadoPc;
                 break;
             case "robar":
-                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible();
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo()+dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible()+dadoPc;
                 break;
             case "tapar":
-                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro();
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa()+dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro()+dadoPc;
                 break;
             case "interceptar":
-                stat1 = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion();
-                stat2 = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase();
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion()+dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase()+dadoPc;
                 break;
 
             default:
                 break;
         }
-        if (stat1 > stat2) {
+        if (statJugador > statPc) {
             return true;
         }
         return false;
