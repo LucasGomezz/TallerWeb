@@ -136,7 +136,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return false;
     }
 
-
-
+    public void guardarPartidoFinal(PartidoDTO partidoDTO){
+        Long id =inicializarPartido(partidoDTO.getEquipoJugador().getIdEquipo(),partidoDTO.getEquipoPC().getIdEquipo());
+        buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
+        buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
+    }
 
 }

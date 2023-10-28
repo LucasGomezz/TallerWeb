@@ -35,4 +35,6 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
     public List<Partido> listAll() {
         return sessionFactory.getCurrentSession().createCriteria(Partido.class).list();
     }
+
+
 }

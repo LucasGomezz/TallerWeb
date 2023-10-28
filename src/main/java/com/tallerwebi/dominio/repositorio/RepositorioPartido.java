@@ -9,4 +9,5 @@ public interface RepositorioPartido {
     Long guardar(Partido partido);
     void actualizar(Partido partido);
     List<Partido> listAll();
+
 }

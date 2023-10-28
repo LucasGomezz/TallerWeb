@@ -86,7 +86,7 @@ public class ControladorPartida {
         partidoNuevo.setEquipoPC(servicioPartido.buscarPartido(idPartido).getEquipoPc());
         partidoNuevo.setIdPartido(idPartido);
         modelo.put("partido", partidoNuevo);
-        if(partidoNuevo.getPuntajeJugador()<21 || partidoNuevo.getPuntajePc()<21){
+        if(partidoNuevo.getPuntajeJugador()<21 && partidoNuevo.getPuntajePc()<21){
         return new ModelAndView("partido", modelo);}
         else{
          return new ModelAndView("partido-resultado");
@@ -141,13 +141,6 @@ public class ControladorPartida {
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
-    @RequestMapping(value = "/obtenerPuntaje", method = RequestMethod.GET)
-    @ResponseBody
-    public PartidoDTO obtenerPuntaje() {
-        PartidoDTO partidoNuevo = new PartidoDTO();
-        return partidoNuevo;
-    }
-
 
     @RequestMapping("/partido-resultado")
     public ModelAndView irAlResultado() {
@@ -159,6 +152,8 @@ public class ControladorPartida {
             mensaje="PERDISTE";
         }
         modelo.put("mensaje", mensaje);
+        //ESTO ANDA MAL, NO GUARDA PUNTAJE Y NO MUESTRA MENSAJE EN VISTA
+        servicioPartido.guardarPartidoFinal(partidoNuevo);
         return new ModelAndView("partido-resultado", modelo);
     }
 
@@ -177,5 +172,12 @@ public class ControladorPartida {
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
+    @RequestMapping(value = "/historial", method = RequestMethod.GET)
+    public ModelAndView mostrarHistorial() {
+        ModelMap modelo = new ModelMap();
+        List<Partido> partidos=servicioPartido.listAll();
+        modelo.put("partidos",partidos);
+        return new ModelAndView("historial", modelo);
+    }
 }
 
