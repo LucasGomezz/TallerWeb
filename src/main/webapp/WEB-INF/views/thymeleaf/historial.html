@@ -9,16 +9,20 @@
   <table>
     <thead>
       <tr>
-        <th>Partidos</th>
+        <th>Id</th>
+        <th>Equipo Jugador</th>
+        <th>Equipo Pc</th>
+        <th>Puntaje Jugador</th>
+        <th>Puntaje Pc</th>
       </tr>
     </thead>
     <tbody>
       <tr th:each="partido : ${partidos}">
         <td th:text="${partido.getId()}"></td>
-        <td th:text="${partido.getEquipoJugador()}"></td>
-        <td th:text="${partido.getEquipoPc()}"></td>
-        <td th:text="${partido.getPuntosPc()}"></td>
+        <td th:text="${partido.getEquipoJugador().getNombre()}"></td>
+        <td th:text="${partido.getEquipoPc().getNombre()}"></td>
         <td th:text="${partido.getPuntosUsuario()}"></td>
+        <td th:text="${partido.getPuntosPc()}"></td>
       </tr>
     </tbody>
   </table>

@@ -1,7 +1,6 @@
 package com.tallerwebi.infraestructura.servicio.impl;
 
 
-import com.tallerwebi.dominio.modelo.Jugador;
 import com.tallerwebi.dominio.modelo.Partido;
 import com.tallerwebi.dominio.modelo.Equipo;
 import com.tallerwebi.dominio.repositorio.RepositorioPartido;
@@ -136,8 +135,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return false;
     }
 
-    public void guardarPartidoFinal(PartidoDTO partidoDTO){
-        Long id =inicializarPartido(partidoDTO.getEquipoJugador().getIdEquipo(),partidoDTO.getEquipoPC().getIdEquipo());
+    public void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO){
         buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
         buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
     }

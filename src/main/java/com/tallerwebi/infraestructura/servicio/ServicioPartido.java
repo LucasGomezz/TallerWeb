@@ -18,5 +18,5 @@ public interface ServicioPartido {
 
     Boolean compararStats(Integer dado, String accion, Long idEquipo1, Long idEquipo2);
 
-    void guardarPartidoFinal(PartidoDTO partidoDTO);
+    void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO);
 }
