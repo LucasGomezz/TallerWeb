@@ -1,7 +1,6 @@
 INSERT INTO usuario (id,email,password,rol,activo) VALUES(1, 'test@unlam.edu.ar', 'test', 'ADMIN', true);
-/**
-ROMPIO, QUIZAS PORQUE YA EXISTIAN EN LA BASE?
 
+/**
 INSERT INTO jugador(nombre, drible, tiro, pase, robo, tapa, intercepcion)
 VALUES("Jason Tatum", 71, 73, 75, 77, 80, 84),
 VALUES("AL Horford", 70, 72, 76, 78, 81, 83),
@@ -34,5 +33,4 @@ INSERT INTO equipo(nombre, jugador1_id, jugador2_id, logo, color)
   VALUES("Miami Heat", 13, 14,"images/logoEquipos/miami.png", "rojo"),
   VALUES("Dallas Mavericks", 15, 16,"images/logoEquipos/dallas.png", "azul"),
   VALUES("Milwaukee Bucks", 17, 18,"images/logoEquipos/bucks.png", "verde"),
-  VALUES("Golden State Warriors", 19, 20,"images/logoEquipos/warriors.png", "azul"),
-*/
+  VALUES("Golden State Warriors", 19, 20,"images/logoEquipos/warriors.png", "azul");*/
