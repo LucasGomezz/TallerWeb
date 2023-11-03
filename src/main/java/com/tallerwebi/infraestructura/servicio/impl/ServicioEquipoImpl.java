@@ -37,35 +37,5 @@ public class ServicioEquipoImpl implements ServicioEquipo {
         return repositorioEquipo.listAll();
     }
 
-    @Override
-    public void inicializarEquipos() {
-        inicializarEquipos("Boston Celtics", "Jason Tatum", "AL Horford","images/logoEquipos/celtics.png", "verde");
-        inicializarEquipos("Chicago Bulls", "Lonzo Ball", "Andre Drummond","images/logoEquipos/bulls.png", "rojo");
-        inicializarEquipos("Cleveland Cavaliers", "Sharife Cooper", "Tristan Thompson","images/logoEquipos/cleveland.png", "rojo");
-        inicializarEquipos("LA Clippers", "Russell Westbrook", "Kawhi Leonard","images/logoEquipos/clippers.png", "azul");
-        inicializarEquipos("New York Knicks", "Donte DiVincenzo", "Josh Hart","images/logoEquipos/knicks.png", "naranja");
-        inicializarEquipos("Los Angeles Lakers", "LeBron James", "Anthony Davis","images/logoEquipos/lakers.png", "amarillo");
-        inicializarEquipos("Miami Heat", "Tyler Herro", "Duncan Robinson","images/logoEquipos/miami.png", "rojo");
-        inicializarEquipos("Dallas Mavericks", "Luka Doncic", "Dwight Powell","images/logoEquipos/dallas.png", "azul");
-        inicializarEquipos("Milwaukee Bucks", "Damian Lillard", "Giannis Antetokounmpo","images/logoEquipos/bucks.png", "verde");
-        inicializarEquipos("Golden State Warriors", "Stephen Curry", "Klay Thompson","images/logoEquipos/warriors.png", "azul");
-    }
 
-
-
-    @Override
-    public void inicializarEquipos(String nombreEquipo,String nombreJugador1, String nombreJugador2, String logo, String color) {
-        Equipo e = repositorioEquipo.buscarPorNombre(nombreEquipo);
-        if(e==null){
-            Jugador jugador1 = repositorioJugador.buscar(nombreJugador1);
-            Jugador jugador2 = repositorioJugador.buscar(nombreJugador2);
-            Equipo equipo = new Equipo();
-            equipo.setLogo(logo);
-            equipo.setColor(color);
-            equipo.setNombre(nombreEquipo);
-            equipo.setJugador1(jugador1);
-            equipo.setJugador2(jugador2);
-            repositorioEquipo.crear(equipo);
-        }
-    }
 }

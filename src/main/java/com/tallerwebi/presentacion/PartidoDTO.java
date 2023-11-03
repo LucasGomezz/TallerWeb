@@ -13,6 +13,7 @@ public class PartidoDTO {
     private Integer posicion = 1;
     private Integer dado;
     private Boolean tengoLaPelota = true;
+    private Integer tienePelotaJugador = 1;
 
     public Integer getPuntajeJugador() {
         return puntajeJugador;
@@ -78,9 +79,40 @@ public class PartidoDTO {
         this.dado = dado;
     }
 
-    public Integer tirarDado(){
+    public Integer getTienePelotaJugador() {
+        return tienePelotaJugador;
+    }
+
+    public void setTienePelotaJugador(Integer tienePelotaJugador) {
+        this.tienePelotaJugador = tienePelotaJugador;
+    }
+
+    public Integer tirarDado() {
         Random rand = new Random();
-        dado= rand.nextInt(20) + 1;
+        dado = rand.nextInt(20) + 1;
         return dado;
+    }
+    public void setImagenes() {
+        if(getTengoLaPelota() && getTienePelotaJugador() == 1){
+            getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
+            getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
+            getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
+            getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
+        }else if(getTengoLaPelota() && getTienePelotaJugador() == 2) {
+            getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL.png");
+            getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
+            getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
+            getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
+        }else if(!getTengoLaPelota() && getTienePelotaJugador() == 1){
+            getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL.png");
+            getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
+            getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE-CON-PELOTA.png");
+            getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
+        }else if(!getTengoLaPelota() && getTienePelotaJugador() == 2){
+            getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL.png");
+            getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
+            getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
+            getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE-CON-PELOTA.png");
+        }
     }
 }

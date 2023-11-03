@@ -70,6 +70,13 @@ public class ControladorPartida {
     public ModelAndView iniciarPartida(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2) {
         Long idPartido = servicioPartido.inicializarPartido(idEquipo1, idEquipo2);
         partidoNuevo = new PartidoDTO();
+        partidoNuevo.setEquipoJugador(servicioPartido.buscarPartido(idPartido).getEquipoJugador());
+        partidoNuevo.setEquipoPC(servicioPartido.buscarPartido(idPartido).getEquipoPc());
+        partidoNuevo.setIdPartido(idPartido);
+        partidoNuevo.getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
+        partidoNuevo.getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
+        partidoNuevo.getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
+        partidoNuevo.getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
@@ -82,43 +89,68 @@ public class ControladorPartida {
         //@PathVariable= solo el valor
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
-        partidoNuevo.setEquipoJugador(servicioPartido.buscarPartido(idPartido).getEquipoJugador());
-        partidoNuevo.setEquipoPC(servicioPartido.buscarPartido(idPartido).getEquipoPc());
-        partidoNuevo.setIdPartido(idPartido);
         modelo.put("partido", partidoNuevo);
-        if(partidoNuevo.getPuntajeJugador()<21 && partidoNuevo.getPuntajePc()<21){
-        return new ModelAndView("partido", modelo);}
-        else{
-         return new ModelAndView("redirect:partido-resultado?idPartido=" + idPartido);
+        partidoNuevo.setImagenes();
+        if (partidoNuevo.getPuntajeJugador() < 21 && partidoNuevo.getPuntajePc() < 21) {
+            return new ModelAndView("partido", modelo);
+        } else {
+            return new ModelAndView("redirect:partido-resultado?idPartido=" + idPartido);
         }
     }
+
 
     @RequestMapping(value = "/acciones", method = RequestMethod.POST)
     public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion) {
         Long idPartido = partidoNuevo.getIdPartido();
-        if (!tipoAccion.equals("tirar")) {
-            Integer dado=partidoNuevo.tirarDado();
-            Boolean resultado = servicioPartido.compararStats(dado,tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
-            if(resultado){
-            partidoNuevo.setTengoLaPelota(true);
-            return new ModelAndView("redirect:posicion?resultado=" + true + "&idPartido=" + idPartido);}
-            else{
-            partidoNuevo.setTengoLaPelota(false);
-            return new ModelAndView("redirect:posicion?resultado=" + false + "&idPartido=" + idPartido);}
-        } else {
-            Integer dado=partidoNuevo.tirarDado();
-            Boolean resultado = servicioPartido.compararStats(dado,tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo());
-            if(resultado){
+        Integer jugador = partidoNuevo.getTienePelotaJugador();
+        Integer dado = partidoNuevo.tirarDado();
+        Boolean resultado = servicioPartido.compararStats(dado, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador);
+
+        if (tipoAccion.equals("tirar")) {
+            if (resultado) {
                 partidoNuevo.setTengoLaPelota(true);
-                return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);}
-            else{
+                return new ModelAndView("redirect:partido-aro?idPartido=" + idPartido);
+            } else {
                 partidoNuevo.setTengoLaPelota(false);
                 return new ModelAndView("redirect:partido?idPartido=" + idPartido);
             }
         }
+        if (resultado) {
+            partidoNuevo.setTengoLaPelota(true);
+
+            if (tipoAccion.equals("pasar")) {
+                if (partidoNuevo.getTienePelotaJugador() == 1) {
+                    partidoNuevo.setTienePelotaJugador(2);
+                } else {
+                    partidoNuevo.setTienePelotaJugador(1);
+                }
+            }
+            return new ModelAndView("redirect:posicion?resultado=" + true + "&idPartido=" + idPartido);
+        } else {
+            partidoNuevo.setTengoLaPelota(false);
+            verificaLaAccionPc(servicioPartido.retornarAccionPc());
+            return new ModelAndView("redirect:posicion?resultado=" + false + "&idPartido=" + idPartido);
+        }
     }
+
+    private void verificaLaAccionPc(String accionPc) {
+        if (accionPc.equals("tirar")) {
+            int puntos = (partidoNuevo.getPosicion() == 1) ? 2 : 3;
+            partidoNuevo.setPuntajePc(partidoNuevo.getPuntajePc() + puntos);
+        }
+
+        if (accionPc.equals("pasar")) {
+            if (partidoNuevo.getTienePelotaJugador() == 1) {
+                partidoNuevo.setTienePelotaJugador(2);
+            } else {
+                partidoNuevo.setTienePelotaJugador(1);
+            }
+        }
+    }
+
+
     @RequestMapping(value = "/partido-aro", method = RequestMethod.GET)
-    public ModelAndView irAlAro(@RequestParam(required = true)Long idPartido) {
+    public ModelAndView irAlAro(@RequestParam(required = true) Long idPartido) {
         ModelMap modelo = new ModelMap();
 
         return new ModelAndView("partido-aro", modelo);
@@ -146,22 +178,22 @@ public class ControladorPartida {
     public ModelAndView irAlResultado(@RequestParam(required = true) Long idPartido) {
         ModelMap modelo = new ModelMap();
         String mensaje;
-        if(partidoNuevo.getPuntajeJugador()> partidoNuevo.getPuntajePc()){
-            mensaje="GANASTE";
-        }else{
-            mensaje="PERDISTE";
+        if (partidoNuevo.getPuntajeJugador() > partidoNuevo.getPuntajePc()) {
+            mensaje = "GANASTE";
+        } else {
+            mensaje = "PERDISTE";
         }
         modelo.put("mensaje", mensaje);
-        servicioPartido.guardarPuntajeFinal(idPartido,partidoNuevo);
+        servicioPartido.guardarPuntajeFinal(idPartido, partidoNuevo);
         return new ModelAndView("partido-resultado", modelo);
     }
 
     @RequestMapping(value = "/tira", method = RequestMethod.POST)
     public ModelAndView procesarValorBarra(@RequestParam Integer resultadoBarra) {
-        if(resultadoBarra >= 85){
-            if(partidoNuevo.getPosicion()== 4){
+        if (resultadoBarra >= 85) {
+            if (partidoNuevo.getPosicion() == 4) {
                 partidoNuevo.setPuntajeJugador(partidoNuevo.getPuntajeJugador() + 2);
-            }else {
+            } else {
                 partidoNuevo.setPuntajeJugador(partidoNuevo.getPuntajeJugador() + 3);
             }
         }
@@ -174,8 +206,8 @@ public class ControladorPartida {
     @RequestMapping(value = "/historial", method = RequestMethod.GET)
     public ModelAndView mostrarHistorial() {
         ModelMap modelo = new ModelMap();
-        List<Partido> partidos=servicioPartido.listAll();
-        modelo.put("partidos",partidos);
+        List<Partido> partidos = servicioPartido.listAll();
+        modelo.put("partidos", partidos);
         return new ModelAndView("historial", modelo);
     }
 }

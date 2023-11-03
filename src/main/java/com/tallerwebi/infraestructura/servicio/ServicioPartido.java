@@ -11,12 +11,13 @@ public interface ServicioPartido {
 
     Long inicializarPartido(Long idEquipo1,Long idEquipo2);
 
-    PartidoDTO sumar(Integer puntajeYo, Integer puntajeRival);
     PartidoDTO guardarResultados(Integer puntajeYo, Integer puntajeRival);
 
     void actualizarPartido(Partido partido);
 
-    Boolean compararStats(Integer dado, String accion, Long idEquipo1, Long idEquipo2);
+    Boolean compararStats(Integer dado, String accion, Long idEquipo1, Long idEquipo2, Integer jugador);
 
     void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO);
+
+    String retornarAccionPc();
 }

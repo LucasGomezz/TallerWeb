@@ -19,9 +19,7 @@ public class ControladorMenuPrincipal {
 
     @RequestMapping("/menuPrincipal")
     public ModelAndView irAMenuPrincipal() {
-        servicioJugador.inicializarJugador();
-        servicioEquipo.inicializarEquipos();
-        servicioItemTienda.inicializarItemTienda();
+        //servicioItemTienda.inicializarItemTienda();
         return new ModelAndView("menuPrincipal");
     }
 
