@@ -58,36 +58,38 @@
     flex-direction: row;
     justify-content: center;
     position: relative;
-    right: 26em;
+    right: 25em;
+    top:6em;
 }
 .div-jugadoresDos{
     display:flex;
     flex-direction: row;
     justify-content: center;
     position: relative;
-    right: 1em;
+    right: 14em;
+    top:6em;
 }
 .div-jugadoresTres{
     display:flex;
     flex-direction: row;
     justify-content: center;
     position: absolute;
-    left: 62em;
-    top:22em;
+    left: 64em;
+    top:27em;
 }
 .div-jugadoresCuatro{
     display:flex;
     flex-direction: row;
     justify-content: center;
     position: absolute;
-    left: 78em;
-    top:22em;
+    left: 75em;
+    top:27em;
 }
 .div-jugadores .img-player{
     width: 10rem;
 }
 .img-player img{
-    height: 15rem;
+    height: 11rem;
 
 }
 .img-player{

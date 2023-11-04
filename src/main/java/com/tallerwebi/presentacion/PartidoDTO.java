@@ -104,7 +104,7 @@ public class PartidoDTO {
             dadoPC = rand.nextInt(15) + 1;
         } else {
             dadoJugador = rand.nextInt(15) + 1;
-            dadoPC =rand.nextInt(11) + 10;
+            dadoPC = rand.nextInt(11) + 10;
         }
     }
 

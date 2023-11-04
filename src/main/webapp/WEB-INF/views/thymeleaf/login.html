@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Taller Web I</title>
-    <!-- Boostrap core css -->
+    <title>Java Dunk</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-    <!-- custom style -->
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/manuPrincipal.css">
@@ -17,10 +15,10 @@
     <div class = "container text-center d-flex justify-content-center">
         <div id="loginbox" class="mainbox col-md-4 col-md-offset-3 col-sm-8 col-sm-offset-2 bg-secondary bg-opacity-25 p-3 rounded-3">
             <form th:action="@{/validar-login}" method="POST" th:object="${datosLogin}" class="mt-1 mb-3">
-                <h3 class="form-signin-heading mb-4">Taller Web dI</h3>
+                <h3 class="form-signin-heading mb-4">Taller Web I</h3>
                 <input th:field="*{email}" id="email" type="email" class="form-control mt-3" placeholder="Email" required/>
-                <input th:field="*{password}" type="password" id="password" class="form-control mt-2" placeholder="Contraseña" required/>
-                <button id="btn-login" class="btn btn-lg btn-primary btn-block mt-4" Type="Submit">Login</button>
+                <input th:field="*{password}" type="password" id="password" class="form-control mt-2 mb-2" placeholder="Contraseña" required/>
+                <button  Type="Submit">Login</button>
                 <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}"></p>
             </form>
             <a id="ir-a-registrarme" href="nuevo-usuario">Registrarme</a>
@@ -32,6 +30,5 @@
 <!-- /.container -->
 <!-- Boostrap core js -->
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
-<script src="../../../resources/core/js/partido-aro.js"></script>
 </body>
 </html>
