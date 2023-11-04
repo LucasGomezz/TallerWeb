@@ -66,19 +66,6 @@ public class ServicioPartidoImpl implements ServicioPartido {
         repositorioPartido.actualizar(partido);
     }
 
-    public Integer tirarDadoDefendiendo() {
-        Random rand = new Random();
-        //PONGO EN 10 PARA BAJAR LA DIFICULTAD
-        Integer dado = rand.nextInt(10) + 1;
-        return dado;
-    }
-
-    public Integer tirarDadoAtacando() {
-        Random rand = new Random();
-        //PONGO EN 10 PARA BAJAR LA DIFICULTAD
-        Integer dado = rand.nextInt(20) + 1;
-        return dado;
-    }
 
     public Integer elegirAccionPc() {
         Random rand = new Random();
@@ -87,122 +74,107 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
 
-    public Boolean compararStats(Integer dadoJugador, String accion, Long idEquipo1, Long idEquipo2, Integer jugador) {
-        Integer statJugador = 0;
-        Integer statPc = 0;
-        Integer dadoPcDefendiendo = tirarDadoDefendiendo();
-        Integer dadoPcAtacando = tirarDadoAtacando();
+    public Boolean compararStats(Integer dadoJugador, Integer dadoPC, String accion, Long idEquipo1, Long idEquipo2, Integer jugador) {
+        Boolean resultado = false;
         switch (accion) {
             case "driblear":
-                this.accionPc = 0;
-                if (jugador == 1) {
-                    statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible() + dadoJugador;
-                    statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo() + dadoPcDefendiendo;
-                } else {
-                    statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getDrible() + dadoJugador;
-                    statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getRobo() + dadoPcDefendiendo;
-                }
+                resultado = driblearStats(dadoJugador, dadoPC,  idEquipo1,  idEquipo2,  jugador);
                 break;
             case "tirar":
-                this.accionPc = 0;
-                if (jugador == 1) {
-                    statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro() + dadoJugador;
-                    statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa() + dadoPcDefendiendo;
-                } else {
-                    statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTiro() + dadoJugador;
-                    statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTapa() + dadoPcDefendiendo;
-                }
+                resultado = tirarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
                 break;
             case "pasar":
-                this.accionPc = 0;
-                if (jugador == 1) {
-                    statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase() + dadoJugador;
-                    statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion() + dadoPcDefendiendo;
-                } else {
-                    statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getPase() + dadoJugador;
-                    statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getIntercepcion() + dadoPcDefendiendo;
-                }
+                resultado = pasarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
                 break;
             case "robar":
-                this.accionPc = elegirAccionPc();
-                if (jugador == 1) {
-                    if (accionPc == 1) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + 5;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPcAtacando;
-                    } else if (accionPc == 2) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPcAtacando;
-                    } else {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPcAtacando;
-                    }
-                } else {
-                    if (accionPc == 1) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + 5;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPcAtacando;
-                    } else if (accionPc == 2) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPcAtacando;
-                    } else {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPcAtacando;
-                    }
-                }
+                resultado = robarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
                 break;
             case "tapar":
-                this.accionPc = elegirAccionPc();
-                if (jugador == 1) {
-                    if (accionPc == 2) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + 5;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPcAtacando;
-                    } else if (accionPc == 1) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPcAtacando;
-                    } else {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPcAtacando;
-                    }
-                } else {
-                    if (accionPc == 2) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + 5;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPcAtacando;
-                    } else if (accionPc == 1) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPcAtacando;
-                    } else {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPcAtacando;
-                    }
-                }
+                resultado = taparStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
                 break;
             case "interceptar":
-                this.accionPc = elegirAccionPc();
-                if (jugador == 1) {
-                    if (accionPc == 3) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + 5;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPcAtacando;
-                    } else if (accionPc == 2) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPcAtacando;
-                    } else {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPcAtacando;
-                }}else{
-                    if (accionPc == 3) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + 5;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPcAtacando;
-                    } else if (accionPc == 2) {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPcAtacando;
-                    } else {
-                        statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador;
-                        statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPcAtacando;
-                    }
-                }
+                resultado=interceptarStats(dadoJugador,dadoPC,idEquipo1,idEquipo2,jugador);
                 break;
-
             default:
                 break;
+        }
+        return resultado;
+    }
+
+    public Boolean driblearStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        this.accionPc = 0;
+        if (jugador == 1) {
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible() + dadoJugador;
+            statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo() + dadoPC;
+        } else {
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getDrible() + dadoJugador;
+            statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getRobo() + dadoPC;
+        }
+        if (statJugador > statPc) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean tirarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        this.accionPc = 0;
+        if (jugador == 1) {
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro() + dadoJugador;
+            statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa() + dadoPC;
+        } else {
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTiro() + dadoJugador;
+            statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTapa() + dadoPC;
+        }
+        if (statJugador > statPc) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean pasarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        this.accionPc = 0;
+        if (jugador == 1) {
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase() + dadoJugador;
+            statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion() + dadoPC;
+        } else {
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getPase() + dadoJugador;
+            statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getIntercepcion() + dadoPC;
+        }
+        if (statJugador > statPc) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean robarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        this.accionPc = elegirAccionPc();
+        if (jugador == 1) {
+            if (accionPc == 1) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + 5;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
+            } else if (accionPc == 2) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
+            } else {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
+            }
+        } else {
+            if (accionPc == 1) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + 5;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
+            } else if (accionPc == 2) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
+            } else {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
+            }
         }
         if (statJugador > statPc) {
             return true;
@@ -211,6 +183,69 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
 
+    public Boolean interceptarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        this.accionPc = elegirAccionPc();
+        if (jugador == 1) {
+            if (accionPc == 3) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + 5;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
+            } else if (accionPc == 2) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
+            } else {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
+            }
+        } else {
+            if (accionPc == 3) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + 5;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
+            } else if (accionPc == 2) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
+            } else {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
+            }
+        }
+        if (statJugador > statPc) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean taparStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+        Integer statJugador = 0;
+        Integer statPc = 0;
+        if (jugador == 1) {
+            if (accionPc == 2) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + 5;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
+            } else if (accionPc == 1) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
+            } else {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
+            }
+        } else {
+            if (accionPc == 2) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + 5;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
+            } else if (accionPc == 1) {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
+            } else {
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador;
+                statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
+            }
+        }
+        if (statJugador > statPc) {
+            return true;
+        }
+        return false;
+    }
     public void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO) {
         buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
         buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());

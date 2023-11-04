@@ -103,8 +103,10 @@ public class ControladorPartida {
     public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion) {
         Long idPartido = partidoNuevo.getIdPartido();
         Integer jugador = partidoNuevo.getTienePelotaJugador();
-        Integer dado = partidoNuevo.tirarDado();
-        Boolean resultado = servicioPartido.compararStats(dado, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador);
+        partidoNuevo.tirarDado(tipoAccion);
+        Integer dadoJugador = partidoNuevo.getDadoJugador();
+        Integer dadoPC = partidoNuevo.getDadoPC();
+        Boolean resultado = servicioPartido.compararStats(dadoJugador, dadoPC, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador);
 
         if (tipoAccion.equals("tirar")) {
             if (resultado) {

@@ -11,7 +11,9 @@ public class PartidoDTO {
     private Equipo equipoJugador;
     private Equipo equipoPC;
     private Integer posicion = 1;
-    private Integer dado;
+    private Integer dadoJugador;
+
+    private Integer dadoPC;
     private Boolean tengoLaPelota = true;
     private Integer tienePelotaJugador = 1;
 
@@ -71,12 +73,20 @@ public class PartidoDTO {
         this.tengoLaPelota = tengoLaPelota;
     }
 
-    public Integer getDado() {
-        return dado;
+    public Integer getDadoJugador() {
+        return dadoJugador;
     }
 
-    public void setDado(Integer dado) {
-        this.dado = dado;
+    public void setDadoJugador(Integer dadoJugador) {
+        this.dadoJugador = dadoJugador;
+    }
+
+    public Integer getDadoPC() {
+        return dadoPC;
+    }
+
+    public void setDadoPC(Integer dadoPC) {
+        this.dadoPC = dadoPC;
     }
 
     public Integer getTienePelotaJugador() {
@@ -87,28 +97,34 @@ public class PartidoDTO {
         this.tienePelotaJugador = tienePelotaJugador;
     }
 
-    public Integer tirarDado() {
+    public void tirarDado(String tipoDeAccion) {
         Random rand = new Random();
-        dado = rand.nextInt(20) + 1;
-        return dado;
+        if (tipoDeAccion.equals("tirar") || tipoDeAccion.equals("pasar") || tipoDeAccion.equals("driblear")) {
+            dadoJugador = rand.nextInt(11) + 10;
+            dadoPC = rand.nextInt(15) + 1;
+        } else {
+            dadoJugador = rand.nextInt(15) + 1;
+            dadoPC =rand.nextInt(11) + 10;
+        }
     }
+
     public void setImagenes() {
-        if(getTengoLaPelota() && getTienePelotaJugador() == 1){
+        if (getTengoLaPelota() && getTienePelotaJugador() == 1) {
             getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
             getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
             getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
             getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
-        }else if(getTengoLaPelota() && getTienePelotaJugador() == 2) {
+        } else if (getTengoLaPelota() && getTienePelotaJugador() == 2) {
             getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL.png");
             getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
             getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
             getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
-        }else if(!getTengoLaPelota() && getTienePelotaJugador() == 1){
+        } else if (!getTengoLaPelota() && getTienePelotaJugador() == 1) {
             getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL.png");
             getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
             getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE-CON-PELOTA.png");
             getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
-        }else if(!getTengoLaPelota() && getTienePelotaJugador() == 2){
+        } else if (!getTengoLaPelota() && getTienePelotaJugador() == 2) {
             getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL.png");
             getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
             getEquipoPC().getJugador1().setImagen("images/JUGADOR-VISITANTE.png");
