@@ -26,13 +26,13 @@
     background-color: white;
     padding: 1rem;
     border-style:solid;
-    border-width: 3px;
+    border-width: 2px;
 }
 .div-dado-Pc{
     background-color: white;
     padding: 1rem;
     border-style:solid;
-    border-width: 3px;
+    border-width: 2px;
 }
 .div-dado-Jugador p {
     position: absolute;
@@ -83,7 +83,7 @@
     justify-content: center;
     position: absolute;
     left: 75em;
-    top:27em;
+    top:25em;
 }
 .div-jugadores .img-player{
     width: 10rem;
@@ -192,22 +192,32 @@
 .verde{
     background-color: black;
     color: green;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 }
 .rojo{
     background-color: black;
     color: red;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 }
 .azul{
     background-color: black;
     color: blue;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 }
 .naranja{
     background-color: black;
     color: orangered;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 }
 .amarillo{
     background-color: black;
     color: yellow;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 }
 .mensaje{
     margin-bottom: 1em;
@@ -218,7 +228,7 @@
     background-color: white;
     padding: 1rem;
     border-style:solid;
-    border-width: 3px;
+    border-width: 2px;
     width: 12.2em;
 }
 .stats-jugador{
@@ -234,4 +244,13 @@
 .estadisticasPartido{
     display: flex;
     justify-content: space-around;
+}
+.stat-nombre{
+    display:flex;
+    flex-direction: row;
+}
+.stat-nombre img{
+    width:20px;
+    height:20px;
+    margin:3px;
 }

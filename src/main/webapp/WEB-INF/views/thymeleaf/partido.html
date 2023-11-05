@@ -67,8 +67,9 @@
         <div class="stats-jugador">
 
             <div class="stat">
-                <div>
+                <div class="stat-nombre">
                     <p th:text="${partido.getEquipoJugador().getJugador1().getNombre()}"></p>
+                    <img th:if="${partido.getTienePelotaJugador()==1&&partido.getTengoLaPelota()}" src="images/ICON.png" alt="icon">
                 </div>
                 <div class="estadisticasPartido">
                     <div>
@@ -84,8 +85,9 @@
                 </div>
             </div>
             <div class="stat">
-                <div>
+                <div class="stat-nombre">
                     <p th:text="${partido.getEquipoJugador().getJugador2().getNombre()}"></p>
+                    <img th:if="${partido.getTienePelotaJugador()==2&&partido.getTengoLaPelota()}" src="images/ICON.png" alt="icon">
                 </div>
                 <div class="estadisticasPartido">
                     <div>
@@ -127,8 +129,9 @@
 
         <div class="stats-pc">
             <div class="stat">
-                <div>
+                <div class="stat-nombre">
                     <p th:text="${partido.getEquipoPC().getJugador1().getNombre()}"></p>
+                    <img th:if="${partido.getTienePelotaJugador()==1&&!partido.getTengoLaPelota()}" src="images/ICON.png" alt="icon">
                 </div>
                 <div class="estadisticasPartido">
                     <div>
@@ -144,8 +147,9 @@
                 </div>
             </div>
             <div class="stat">
-                <div>
+                <div class="stat-nombre">
                     <p th:text="${partido.getEquipoPC().getJugador2().getNombre()}"></p>
+                    <img th:if="${partido.getTienePelotaJugador()==2&&!partido.getTengoLaPelota()}" src="images/ICON.png" alt="icon">
                 </div>
                 <div class="estadisticasPartido">
                     <div>
