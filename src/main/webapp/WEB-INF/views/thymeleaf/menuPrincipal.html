@@ -9,19 +9,25 @@
     <link rel="stylesheet" href="css/manuPrincipal.css">
 </head>
 <body>
-
-  <div class="menuPrincipal">
-      <a href="elegir-equipo">
-          <button>Juego Rápido</button>
-      </a>
-      <a href="historial">
-          <button>Historial</button>
-      </a>
-      <a href="tienda">
-          <button>Tienda</button>
-      </a>
-  </div>
-  <img class="fondo" src="images/MENUFONDO.jpg">
+<div th:if="${idUltimoPartido != null}">
+        <p>¿Desea recuperar la ultima partida?</p>
+    <form action="recuperar-partida" method="post">
+        <button type="submit" name="respuesta" value="true">Si</button>
+        <button type="submit" name="respuesta" value="false">No</button>
+    </form>
+</div>
+<div class="menuPrincipal">
+    <a href="check-guardado">
+        <button>Jugar</button>
+    </a>
+    <a href="historial">
+        <button>Historial</button>
+    </a>
+    <a href="tienda">
+        <button>Tienda</button>
+    </a>
+</div>
+<img class="fondo" src="images/MENUFONDO.jpg">
 </body>
 </html>
 

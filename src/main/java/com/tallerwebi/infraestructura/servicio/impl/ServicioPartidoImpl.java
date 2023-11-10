@@ -50,6 +50,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Equipo equipoPc = servicioEquipo.buscarEquipo(idEquipo2);
         partido.setEquipoPc(equipoPc);
         partido.setEquipoJugador(equipoJugador);
+        partido.setGuardable(true);
         return repositorioPartido.guardar(partido);
     }
 
@@ -72,9 +73,24 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer accionPc = rand.nextInt(3) + 1;
         return accionPc;
     }
+    public void tirarDado(String tipoDeAccion, PartidoDTO partido) {
+        Random rand = new Random();
+        if (tipoDeAccion.equals("tirar") || tipoDeAccion.equals("pasar") || tipoDeAccion.equals("driblear")) {
+            Integer dadoJugador = rand.nextInt(11) + 10;
+            partido.setDadoJugador(dadoJugador);
+            Integer dadoPC = rand.nextInt(15) + 1;
+            partido.setDadoPC(dadoPC);
+        } else {
+            Integer dadoJugador = rand.nextInt(15) + 1;
+            Integer dadoPC = rand.nextInt(11) + 10;
+            partido.setDadoJugador(dadoJugador);
+            partido.setDadoJugador(dadoPC);
+        }
+    }
 
 
     public Boolean compararStats(Integer dadoJugador, Integer dadoPC, String accion, Long idEquipo1, Long idEquipo2, Integer jugador) {
+
         Boolean resultado = false;
         switch (accion) {
             case "driblear":
@@ -246,9 +262,38 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         return false;
     }
+
+    public void actualizar(Long id){
+        repositorioPartido.actualizar(buscarPartido(id));
+    }
     public void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO) {
         buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
         buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
+        buscarPartido(id).setGuardable(false);
+        actualizar(id);
+    }
+
+
+    public void guardarPartido(Long id, PartidoDTO partidoDTO){
+        buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
+        buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
+        buscarPartido(id).setEquipoJugador(partidoDTO.getEquipoJugador());
+        buscarPartido(id).setEquipoPc(partidoDTO.getEquipoPC());
+        buscarPartido(id).setPosicion(partidoDTO.getPosicion());
+        buscarPartido(id).setTengoLaPelota(partidoDTO.getTengoLaPelota());
+        buscarPartido(id).setTienePelotaJugador(partidoDTO.getTienePelotaJugador());
+        actualizar(id);
+    }
+
+    @Override
+    public Long buscarPartidoGuardado() {
+        List<Partido> partidos = repositorioPartido.listAll();
+        for(Partido partido: partidos){
+            if(partido.getGuardable()){
+                return partido.getId();
+            }
+        }
+        return null;
     }
 
     @Override

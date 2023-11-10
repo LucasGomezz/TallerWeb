@@ -10,13 +10,24 @@ public class Partido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Integer puntosUsuario;
+
     private Integer puntosPc;
+
     @OneToOne
     private Equipo equipoJugador;
+
     @OneToOne
     private Equipo equipoPc;
 
+    private Integer posicion;
+
+    private Boolean tengoLaPelota;
+
+    private Integer tienePelotaJugador;
+
+    private Boolean guardable = false;
 
     public Long getId() {
         return id;
@@ -56,5 +67,37 @@ public class Partido {
 
     public void setEquipoPc(Equipo equipoPc) {
         this.equipoPc = equipoPc;
+    }
+
+    public Integer getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Integer posicion) {
+        this.posicion = posicion;
+    }
+
+    public Boolean getTengoLaPelota() {
+        return tengoLaPelota;
+    }
+
+    public void setTengoLaPelota(Boolean tengoLaPelota) {
+        this.tengoLaPelota = tengoLaPelota;
+    }
+
+    public Integer getTienePelotaJugador() {
+        return tienePelotaJugador;
+    }
+
+    public void setTienePelotaJugador(Integer tienePelotaJugador) {
+        this.tienePelotaJugador = tienePelotaJugador;
+    }
+
+    public Boolean getGuardable() {
+        return guardable;
+    }
+
+    public void setGuardable(Boolean guardable) {
+        this.guardable = guardable;
     }
 }

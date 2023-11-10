@@ -97,16 +97,6 @@ public class PartidoDTO {
         this.tienePelotaJugador = tienePelotaJugador;
     }
 
-    public void tirarDado(String tipoDeAccion) {
-        Random rand = new Random();
-        if (tipoDeAccion.equals("tirar") || tipoDeAccion.equals("pasar") || tipoDeAccion.equals("driblear")) {
-            dadoJugador = rand.nextInt(11) + 10;
-            dadoPC = rand.nextInt(15) + 1;
-        } else {
-            dadoJugador = rand.nextInt(15) + 1;
-            dadoPC = rand.nextInt(11) + 10;
-        }
-    }
 
     public void setImagenes() {
         if (getTengoLaPelota() && getTienePelotaJugador() == 1) {

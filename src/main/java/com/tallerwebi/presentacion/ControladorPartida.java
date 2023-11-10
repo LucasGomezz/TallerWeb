@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,30 @@ public class ControladorPartida {
         this.servicioPartido = servicioPartido;
     }
 
+    @RequestMapping(value = "/check-guardado")
+    public ModelAndView checkGuardado() {
+        ModelMap modelo = new ModelMap();
+        Long hayGuardado = servicioPartido.buscarPartidoGuardado();
+        modelo.put("hayGuardado", hayGuardado);
+        if (hayGuardado != null) {
+            return new ModelAndView("menuPrincipal", modelo);
+        } else {
+            return new ModelAndView("redirect:elegir-equipo");
+        }
+    }
+
+    @RequestMapping(value = "/recuperar-partida", method = {RequestMethod.POST})
+    public ModelAndView recuperarPartida(@RequestParam(required = true) Boolean respuesta) {
+        Long idPartido = servicioPartido.buscarPartidoGuardado();
+        if (respuesta) {
+            return new ModelAndView("redirect:partido?idPartido=" + idPartido);
+        } else {
+            Partido partido = servicioPartido.buscarPartido(idPartido);
+            partido.setGuardable(false);
+            servicioPartido.actualizar(idPartido);
+            return new ModelAndView("redirect:elegir-equipo");
+        }
+    }
 
     @RequestMapping(value = "/elegir-equipo", method = {RequestMethod.GET})
     public ModelAndView elegirEquipo(@RequestParam(required = false) Long idEquipo1, @RequestParam(required = false) Long idEquipo2) {
@@ -103,7 +128,7 @@ public class ControladorPartida {
     public ModelAndView realizarAcciones(@RequestParam(required = true) String tipoAccion) {
         Long idPartido = partidoNuevo.getIdPartido();
         Integer jugador = partidoNuevo.getTienePelotaJugador();
-        partidoNuevo.tirarDado(tipoAccion);
+        servicioPartido.tirarDado(tipoAccion, partidoNuevo);
         Integer dadoJugador = partidoNuevo.getDadoJugador();
         Integer dadoPC = partidoNuevo.getDadoPC();
         Boolean resultado = servicioPartido.compararStats(dadoJugador, dadoPC, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador);
@@ -203,6 +228,15 @@ public class ControladorPartida {
         partidoNuevo.setPosicion(4);
         Long idPartido = partidoNuevo.getIdPartido();
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
+    }
+
+    @RequestMapping(path = "/guardarPartido")
+    public ModelAndView guardarPartido() {
+        Long idPartido = partidoNuevo.getIdPartido();
+        servicioPartido.guardarPartido(idPartido, partidoNuevo);
+        ModelMap modelo = new ModelMap();
+        modelo.put("idUltimoPartido", idPartido);
+        return new ModelAndView("menuPrincipal", modelo);
     }
 
     @RequestMapping(value = "/historial", method = RequestMethod.GET)

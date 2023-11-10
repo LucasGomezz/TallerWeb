@@ -20,4 +20,12 @@ public interface ServicioPartido {
     void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO);
 
     String retornarAccionPc();
+
+    void tirarDado(String tipoDeAccion, PartidoDTO partido);
+
+    void guardarPartido(Long id, PartidoDTO partido);
+
+    Long buscarPartidoGuardado();
+
+    void actualizar(Long id);
 }

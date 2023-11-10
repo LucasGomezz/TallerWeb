@@ -10,4 +10,5 @@ public interface RepositorioPartido {
     void actualizar(Partido partido);
     List<Partido> listAll();
 
+
 }
