@@ -40,7 +40,7 @@ public class ControladorPartida {
         Long hayGuardado = servicioPartido.buscarPartidoGuardado();
         modelo.put("hayGuardado", hayGuardado);
         if (hayGuardado != null) {
-            return new ModelAndView("menuPrincipal", modelo);
+            return new ModelAndView("partidaGuardada", modelo);
         } else {
             return new ModelAndView("redirect:elegir-equipo");
         }
@@ -131,7 +131,7 @@ public class ControladorPartida {
         servicioPartido.tirarDado(tipoAccion, partidoNuevo);
         Integer dadoJugador = partidoNuevo.getDadoJugador();
         Integer dadoPC = partidoNuevo.getDadoPC();
-        Boolean resultado = servicioPartido.compararStats(dadoJugador, dadoPC, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador);
+        Boolean resultado = servicioPartido.compararStats(dadoJugador, dadoPC, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador, partidoNuevo.getPosicion());
 
         if (tipoAccion.equals("tirar")) {
             if (resultado) {
@@ -179,7 +179,7 @@ public class ControladorPartida {
     @RequestMapping(value = "/partido-aro", method = RequestMethod.GET)
     public ModelAndView irAlAro(@RequestParam(required = true) Long idPartido) {
         ModelMap modelo = new ModelMap();
-
+        modelo.put("posicion", partidoNuevo.getPosicion());
         return new ModelAndView("partido-aro", modelo);
     }
 

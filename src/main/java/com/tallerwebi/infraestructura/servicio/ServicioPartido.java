@@ -15,7 +15,7 @@ public interface ServicioPartido {
 
     void actualizarPartido(Partido partido);
 
-    Boolean compararStats(Integer dadoJugador, Integer dadoPc, String accion, Long idEquipo1, Long idEquipo2, Integer jugador);
+    Boolean compararStats(Integer dadoJugador, Integer dadoPc, String accion, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
 
     void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO);
 
@@ -28,4 +28,17 @@ public interface ServicioPartido {
     Long buscarPartidoGuardado();
 
     void actualizar(Long id);
+    Integer elegirAccionPc(Integer posicion);
+
+    Boolean driblearStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador);
+    Boolean robarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+
+    Boolean tirarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador);
+
+    Boolean pasarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador);
+
+    Boolean interceptarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+
+    Boolean taparStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+
 }

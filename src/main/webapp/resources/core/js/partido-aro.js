@@ -1,14 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
+
     const progreso = document.getElementById('progreso');
     const boton = document.getElementById('tirar');
-    const llenarDuracion = 1000;
-    const vaciarDuracion = 1000;
+    let posicion = parseInt(document.getElementById('posicion').value, 10);
+    let llenarDuracion;
+    let vaciarDuracion;
+    if (posicion <= 2) {
+        llenarDuracion = 100;
+        vaciarDuracion = 100;
+    } else {
+        llenarDuracion = 1000;
+        vaciarDuracion = 1000;
+    }
     const anchoInicial = 1;
     const anchoMaximo = 100;
     let pararBarra = false;
     let valorBarra = 1;
     let resultadoBarra = document.getElementById('resultadoBarra');
-
 
     function llenarBarra() {
         let startTime = null;
@@ -33,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function vaciarBarra() {
         let startTime = null;
+
         function animarVaciado(timestamp) {
             if (!pararBarra) {
                 if (!startTime) startTime = timestamp;
@@ -49,21 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
         requestAnimationFrame(animarVaciado);
     }
 
     function tirar() {
         pararBarra = true;
-       /** $.ajax({
+        /** $.ajax({
             url: '/tira',
             method: 'GET',
             data: { valorBarra: valorBarra}
         });
-        return false;*/
-       resultadoBarra.value = valorBarra;
+         return false;*/
+        resultadoBarra.value = valorBarra;
     }
 
-
+document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', tirar);
 
     llenarBarra();

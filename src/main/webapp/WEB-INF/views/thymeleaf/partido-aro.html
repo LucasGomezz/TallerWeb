@@ -11,6 +11,7 @@
 
 <div class="div-menu-tiro">
     <form action="tira" method="post">
+        <input type="hidden" name="posicion" id="posicion" th:value="${posicion}">
         <input type="hidden" name="resultadoBarra" id="resultadoBarra" value="">
         <button id="tirar">Tirar</button>
     </form>

@@ -67,12 +67,18 @@ public class ServicioPartidoImpl implements ServicioPartido {
         repositorioPartido.actualizar(partido);
     }
 
-
-    public Integer elegirAccionPc() {
-        Random rand = new Random();
-        Integer accionPc = rand.nextInt(3) + 1;
+    @Override
+    public Integer elegirAccionPc(Integer posicion) {
+        Integer accionPc;
+        if (posicion == 1) {
+            accionPc = 2;
+        } else {
+            Random rand = new Random();
+            accionPc = rand.nextInt(3) + 1;
+        }
         return accionPc;
     }
+    @Override
     public void tirarDado(String tipoDeAccion, PartidoDTO partido) {
         Random rand = new Random();
         if (tipoDeAccion.equals("tirar") || tipoDeAccion.equals("pasar") || tipoDeAccion.equals("driblear")) {
@@ -84,17 +90,17 @@ public class ServicioPartidoImpl implements ServicioPartido {
             Integer dadoJugador = rand.nextInt(15) + 1;
             Integer dadoPC = rand.nextInt(11) + 10;
             partido.setDadoJugador(dadoJugador);
-            partido.setDadoJugador(dadoPC);
+            partido.setDadoPC(dadoPC);
         }
     }
 
-
-    public Boolean compararStats(Integer dadoJugador, Integer dadoPC, String accion, Long idEquipo1, Long idEquipo2, Integer jugador) {
+    @Override
+    public Boolean compararStats(Integer dadoJugador, Integer dadoPC, String accion, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
 
         Boolean resultado = false;
         switch (accion) {
             case "driblear":
-                resultado = driblearStats(dadoJugador, dadoPC,  idEquipo1,  idEquipo2,  jugador);
+                resultado = driblearStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
                 break;
             case "tirar":
                 resultado = tirarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
@@ -103,21 +109,21 @@ public class ServicioPartidoImpl implements ServicioPartido {
                 resultado = pasarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
                 break;
             case "robar":
-                resultado = robarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
+                resultado = robarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion);
                 break;
             case "tapar":
-                resultado = taparStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador);
+                resultado = taparStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion);
                 break;
             case "interceptar":
-                resultado=interceptarStats(dadoJugador,dadoPC,idEquipo1,idEquipo2,jugador);
+                resultado = interceptarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion);
                 break;
             default:
                 break;
         }
         return resultado;
     }
-
-    public Boolean driblearStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+    @Override
+    public Boolean driblearStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador) {
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = 0;
@@ -133,7 +139,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         return false;
     }
-    public Boolean tirarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+    @Override
+    public Boolean tirarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador) {
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = 0;
@@ -149,7 +156,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         return false;
     }
-    public Boolean pasarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+    @Override
+    public Boolean pasarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador) {
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = 0;
@@ -165,15 +173,16 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         return false;
     }
-    public Boolean robarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+    @Override
+    public Boolean robarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
         Integer statJugador = 0;
         Integer statPc = 0;
-        this.accionPc = elegirAccionPc();
+        this.accionPc = elegirAccionPc(posicion);
         if (jugador == 1) {
             if (accionPc == 1) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
-            } else if (accionPc == 2) {
+            } else if (accionPc == 2 && posicion <= 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
             } else {
@@ -184,7 +193,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
             if (accionPc == 1) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
-            } else if (accionPc == 2) {
+            } else if (accionPc == 2 && posicion <= 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
             } else {
@@ -198,16 +207,16 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return false;
     }
 
-
-    public Boolean interceptarStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+    @Override
+    public Boolean interceptarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
         Integer statJugador = 0;
         Integer statPc = 0;
-        this.accionPc = elegirAccionPc();
+        this.accionPc = elegirAccionPc(posicion);
         if (jugador == 1) {
             if (accionPc == 3) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
-            } else if (accionPc == 2) {
+            } else if (accionPc == 2 && posicion <= 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
             } else {
@@ -218,7 +227,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
             if (accionPc == 3) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
-            } else if (accionPc == 2) {
+            } else if (accionPc == 2 && posicion <= 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
             } else {
@@ -231,11 +240,13 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         return false;
     }
-    public Boolean taparStats(Integer dadoJugador,Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador){
+    @Override
+    public Boolean taparStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
         Integer statJugador = 0;
         Integer statPc = 0;
+        this.accionPc = elegirAccionPc(posicion);
         if (jugador == 1) {
-            if (accionPc == 2) {
+            if (accionPc == 2 && posicion <= 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
             } else if (accionPc == 1) {
@@ -246,7 +257,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
             }
         } else {
-            if (accionPc == 2) {
+            if (accionPc == 2 && posicion <= 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
             } else if (accionPc == 1) {
@@ -262,10 +273,11 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         return false;
     }
-
-    public void actualizar(Long id){
+    @Override
+    public void actualizar(Long id) {
         repositorioPartido.actualizar(buscarPartido(id));
     }
+    @Override
     public void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO) {
         buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
         buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
@@ -273,8 +285,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         actualizar(id);
     }
 
-
-    public void guardarPartido(Long id, PartidoDTO partidoDTO){
+    @Override
+    public void guardarPartido(Long id, PartidoDTO partidoDTO) {
         buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
         buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
         buscarPartido(id).setEquipoJugador(partidoDTO.getEquipoJugador());
@@ -288,8 +300,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
     @Override
     public Long buscarPartidoGuardado() {
         List<Partido> partidos = repositorioPartido.listAll();
-        for(Partido partido: partidos){
-            if(partido.getGuardable()){
+        for (Partido partido : partidos) {
+            if (partido.getGuardable()) {
                 return partido.getId();
             }
         }

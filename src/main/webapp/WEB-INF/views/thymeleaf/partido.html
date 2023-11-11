@@ -10,10 +10,11 @@
 </head>
 <body>
 <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
+<form action="guardarPartido" >
+    <button type="submit" class="guardar">Guardar</button>
+</form>
 <section class="container-partido">
-    <form action="guardarPartido" >
-    <button type="submit">Guardar</button>
-    </form>
+
     <h1 class="score mt-3 mb-3">
         <span id="puntajeYo" th:text="${partido.getPuntajeJugador()}"></span>
         -
