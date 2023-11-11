@@ -54,7 +54,7 @@ public class ControladorPartida {
         } else {
             Partido partido = servicioPartido.buscarPartido(idPartido);
             partido.setGuardable(false);
-            servicioPartido.actualizar(idPartido);
+            servicioPartido.actualizarPartido(partido);
             return new ModelAndView("redirect:elegir-equipo");
         }
     }

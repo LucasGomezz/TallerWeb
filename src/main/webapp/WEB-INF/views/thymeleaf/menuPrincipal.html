@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="css/manuPrincipal.css">
 </head>
 <body>
-<div th:if="${idUltimoPartido != null}">
-        <p>¿Desea recuperar la ultima partida?</p>
-    <form action="recuperar-partida" method="post">
+<div id="divGuardado" th:if="${idUltimoPartido != null}">
+    <p>¿Desea recuperar la última partida?</p>
+    <form id="formularioRecuperarPartida" action="recuperar-partida" method="post">
         <button type="submit" name="respuesta" value="true">Si</button>
         <button type="submit" name="respuesta" value="false">No</button>
     </form>
 </div>
 <div class="menuPrincipal">
     <a href="check-guardado">
-        <button>Jugar</button>
+        <button >Jugar</button>
     </a>
     <a href="historial">
         <button>Historial</button>
