@@ -121,7 +121,7 @@
         </div>
         <div th:if="${!partido.getTengoLaPelota()}" class="div-menu">
             <form action="acciones" method="POST" >
-                <button type="submit" value="robar" name="tipoAccion" id="robar">Robar</button>
+                <button type="submit" value="robar" name="tipoAccion" id="robar" >Robar</button>
                 <button type="submit" value="tapar" name="tipoAccion" id="tapar">Tapar</button>
                 <button type="submit" value="interceptar" name="tipoAccion" id="interceptar">Interceptar</button>
             </form>
@@ -172,6 +172,9 @@
 
     </div>
 </section>
+<div class="accionElegidaPc">
+    <p th:if="${accionElegidaPc != null}" th:text="${accionElegidaPc}">Tirar</p>
+</div>
 <img src="images/CANCHA.jpg" alt="cancha" class="cancha-img">
 <script src="js/partido.js"></script>
 </body>

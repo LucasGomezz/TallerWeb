@@ -22,7 +22,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
     @Autowired
     ServicioEquipo servicioEquipo;
 
-    Integer accionPc;
+    Integer accionPc = 0;
 
     @Autowired
     public ServicioPartidoImpl(RepositorioPartido repositorioPartido, ServicioEquipo servicioEquipo) {
@@ -69,14 +69,13 @@ public class ServicioPartidoImpl implements ServicioPartido {
 
     @Override
     public Integer elegirAccionPc(Integer posicion) {
-        Integer accionPc;
         if (posicion == 1) {
-            accionPc = 2;
+            this.accionPc = 2;
         } else {
             Random rand = new Random();
-            accionPc = rand.nextInt(3) + 1;
+            this.accionPc = rand.nextInt(3) + 1;
         }
-        return accionPc;
+        return this.accionPc;
     }
     @Override
     public void tirarDado(String tipoDeAccion, PartidoDTO partido) {
@@ -178,11 +177,14 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
+        if(accionPc == 2 && posicion > 2){
+            this.accionPc = 3;
+        }
         if (jugador == 1) {
             if (accionPc == 1) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
-            } else if (accionPc == 2 && posicion <= 2) {
+            } else if (accionPc == 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
             } else {
@@ -193,7 +195,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
             if (accionPc == 1) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
-            } else if (accionPc == 2 && posicion <= 2) {
+            } else if (accionPc == 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
             } else {
@@ -212,11 +214,14 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
+        if(accionPc == 2 && posicion > 2){
+            this.accionPc = 3;
+        }
         if (jugador == 1) {
             if (accionPc == 3) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
-            } else if (accionPc == 2 && posicion <= 2) {
+            } else if (accionPc == 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
             } else {
@@ -227,7 +232,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
             if (accionPc == 3) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
-            } else if (accionPc == 2 && posicion <= 2) {
+            } else if (accionPc == 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
             } else {
@@ -245,8 +250,11 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
+        if(accionPc == 2 && posicion > 2){
+            this.accionPc = 3;
+        }
         if (jugador == 1) {
-            if (accionPc == 2 && posicion <= 2) {
+            if (accionPc == 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
             } else if (accionPc == 1) {
@@ -257,7 +265,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
             }
         } else {
-            if (accionPc == 2 && posicion <= 2) {
+            if (accionPc == 2) {
                 statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + 5;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
             } else if (accionPc == 1) {

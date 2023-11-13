@@ -115,6 +115,7 @@ public class ControladorPartida {
         //@RequestParam= tambien
         ModelMap modelo = new ModelMap();
         modelo.put("partido", partidoNuevo);
+        modelo.put("accionElegidaPc", servicioPartido.retornarAccionPc());
         partidoNuevo.setImagenes();
         if (partidoNuevo.getPuntajeJugador() < 21 && partidoNuevo.getPuntajePc() < 21) {
             return new ModelAndView("partido", modelo);
@@ -163,6 +164,9 @@ public class ControladorPartida {
     private void verificaLaAccionPc(String accionPc) {
         if (accionPc.equals("tirar")) {
             int puntos = (partidoNuevo.getPosicion() == 1) ? 2 : 3;
+            partidoNuevo.setPosicion(1);
+            partidoNuevo.setTengoLaPelota(true);
+            partidoNuevo.setTienePelotaJugador(1);
             partidoNuevo.setPuntajePc(partidoNuevo.getPuntajePc() + puntos);
         }
 
