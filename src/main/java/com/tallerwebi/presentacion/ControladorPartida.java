@@ -22,14 +22,14 @@ public class ControladorPartida {
     PartidoDTO partidoNuevo = new PartidoDTO();
 
     //Se pueden usar todos los servicios necesarios
-    private ServicioJugador servicioJugador;
+    //private ServicioJugador servicioJugador;
     private ServicioEquipo servicioEquipo;
     private ServicioPartido servicioPartido;
 
     //Los controladores se comunica con los servicios y saben si estatodo bien gracias a las exceptions
     @Autowired
-    public ControladorPartida(ServicioJugador servicioJugador, ServicioEquipo servicioEquipo, ServicioPartido servicioPartido) {
-        this.servicioJugador = servicioJugador;
+    public ControladorPartida(/*ServicioJugador servicioJugador,*/ ServicioEquipo servicioEquipo, ServicioPartido servicioPartido) {
+        //this.servicioJugador = servicioJugador;
         this.servicioEquipo = servicioEquipo;
         this.servicioPartido = servicioPartido;
     }
@@ -116,6 +116,8 @@ public class ControladorPartida {
         ModelMap modelo = new ModelMap();
         modelo.put("partido", partidoNuevo);
         modelo.put("accionElegidaPc", servicioPartido.retornarAccionPc());
+        modelo.put("adivinoLaAccionDeLaPc", servicioPartido.getVerificacion());
+        modelo.put("accion", servicioPartido.getAccion());
         partidoNuevo.setImagenes();
         if (partidoNuevo.getPuntajeJugador() < 21 && partidoNuevo.getPuntajePc() < 21) {
             return new ModelAndView("partido", modelo);

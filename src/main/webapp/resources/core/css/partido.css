@@ -268,3 +268,44 @@
     top: 9rem;
     right: 47rem;
 }
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 11rem;
+    left: 29rem;
+    width: 67rem;
+    height: 35rem;
+    z-index: 1;
+}
+.overlay2 {
+    display: none;
+    position: absolute;
+    top: 16rem;
+    left: 29rem;
+    width: 67rem;
+    height: 35rem;
+    z-index: 2;
+}
+.overlay2 img{
+    width: 34rem;
+    height: auto;
+    position: relative;
+    left: 15rem;
+}
+
+.infoModal {
+    background-color: #f3d7d7;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    top: 0rem;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}

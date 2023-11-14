@@ -12,7 +12,6 @@ public class PartidoDTO {
     private Equipo equipoPC;
     private Integer posicion = 1;
     private Integer dadoJugador;
-
     private Integer dadoPC;
     private Boolean tengoLaPelota = true;
     private Integer tienePelotaJugador = 1;
