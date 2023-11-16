@@ -1,34 +1,33 @@
 package com.tallerwebi.dominio.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
-public class ItemTienda {
+@Table(name = "productoTienda")
+public class productoTienda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idProducto;
+
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private Integer precio;
     private String imagen;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria", nullable = false)
+    private Categoria categoria;
 
 
-
-
-
-
-    public Long getId() {
-        return id;
+    public Long getIdProducto() {
+        return idProducto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -55,5 +54,11 @@ public class ItemTienda {
         this.imagen = imagen;
     }
 
- 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }

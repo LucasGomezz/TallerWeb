@@ -17,9 +17,10 @@ public class Usuario {
     private String password;
     private String rol;
     private Boolean activo = false;
+    private int dinero;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Inventario> inventario;
+//    @OneToMany(mappedBy = "usuario")
+//    private List<Inventario> inventario;
 
     public Long getId() {
         return id;
@@ -60,4 +61,11 @@ public class Usuario {
         activo = true;
     }
 
+    public int getDinero() {
+        return dinero;
+    }
+
+    public void setDinero(int dinero) {
+        this.dinero = dinero;
+    }
 }

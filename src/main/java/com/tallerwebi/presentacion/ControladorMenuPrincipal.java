@@ -1,7 +1,7 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.infraestructura.servicio.ServicioEquipo;
-import com.tallerwebi.infraestructura.servicio.ServicioItemTienda;
+import com.tallerwebi.infraestructura.servicio.ServicioTienda;
 import com.tallerwebi.infraestructura.servicio.ServicioJugador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class ControladorMenuPrincipal {
     @Autowired
     private ServicioJugador servicioJugador;
     @Autowired
-    private ServicioItemTienda servicioItemTienda;
+    private ServicioTienda servicioTienda;
 
     @RequestMapping("/menuPrincipal")
     public ModelAndView irAMenuPrincipal() {

@@ -34,5 +34,10 @@ public class ServicioLoginImpl implements ServicioLogin {
         repositorioUsuario.guardar(usuario);
     }
 
+    @Override
+    public int mostrarDinero() {
+        return repositorioUsuario.mostrarDinero();
+    }
+
 }
 

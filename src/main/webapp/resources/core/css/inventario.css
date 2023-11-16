@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI";
+}
+.fondo{
+    border: 10px solid #B99F84;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+}
+.inventarioFrame{
+    width: 80%;
+    height: 80%;
+    background-color:#111111;
+    display: inline-block;
+    margin: 2em 4em;
+    padding: 0.5em;
+    font-weight: 600;
+    font-size: larger;
+    border: 5px solid #926540;
+    color: white;
+
+}
+.inventarioName{
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+.galeria{
+    width: 71%;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.card-size{
+    width: 25%;
+}
+.card-inventario{
+
+}
+.card-inventario img{
+    height: 8rem;
+    width: 35%;
+}
+
+img{
+    width: 8rem;
+    height: auto;
+}
+
+.card-body p{
+    font-size: 1rem;
+}
+
+.logo{
+    height: 16rem;
+    display: flex;
+    justify-content: center;
+}
+
+.confirmar{
+    position: absolute;
+    left: 46%;
+    bottom: 10rem;
+}
