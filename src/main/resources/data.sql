@@ -1,4 +1,4 @@
-INSERT INTO usuario (id,email,password,rol,activo) VALUES(1, 'test@unlam.edu.ar', 'test', 'ADMIN', true);
+INSERT INTO usuario (id,email,password,rol,activo, dinero) VALUES(1, 'test@unlam.edu.ar', 'test', 'ADMIN', true, 1000);
 
 INSERT INTO jugador(nombre, drible, tiro, pase, robo, tapa, intercepcion)VALUES("Jason Tatum", 81, 83, 84, 78, 79, 76);
 INSERT INTO jugador(nombre, drible, tiro, pase, robo, tapa, intercepcion)VALUES("AL Horford",82, 80, 81,75, 80, 77);
@@ -31,3 +31,18 @@ INSERT INTO equipo(nombre, jugador1_id, jugador2_id, logo, color)VALUES("Miami H
 INSERT INTO equipo(nombre, jugador1_id, jugador2_id, logo, color)VALUES("Dallas Mavericks", 15, 16,"images/logoEquipos/dallas.png", "azul");
 INSERT INTO equipo(nombre, jugador1_id, jugador2_id, logo, color)VALUES("Milwaukee Bucks", 17, 18,"images/logoEquipos/bucks.png", "verde");
 INSERT INTO equipo(nombre, jugador1_id, jugador2_id, logo, color)VALUES("Golden State Warriors", 19, 20,"images/logoEquipos/warriors.png", "azul");
+
+INSERT INTO categoria(nombre, porcentaje)VALUES("Tirar", 80);
+INSERT INTO categoria(nombre, porcentaje)VALUES("Pasar", 30);
+INSERT INTO categoria(nombre, porcentaje)VALUES("Driblear", 55);
+INSERT INTO categoria(nombre, porcentaje)VALUES("Robar", 20);
+INSERT INTO categoria(nombre, porcentaje)VALUES("Correr", 12);
+INSERT INTO categoria(nombre, porcentaje)VALUES("Esquivar", 30);
+
+
+INSERT INTO productoTienda(nombre, precio, imagen, categoria)VALUES("gaytorade", 120, "images/ITEM.png", (SELECT id FROM Categoria WHERE nombre = "Tirar"));
+INSERT INTO productoTienda(nombre, precio, imagen, categoria)VALUES("Mr. Basquet", 230, "images/ITEM.png", (SELECT id FROM Categoria WHERE nombre = "Pasar"));
+INSERT INTO productoTienda(nombre, precio, imagen, categoria)VALUES("Pachu", 180, "images/ITEM.png", (SELECT id FROM Categoria WHERE nombre = "Driblear"));
+INSERT INTO productoTienda(nombre, precio, imagen, categoria)VALUES("Libertador", 300, "images/ITEM.png", (SELECT id FROM Categoria WHERE nombre = "Robar"));
+INSERT INTO productoTienda(nombre, precio, imagen, categoria)VALUES("Goodsilla", 220, "images/ITEM.png", (SELECT id FROM Categoria WHERE nombre = "Correr"));
+INSERT INTO productoTienda(nombre, precio, imagen, categoria)VALUES("Esquivar", 280, "images/ITEM.png", (SELECT id FROM Categoria WHERE nombre = "Esquivar"));

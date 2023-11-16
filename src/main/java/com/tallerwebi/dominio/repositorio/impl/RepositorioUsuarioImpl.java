@@ -43,4 +43,29 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         sessionFactory.getCurrentSession().update(usuario);
     }
 
+    @Override
+    public Integer mostrarDinero() {
+        Usuario usuario = new Usuario();
+        usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+                .add(Restrictions.eq("id", 1L))
+                .uniqueResult();
+
+        if(usuario != null){
+            return usuario.getDinero();
+        }else{
+            return 0;
+        }
+    }
+    @Override
+    public void modificarDinero(Integer dinero, Integer precio) {
+        Usuario usuario = new Usuario();
+        usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+                .add(Restrictions.eq("id", usuario.getId()))
+                .uniqueResult();
+
+        int dineroActual = dinero - precio;
+        usuario.setDinero(dineroActual);
+        sessionFactory.getCurrentSession().update(usuario);
+    }
+
 }

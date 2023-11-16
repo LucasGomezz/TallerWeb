@@ -4,50 +4,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Inventario {
 
-    private int cantidad;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idProductoInventario;
+    private String nombre;
+    private String imagen;
+    private String categoria;
+    private int cantidad = 0;
+    private int porcentaje = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "item_tienda_id")
-    private ItemTienda itemTienda;
-
-
-
-    public Long getId() {
-        return id;
+    public Long getIdProductoInventario() {
+        return idProductoInventario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProductoInventario(Long idProductoInventario) {
+        this.idProductoInventario = idProductoInventario;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public ItemTienda getItemTienda() {
-        return itemTienda;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setItemTienda(ItemTienda itemTienda) {
-        this.itemTienda = itemTienda;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getCantidad() {
@@ -56,5 +55,13 @@ public class Inventario {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(int porcentaje) {
+        this.porcentaje = porcentaje;
     }
 }

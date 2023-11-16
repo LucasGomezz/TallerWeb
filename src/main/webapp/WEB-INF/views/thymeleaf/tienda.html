@@ -9,43 +9,50 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/manuPrincipal.css">
-
+    <link rel="stylesheet" href="css/tienda.css">
 
     <title>Tienda</title>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Tienda de Baloncesto</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-category="personajes">Personajes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-category="balones">Balones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-category="potenciadores">Potenciadores</a>
-                </li>
-            </ul>
+<img class="fondo" src="images/pisoCancha.png">
+<div class="tiendaFrame">
+    <div class="header-tienda w-75 m-auto d-flex justify-content-around">
+        <a href="menuPrincipal" class="tiendaVolver m-auto">
+            <h5 class="p-2 border border-2 border-white">Volver</h5>
+        </a>
+        <div class="tiendaName">
+            <h3>Tienda</h3>
+        </div>
+        <div class="tiendaDinero m-auto">
+            <h5 th:text="'Dinero: $' + ${dinero}"></h5>
         </div>
     </div>
-</nav>
-
-<div class="container mt-5">
-    <div class="row" id="product-list">
-        <!-- Aquí se mostrarán los productos -->
+    <div class="galeria ps-5 m-auto">
+        <div class="tienda-productos">
+            <form action="comprar" method="POST">
+                <input type="hidden" name="dinero" th:value="${dinero}">
+                <div>
+                    <div class="d-flex flex-wrap">
+                        <div th:each="p : ${productos}" class="me-4 mb-4 card-size">
+                            <div class="card text-center card-producto">
+                                <img th:src="${p.imagen}" class="card-img-top m-auto pt-3" alt="...">
+                                <div class="card-body">
+                                    <h5 th:text="${p.nombre}" class="card-title"></h5>
+                                    <p th:text="'Categoría: ' + ${p.categoria.nombre}" class="card-text"></p>
+                                    <p th:text="'Aumento: ' + ${p.categoria.porcentaje} + '%'" class="card-text"></p>
+                                    <p th:text="'$' + ${p.precio}" class="card-text"></p>
+                                    <button type="submit" th:value="${p.idProducto}" name="idProducto" id="idProducto" th:text="'Comprar'"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
 </div>
 
-
-
-<img class="fondo" src="images/MENUFONDO.jpg">
-<script src="js/tienda.js"></script>
 </body>
 </html>
