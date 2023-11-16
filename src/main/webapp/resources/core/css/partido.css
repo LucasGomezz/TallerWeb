@@ -287,7 +287,7 @@
     height: 35rem;
     z-index: 2;
 }
-.overlay2 img{
+.overlay2 video{
     width: 34rem;
     height: auto;
     position: relative;

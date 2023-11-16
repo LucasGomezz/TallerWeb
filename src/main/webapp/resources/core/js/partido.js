@@ -68,42 +68,74 @@ function closeModal() {
 
 let modalOverlay = document.getElementById('modalOverlay2');
 let accion = modalOverlay.getAttribute('name');
-
-function openModal2(ruta) {
+let tengoPelotaStr = modalOverlay.getAttribute('name2');
+let tengoPelota = tengoPelotaStr === "true";
+function openModal2(ruta,texto) {
+    /**<img src="${ruta}" alt="accion">*/
     modalOverlay.innerHTML = `
-         <img src="${ruta}" alt="accion">
+        <h2>${texto}</h2>
+        <video width="500" height="500" autoplay>
+            <source src="images/INTERCEPTAR.mp4" type="video/mp4" >
+        </video>
     `;
     modalOverlay.style.display = 'block';
 }
 function closeModal2() {
     modalOverlay.style.display = 'none';
 }
-setTimeout(closeModal2, 2000);
+setTimeout(closeModal2, 1500);
 let ruta = "";
+let texto=" ";
+
 switch (accion) {
     case "driblear":
         ruta = "images/DRIBLEAR.jpg"
-        openModal2(ruta);
+        if(tengoPelota){
+            texto = "Avanzaste con drible"
+        }else{
+            texto = "Avanzo con drible"
+        }
+        openModal2(ruta, texto);
         break;
     case "pasar":
          ruta = "images/PASAR.jpg"
-        openModal2(ruta);
+        if(tengoPelota){
+            texto = "Avance con pase";
+        }else{
+            texto = "Avanzo con pase";
+        }
+        openModal2(ruta, texto);
         break;
     case "interceptar":
         ruta= "images/INTERCEPTAR.jpg"
-        openModal2(ruta);
+        if(tengoPelota){
+            texto = "Interceptaste la pelota";
+        }else{
+            texto = "Te intercepto la pelota"
+        }
+        openModal2(ruta, texto);
         break;
     case "robar":
         ruta= "images/ROBAR.jpg"
-        openModal2(ruta);
+        if(tengoPelota){
+            texto = "Robaste la pelota";
+        }else{
+            texto = "Te robo la pelota";
+        }
+        openModal2(ruta, texto);
         break;
     case "tapar":
         ruta= "images/TAPAR.jpg"
-        openModal2(ruta);
+        if(tengoPelota){
+            texto = "Metiste un tapon";
+        }else{
+            texto = "Te metio un tapon";
+        }
+        openModal2(ruta, texto);
         break;
     case "tirar":
         ruta= "images/TIRAR.jpg"
-        openModal2(ruta);
+        openModal2(ruta, texto);
         break;
     default:
         break;

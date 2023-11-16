@@ -24,7 +24,7 @@
         <div class="infoModal">
         </div>
     </div>
-    <div id="modalOverlay2" class="overlay2" th:name="${accion}">
+    <div id="modalOverlay2" class="overlay2" th:name="${accion}"  th:name2="${partido.getTengoLaPelota()}">
     </div>
 
     <div th:if="${partido.getPosicion() == 1 || partido.getPosicion() == 2}"
