@@ -194,7 +194,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
         if(accionPc == 2 && posicion > 2){
-            this.accionPc = 3;
+            Random rand = new Random();
+            this.accionPc = (rand.nextInt(2) == 0) ? 1 : 3;
         }
         if (jugador == 1) {
             if (accionPc == 1) {
@@ -237,7 +238,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
         if(accionPc == 2 && posicion > 2){
-            this.accionPc = 3;
+            Random rand = new Random();
+            this.accionPc = (rand.nextInt(2) == 0) ? 1 : 3;
         }
         if (jugador == 1) {
             if (accionPc == 3) {
@@ -279,7 +281,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
         if(accionPc == 2 && posicion > 2){
-            this.accionPc = 3;
+            Random rand = new Random();
+            this.accionPc = (rand.nextInt(2) == 0) ? 1 : 3;
         }
         if (jugador == 1) {
             if (accionPc == 2) {

@@ -293,6 +293,23 @@
     position: relative;
     left: 15rem;
 }
+.accionOcurrida{
+    position: absolute;
+    z-index: 3;
+    left: 23rem;
+    top: 1rem;
+    color: white;
+}
+.adivineAccion{
+    position: absolute;
+    z-index: 3;
+    left: 45rem;
+    bottom: 18rem;
+    color: white;
+}
+.oculto{
+    display: none;
+}
 
 .infoModal {
     background-color: #f3d7d7;

@@ -70,12 +70,12 @@ let modalOverlay = document.getElementById('modalOverlay2');
 let accion = modalOverlay.getAttribute('name');
 let tengoPelotaStr = modalOverlay.getAttribute('name2');
 let tengoPelota = tengoPelotaStr === "true";
+
 function openModal2(ruta,texto) {
-    /**<img src="${ruta}" alt="accion">*/
     modalOverlay.innerHTML = `
-        <h2>${texto}</h2>
+        <h2 class="accionOcurrida">${texto}</h2>
         <video width="500" height="500" autoplay>
-            <source src="images/INTERCEPTAR.mp4" type="video/mp4" >
+            <source src="${ruta}" type="video/mp4" >
         </video>
     `;
     modalOverlay.style.display = 'block';
@@ -89,7 +89,7 @@ let texto=" ";
 
 switch (accion) {
     case "driblear":
-        ruta = "images/DRIBLEAR.jpg"
+        ruta = "images/DRIBLEAR.mp4"
         if(tengoPelota){
             texto = "Avanzaste con drible"
         }else{
@@ -98,7 +98,7 @@ switch (accion) {
         openModal2(ruta, texto);
         break;
     case "pasar":
-         ruta = "images/PASAR.jpg"
+         ruta = "images/PASAR.mp4"
         if(tengoPelota){
             texto = "Avance con pase";
         }else{
@@ -107,7 +107,7 @@ switch (accion) {
         openModal2(ruta, texto);
         break;
     case "interceptar":
-        ruta= "images/INTERCEPTAR.jpg"
+        ruta= "images/INTERCEPTAR.mp4"
         if(tengoPelota){
             texto = "Interceptaste la pelota";
         }else{
@@ -116,7 +116,7 @@ switch (accion) {
         openModal2(ruta, texto);
         break;
     case "robar":
-        ruta= "images/ROBAR.jpg"
+        ruta= "images/ROBAR.mp4"
         if(tengoPelota){
             texto = "Robaste la pelota";
         }else{
@@ -125,7 +125,7 @@ switch (accion) {
         openModal2(ruta, texto);
         break;
     case "tapar":
-        ruta= "images/TAPAR.jpg"
+        ruta= "images/TAPAR.mp4"
         if(tengoPelota){
             texto = "Metiste un tapon";
         }else{
@@ -134,13 +134,18 @@ switch (accion) {
         openModal2(ruta, texto);
         break;
     case "tirar":
-        ruta= "images/TIRAR.jpg"
+        ruta= "images/TIRAR.mp4"
         openModal2(ruta, texto);
         break;
     default:
         break;
-    }
+    };
 
+
+setTimeout(function() {
+    let elegirAccionPc = document.querySelector('.adivineAccion');
+    elegirAccionPc.classList.add('oculto');
+}, 1500);
 
 
 

@@ -25,8 +25,9 @@
         </div>
     </div>
     <div id="modalOverlay2" class="overlay2" th:name="${accion}"  th:name2="${partido.getTengoLaPelota()}">
-    </div>
 
+    </div>
+    <h3 class="adivineAccion" th:if="${adivinoLaAccionDeLaPc}" th:text="'Adivinaste + 5'"></h3>
     <div th:if="${partido.getPosicion() == 1 || partido.getPosicion() == 2}"
          th:class="${partido.getPosicion() == 1} ? 'div-jugadoresUno' :  'div-jugadoresDos'">
         <div class="img-player">
@@ -180,10 +181,6 @@
 
     </div>
 </section>
-<div class="accionElegidaPc">
-    <p th:if="${accionElegidaPc != null}" th:text="${accionElegidaPc}"></p>
-    <p th:if="${adivinoLaAccionDeLaPc}" th:text="'Adivinaste + 5'"></p>
-</div>
 <img src="images/CANCHA.jpg" alt="cancha" class="cancha-img">
 <script src="js/partido.js"></script>
 </body>
