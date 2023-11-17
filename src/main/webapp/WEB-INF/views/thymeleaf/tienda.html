@@ -19,23 +19,24 @@
 <div class="tiendaFrame">
     <div class="header-tienda w-75 m-auto d-flex justify-content-around">
         <a href="menuPrincipal" class="tiendaVolver m-auto">
-            <h5 class="p-2 border border-2 border-white">Volver</h5>
+            <button class="volver">Volver</button>
         </a>
         <div class="tiendaName">
             <h3>Tienda</h3>
         </div>
         <div class="tiendaDinero m-auto">
-            <h5 th:text="'Dinero: $' + ${dinero}"></h5>
+            <img src="images/MONEDA.png" alt="" class="moneda">
+            <h5 th:text="${dinero}"></h5>
         </div>
     </div>
-    <div class="galeria ps-5 m-auto">
+    <div class="galeria">
         <div class="tienda-productos">
             <form action="comprar" method="POST">
                 <input type="hidden" name="dinero" th:value="${dinero}">
                 <div>
-                    <div class="d-flex flex-wrap">
-                        <div th:each="p : ${productos}" class="me-4 mb-4 card-size">
-                            <div class="card text-center card-producto">
+                    <div class="galeria2">
+                        <div th:each="p : ${productos}" >
+                            <div class="card text-center card-producto m-2">
                                 <img th:src="${p.imagen}" class="card-img-top m-auto pt-3" alt="...">
                                 <div class="card-body">
                                     <h5 th:text="${p.nombre}" class="card-title"></h5>

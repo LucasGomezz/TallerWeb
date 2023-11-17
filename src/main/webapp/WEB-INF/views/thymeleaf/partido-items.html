@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/partido.css">
+    <link rel="stylesheet" href="css/partido-items.css">
     <title>Partido</title>
 </head>
 <body class="body-partido-items">
@@ -11,13 +12,13 @@
         <div class="partido-item">
 
                         <div th:each="i : ${items}" th:if="${i != null}">
-                            <div>
+                            <div class="item">
                                 <img th:src="${i.imagen}">
                                 <div>
                                     <form action="equipar" method="POST">
                                         <input type="hidden" name="idEquipo1" th:value="${idEquipo1}">
                                         <input type="hidden" name="idEquipo2" th:value="${idEquipo2}">
-                                        <h5 th:text="${i.nombre}"></h5>
+                                        <h3 th:text="${i.nombre}"></h3>
                                         <input type="hidden" th:value="${i.getNombre()}" name="nombreProducto">
                                         <button type="submit" >Equipar</button>
                                     </form>

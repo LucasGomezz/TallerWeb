@@ -35,8 +35,8 @@ INSERT INTO equipo(nombre, jugador1_id, jugador2_id, logo, color)VALUES("Golden 
 
 
 INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Tirar + 5", 1000, "images/ITEM.png");
-INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Pasar + 5", 1000, "images/ITEM.png");
-INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Driblear + 5", 1000, "images/ITEM.png");
-INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Robar + 5", 1000, "images/ITEM.png");
-INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Tapar + 5", 1000, "images/ITEM.png");
-INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Interceptar + 5", 1000, "images/ITEM.png");
+INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Pasar + 5", 1000, "images/ITEM2.png");
+INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Driblear + 5", 1000, "images/ITEM3.png");
+INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Robar + 5", 1000, "images/ITEM4.png");
+INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Tapar + 5", 1000, "images/ITEM5.png");
+INSERT INTO productoTienda(nombre, precio, imagen)VALUES("Interceptar + 5", 1000, "images/ITEM6.png");

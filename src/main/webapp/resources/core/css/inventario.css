@@ -4,6 +4,9 @@
     box-sizing: border-box;
     font-family: "Segoe UI";
 }
+.volver{
+    border: 3px solid white;
+}
 .fondo{
     border: 10px solid #B99F84;
     box-sizing: border-box;
@@ -17,8 +20,8 @@
     z-index: -1;
 }
 .inventarioFrame{
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     background-color:#111111;
     display: inline-block;
     margin: 2em 4em;
@@ -31,13 +34,14 @@
 }
 .inventarioName{
     padding: 1rem;
-    width: 100%;
+    width: 500em;
     text-align: center;
 }
 .galeria{
     width: 71%;
-    max-height: 450px;
+    max-height: 500px;
     overflow-y: auto;
+    margin:2em;
 }
 
 .card-size{
