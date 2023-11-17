@@ -1,10 +1,9 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.modelo.Equipo;
+import com.tallerwebi.dominio.modelo.Inventario;
 import com.tallerwebi.dominio.modelo.Partido;
-import com.tallerwebi.infraestructura.servicio.ServicioEquipo;
-import com.tallerwebi.infraestructura.servicio.ServicioJugador;
-import com.tallerwebi.infraestructura.servicio.ServicioPartido;
+import com.tallerwebi.infraestructura.servicio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +19,23 @@ import java.util.List;
 public class ControladorPartida {
 
     PartidoDTO partidoNuevo = new PartidoDTO();
+    ItemsPartido items = new ItemsPartido();
 
     //Se pueden usar todos los servicios necesarios
     //private ServicioJugador servicioJugador;
     private ServicioEquipo servicioEquipo;
     private ServicioPartido servicioPartido;
+    private ServicioInventario servicioInventario;
+    private ServicioTienda servicioTienda;
 
     //Los controladores se comunica con los servicios y saben si estatodo bien gracias a las exceptions
     @Autowired
-    public ControladorPartida(/*ServicioJugador servicioJugador,*/ ServicioEquipo servicioEquipo, ServicioPartido servicioPartido) {
+    public ControladorPartida(/*ServicioJugador servicioJugador,*/ ServicioEquipo servicioEquipo, ServicioPartido servicioPartido, ServicioInventario servicioInventario, ServicioTienda servicioTienda) {
         //this.servicioJugador = servicioJugador;
         this.servicioEquipo = servicioEquipo;
         this.servicioPartido = servicioPartido;
+        this.servicioInventario = servicioInventario;
+        this.servicioTienda=servicioTienda;
     }
 
     @RequestMapping(value = "/check-guardado")
@@ -85,10 +89,24 @@ public class ControladorPartida {
     }
 
 
-    @RequestMapping("/partido-items")
-    public ModelAndView irAItems() {
+    @RequestMapping(value ="/items", method = {RequestMethod.GET})
+    public ModelAndView irAItems(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2) {
+        List<Long> itemsFalse = items.traerLosFalse();
+        List<Inventario> listaInventarios = new ArrayList<>();
+        for (Long item : itemsFalse) {
+                listaInventarios.add(servicioInventario.buscar(item));
+        }
         ModelMap modelo = new ModelMap();
+        modelo.put("items", listaInventarios);
+        modelo.put("idEquipo1", idEquipo1);
+        modelo.put("idEquipo2", idEquipo2);
         return new ModelAndView("partido-items", modelo);
+    }
+    @RequestMapping(value ="/equipar", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView equiparItems(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2, @RequestParam String nombreProducto) {
+        servicioInventario.consumir(servicioInventario.buscar(nombreProducto));
+        items.setearTrue(nombreProducto);
+        return new ModelAndView("redirect:items?idEquipo1="+idEquipo1+"&idEquipo2="+idEquipo2);
     }
 
     @RequestMapping(value = "/iniciarPartida", method = {RequestMethod.GET})
@@ -102,6 +120,7 @@ public class ControladorPartida {
         partidoNuevo.getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
         partidoNuevo.getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
         partidoNuevo.getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
+        items.vaciarTodos();
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
@@ -134,7 +153,7 @@ public class ControladorPartida {
         servicioPartido.tirarDado(tipoAccion, partidoNuevo);
         Integer dadoJugador = partidoNuevo.getDadoJugador();
         Integer dadoPC = partidoNuevo.getDadoPC();
-        Boolean resultado = servicioPartido.compararStats(dadoJugador, dadoPC, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador, partidoNuevo.getPosicion());
+        Boolean resultado = servicioPartido.compararStats(dadoJugador, dadoPC, tipoAccion, partidoNuevo.getEquipoJugador().getIdEquipo(), partidoNuevo.getEquipoPC().getIdEquipo(), jugador, partidoNuevo.getPosicion(), items.traerLosTrue());
 
         if (tipoAccion.equals("tirar")) {
             if (resultado) {
@@ -213,8 +232,10 @@ public class ControladorPartida {
         String mensaje;
         if (partidoNuevo.getPuntajeJugador() > partidoNuevo.getPuntajePc()) {
             mensaje = "GANASTE";
+            servicioTienda.modificarDinero(500);
         } else {
             mensaje = "PERDISTE";
+            servicioTienda.modificarDinero(100);
         }
         modelo.put("mensaje", mensaje);
         servicioPartido.guardarPuntajeFinal(idPartido, partidoNuevo);

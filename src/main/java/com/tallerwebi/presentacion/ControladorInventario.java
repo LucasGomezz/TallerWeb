@@ -26,7 +26,4 @@ public class ControladorInventario {
         return new ModelAndView("inventario", modelo);
     }
 
-    public void agregar(ProductoTienda producto, int dinero) {
-        servicioInventario.agregar(producto, dinero);
-    }
 }

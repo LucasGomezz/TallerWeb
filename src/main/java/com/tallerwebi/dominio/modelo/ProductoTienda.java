@@ -17,10 +17,6 @@ public class ProductoTienda {
     private Integer precio;
     private String imagen;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria", nullable = false)
-    private Categoria categoria;
-
 
     public Long getIdProducto() {
         return idProducto;
@@ -53,12 +49,5 @@ public class ProductoTienda {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+    
 }

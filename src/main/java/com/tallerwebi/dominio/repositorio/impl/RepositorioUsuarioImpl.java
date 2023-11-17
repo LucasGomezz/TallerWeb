@@ -18,7 +18,6 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
     @Override
     public Usuario buscarUsuario(String email, String password) {
-
         final Session session = sessionFactory.getCurrentSession();
         return (Usuario) session.createCriteria(Usuario.class)
                 .add(Restrictions.eq("email", email))
@@ -45,8 +44,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
     @Override
     public Integer mostrarDinero() {
-        Usuario usuario = new Usuario();
-        usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+        Usuario usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
                 .add(Restrictions.eq("id", 1L))
                 .uniqueResult();
 
@@ -58,14 +56,12 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     }
     @Override
     public void modificarDinero(Integer dinero, Integer precio) {
-        Usuario usuario = new Usuario();
-        usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-                .add(Restrictions.eq("id", usuario.getId()))
+        Usuario  usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+                .add(Restrictions.eq("id", 1L))
                 .uniqueResult();
 
-        int dineroActual = dinero - precio;
+        Integer dineroActual = dinero - precio;
         usuario.setDinero(dineroActual);
         sessionFactory.getCurrentSession().update(usuario);
     }
-
 }

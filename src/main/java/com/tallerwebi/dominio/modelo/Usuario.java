@@ -17,7 +17,7 @@ public class Usuario {
     private String password;
     private String rol;
     private Boolean activo = false;
-    private int dinero;
+    private Integer dinero;
 
 //    @OneToMany(mappedBy = "usuario")
 //    private List<Inventario> inventario;
@@ -61,11 +61,11 @@ public class Usuario {
         activo = true;
     }
 
-    public int getDinero() {
+    public Integer getDinero() {
         return dinero;
     }
 
-    public void setDinero(int dinero) {
+    public void setDinero(Integer dinero) {
         this.dinero = dinero;
     }
 }

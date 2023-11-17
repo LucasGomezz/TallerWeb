@@ -39,8 +39,6 @@
                                 <img th:src="${p.imagen}" class="card-img-top m-auto pt-3" alt="...">
                                 <div class="card-body">
                                     <h5 th:text="${p.nombre}" class="card-title"></h5>
-                                    <p th:text="'Categoría: ' + ${p.categoria.nombre}" class="card-text"></p>
-                                    <p th:text="'Aumento: ' + ${p.categoria.porcentaje} + '%'" class="card-text"></p>
                                     <p th:text="'$' + ${p.precio}" class="card-text"></p>
                                     <button type="submit" th:value="${p.idProducto}" name="idProducto" id="idProducto" th:text="'Comprar'"></button>
                                 </div>

@@ -6,7 +6,6 @@ import com.tallerwebi.dominio.modelo.ProductoTienda;
 import com.tallerwebi.dominio.modelo.Usuario;
 import com.tallerwebi.dominio.repositorio.RepositorioInventario;
 
-import com.tallerwebi.dominio.repositorio.RepositorioUsuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -33,32 +32,46 @@ public class RepositorioInventarioImpl implements RepositorioInventario{
         return(Inventario) session.createCriteria(Inventario.class).add(Restrictions.eq("id", idProductoInventario)).uniqueResult();
     }
     @Override
+    public Inventario buscar(String nombre) {
+        final Session session = sessionFactory.getCurrentSession();
+        return(Inventario) session.createCriteria(Inventario.class).add(Restrictions.eq("nombre", nombre)).uniqueResult();
+    }
+    @Override
     public List<Inventario> listAll() {
         return sessionFactory.getCurrentSession().createCriteria(Inventario.class).list();
     }
 
     @Override
-    public void agregar(ProductoTienda producto, int dinero) {
+    public void agregar(ProductoTienda producto, Integer dinero) {
         final Session session = sessionFactory.getCurrentSession();
         Inventario inventario = new Inventario();
         Inventario productoBuscado = (Inventario) session.createCriteria(Inventario.class)
                 .add(Restrictions.eq("nombre", producto.getNombre()))
                 .uniqueResult();
 
-        if(dinero > producto.getPrecio()){
+        if(dinero >= producto.getPrecio()){
             repositorioUsuario.modificarDinero(dinero, producto.getPrecio());
             if(productoBuscado != null){
                 productoBuscado.setCantidad(productoBuscado.getCantidad() + 1);
                 session.update(productoBuscado);
             } else{
                 inventario.setIdProductoInventario(producto.getIdProducto());
-                inventario.setCategoria(producto.getCategoria().getNombre());
-                inventario.setPorcentaje(producto.getCategoria().getPorcentaje());
                 inventario.setImagen(producto.getImagen());
                 inventario.setNombre(producto.getNombre());
                 inventario.setCantidad(inventario.getCantidad() + 1);
                 session.save(inventario);
             }
+        }
+    }
+
+    @Override
+    public void consumir(Inventario inventario) {
+        final Session session = sessionFactory.getCurrentSession();
+        if (inventario.getCantidad() > 1) {
+            inventario.setCantidad(inventario.getCantidad() - 1);
+            session.update(inventario);
+        } else {
+            session.delete(inventario);
         }
     }
 

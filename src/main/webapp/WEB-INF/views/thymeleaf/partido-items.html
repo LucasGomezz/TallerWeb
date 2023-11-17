@@ -9,18 +9,28 @@
 <body class="body-partido-items">
     <div class="partido-item-todos">
         <div class="partido-item">
-        <img src="images/ITEM.png" alt="item" class="img-item" width="100px">
-        <input type="number" name="cantidad" id="cantidad1" min="0" max="4" placeholder="0" class="input-number">
-        </div>
-        <div class="partido-item">
-            <img src="images/ITEM.png" alt="item" class="img-item" width="100px">
-            <input type="number" name="cantidad" id="cantidad2"min="0" max="4" placeholder="0" class="input-number">
-        </div>
-        <div class="partido-item">
-            <img src="images/ITEM.png" alt="item" class="img-item" width="100px">
-            <input type="number" name="cantidad" id="cantidad3"min="0" max="4" placeholder="0" class="input-number">
+
+                        <div th:each="i : ${items}" th:if="${i != null}">
+                            <div>
+                                <img th:src="${i.imagen}">
+                                <div>
+                                    <form action="equipar" method="POST">
+                                        <input type="hidden" name="idEquipo1" th:value="${idEquipo1}">
+                                        <input type="hidden" name="idEquipo2" th:value="${idEquipo2}">
+                                        <h5 th:text="${i.nombre}"></h5>
+                                        <input type="hidden" th:value="${i.getNombre()}" name="nombreProducto">
+                                        <button type="submit" >Equipar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
         </div>
     </div>
-<a href="partido"><button>Equipar</button></a>
+    <form action="iniciarPartida" method="get">
+        <input type="hidden" name="idEquipo1" th:value="${idEquipo1}">
+        <input type="hidden" name="idEquipo2" th:value="${idEquipo2}">
+        <button type="submit">Confirmar</button>
+    </form>
+
 </body>
 </html>

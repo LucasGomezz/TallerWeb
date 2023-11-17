@@ -15,7 +15,7 @@ public interface ServicioPartido {
 
     void actualizarPartido(Partido partido);
 
-    Boolean compararStats(Integer dadoJugador, Integer dadoPc, String accion, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+    Boolean compararStats(Integer dadoJugador, Integer dadoPc, String accion, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion, List<String> itemsTrue);
 
     void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO);
 
@@ -30,16 +30,16 @@ public interface ServicioPartido {
     void actualizar(Long id);
     Integer elegirAccionPc(Integer posicion);
 
-    Boolean driblearStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion);
-    Boolean robarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+    Boolean driblearStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion, List<String> itemsTrue);
+    Boolean robarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion, List<String> itemsTrue);
 
-    Boolean tirarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion);
+    Boolean tirarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion, List<String> itemsTrue);
 
-    Boolean pasarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion);
+    Boolean pasarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion, List<String> itemsTrue);
 
-    Boolean interceptarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+    Boolean interceptarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion, List<String> itemsTrue);
 
-    Boolean taparStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion);
+    Boolean taparStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion, List<String> itemsTrue);
 
     Boolean adivinoAccionDeLaMaquina(Boolean adivino);
 

@@ -99,26 +99,26 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public Boolean compararStats(Integer dadoJugador, Integer dadoPC, String accion, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
+    public Boolean compararStats(Integer dadoJugador, Integer dadoPC, String accion, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion, List<String> itemsTrue) {
         Boolean resultado = false;
         switch (accion) {
             case "driblear":
-                resultado = driblearStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, accion);
+                resultado = driblearStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, accion, itemsTrue);
                 break;
             case "tirar":
-                resultado = tirarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, accion);
+                resultado = tirarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, accion, itemsTrue);
                 break;
             case "pasar":
-                resultado = pasarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador,accion);
+                resultado = pasarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador,accion, itemsTrue);
                 break;
             case "robar":
-                resultado = robarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion);
+                resultado = robarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion, itemsTrue);
                 break;
             case "tapar":
-                resultado = taparStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion);
+                resultado = taparStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion, itemsTrue);
                 break;
             case "interceptar":
-                resultado = interceptarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion);
+                resultado = interceptarStats(dadoJugador, dadoPC, idEquipo1, idEquipo2, jugador, posicion, itemsTrue);
                 break;
             default:
                 break;
@@ -126,16 +126,22 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return resultado;
     }
     @Override
-    public Boolean driblearStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion) {
+    public Boolean driblearStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion, List<String> itemsTrue) {
+        Integer tienePotenciador = 0;
+        for (String item: itemsTrue) {
+            if(item.equals("drible")){
+                tienePotenciador += 5;
+            }
+        }
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = 0;
         if (jugador == 1) {
-            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible() + dadoJugador;
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getDrible() + dadoJugador + tienePotenciador;
             statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getRobo() + dadoPC;
             adivinoAccionDeLaMaquina(false);
         } else {
-            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getDrible() + dadoJugador;
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getDrible() + dadoJugador + tienePotenciador;
             statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getRobo() + dadoPC;
             adivinoAccionDeLaMaquina(false);
         }
@@ -147,16 +153,22 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return statJugador > statPc;
     }
     @Override
-    public Boolean tirarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion) {
+    public Boolean tirarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion,  List<String> itemsTrue) {
+        Integer tienePotenciador = 0;
+        for (String item: itemsTrue) {
+            if(item.equals("tirar")){
+                tienePotenciador += 5;
+            }
+        }
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = 0;
         if (jugador == 1) {
-            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro() + dadoJugador;
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTiro() + dadoJugador + tienePotenciador;
             statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTapa() + dadoPC;
             adivinoAccionDeLaMaquina(false);
         } else {
-            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTiro() + dadoJugador;
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTiro() + dadoJugador + tienePotenciador;
             statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTapa() + dadoPC;
             adivinoAccionDeLaMaquina(false);
         }
@@ -168,16 +180,22 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return statJugador > statPc;
     }
     @Override
-    public Boolean pasarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion   ) {
+    public Boolean pasarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, String accion,  List<String> itemsTrue) {
+        Integer tienePotenciador = 0;
+        for (String item: itemsTrue) {
+            if(item.equals("pasar")){
+                tienePotenciador += 5;
+            }
+        }
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = 0;
         if (jugador == 1) {
-            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase() + dadoJugador;
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getPase() + dadoJugador + tienePotenciador;
             statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getIntercepcion() + dadoPC;
             adivinoAccionDeLaMaquina(false);
         } else {
-            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getPase() + dadoJugador;
+            statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getPase() + dadoJugador + tienePotenciador;
             statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getIntercepcion() + dadoPC;
             adivinoAccionDeLaMaquina(false);
         }
@@ -189,7 +207,13 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return statJugador > statPc;
     }
     @Override
-    public Boolean robarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
+    public Boolean robarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion, List<String> itemsTrue) {
+        Integer tienePotenciador = 0;
+        for (String item: itemsTrue) {
+            if(item.equals("robar")){
+                tienePotenciador += 5;
+            }
+        }
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
@@ -199,29 +223,29 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         if (jugador == 1) {
             if (accionPc == 1) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + 5;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + 5 + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
                 adivinoAccionDeLaMaquina(true);
             } else if (accionPc == 2) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             } else {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             }
         } else {
             if (accionPc == 1) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + 5;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + 5 + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
                 adivinoAccionDeLaMaquina(true);
             } else if (accionPc == 2) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             } else {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             }
@@ -233,7 +257,13 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public Boolean interceptarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
+    public Boolean interceptarStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion,  List<String> itemsTrue) {
+        Integer tienePotenciador = 0;
+        for (String item: itemsTrue) {
+            if(item.equals("tirar")){
+                tienePotenciador += 5;
+            }
+        }
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
@@ -243,29 +273,29 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         if (jugador == 1) {
             if (accionPc == 3) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + 5;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + 5 + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
                 adivinoAccionDeLaMaquina(true);
             } else if (accionPc == 2) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             } else {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             }
         } else {
             if (accionPc == 3) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + 5;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + 5 + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
                 adivinoAccionDeLaMaquina(true);
             } else if (accionPc == 2) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             } else {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             }
@@ -276,7 +306,13 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return resultado;
     }
     @Override
-    public Boolean taparStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion) {
+    public Boolean taparStats(Integer dadoJugador, Integer dadoPC, Long idEquipo1, Long idEquipo2, Integer jugador, Integer posicion,  List<String> itemsTrue) {
+        Integer tienePotenciador = 0;
+        for (String item: itemsTrue) {
+            if(item.equals("tirar")){
+                tienePotenciador += 5;
+            }
+        }
         Integer statJugador = 0;
         Integer statPc = 0;
         this.accionPc = elegirAccionPc(posicion);
@@ -286,29 +322,29 @@ public class ServicioPartidoImpl implements ServicioPartido {
         }
         if (jugador == 1) {
             if (accionPc == 2) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + 5;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getTapa() + dadoJugador + 5 + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getTiro() + dadoPC;
                 adivinoAccionDeLaMaquina(true);
             } else if (accionPc == 1) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getRobo() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getDrible() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             } else {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador1().getIntercepcion() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador1().getPase() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             }
         } else {
             if (accionPc == 2) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + 5;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getTapa() + dadoJugador + 5 + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getTiro() + dadoPC;
                 adivinoAccionDeLaMaquina(true);
             } else if (accionPc == 1) {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getRobo() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getDrible() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             } else {
-                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador;
+                statJugador = servicioEquipo.buscarEquipo(idEquipo1).getJugador2().getIntercepcion() + dadoJugador + tienePotenciador;
                 statPc = servicioEquipo.buscarEquipo(idEquipo2).getJugador2().getPase() + dadoPC;
                 adivinoAccionDeLaMaquina(false);
             }

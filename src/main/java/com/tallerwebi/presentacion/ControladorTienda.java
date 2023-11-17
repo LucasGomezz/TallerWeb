@@ -30,7 +30,7 @@ public class ControladorTienda {
     }
 
     @RequestMapping(value = "/comprar", method = RequestMethod.POST)
-    public ModelAndView comprar(@RequestParam(required = false) Long idProducto, int dinero) {
+    public ModelAndView comprar(@RequestParam(required = false) Long idProducto, Integer dinero) {
         ProductoTienda producto = servicioTienda.buscar(idProducto);
         servicionInventario.agregar(producto, dinero);
         return new ModelAndView("redirect:/tienda");

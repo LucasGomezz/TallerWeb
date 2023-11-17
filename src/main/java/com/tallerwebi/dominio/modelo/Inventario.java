@@ -13,9 +13,7 @@ public class Inventario {
     private Long idProductoInventario;
     private String nombre;
     private String imagen;
-    private String categoria;
-    private int cantidad = 0;
-    private int porcentaje = 0;
+    private Integer cantidad = 0;
 
     public Long getIdProductoInventario() {
         return idProductoInventario;
@@ -41,27 +39,12 @@ public class Inventario {
         this.imagen = imagen;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    public int getPorcentaje() {
-        return porcentaje;
-    }
-
-    public void setPorcentaje(int porcentaje) {
-        this.porcentaje = porcentaje;
-    }
 }

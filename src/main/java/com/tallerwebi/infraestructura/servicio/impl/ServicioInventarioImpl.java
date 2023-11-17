@@ -22,6 +22,14 @@ public class ServicioInventarioImpl implements ServicioInventario {
         this.repositorioInventario = repositorioInventario;
 
     }
+    @Override
+    public Inventario buscar(Long idProductoInventario){
+        return repositorioInventario.buscar(idProductoInventario);
+    }
+    @Override
+    public Inventario buscar(String nombre){
+        return repositorioInventario.buscar(nombre);
+    }
 
     @Override
     public List<Inventario> listAll(){
@@ -29,7 +37,11 @@ public class ServicioInventarioImpl implements ServicioInventario {
     }
 
     @Override
-    public void agregar(ProductoTienda producto, int dinero) {
+    public void agregar(ProductoTienda producto, Integer dinero) {
         repositorioInventario.agregar(producto, dinero);
+    }
+    @Override
+    public void consumir(Inventario inventario) {
+        repositorioInventario.consumir(inventario);
     }
 }
