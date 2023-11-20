@@ -88,18 +88,19 @@ public class ControladorPartidaTest {
         partido.setDadoJugador(2);
         partido.setTengoLaPelota(true);
         partido.setTienePelotaJugador(1);
-
+        controladorPartida.setPartidoNuevo(partido);
         ModelAndView mav = whenElPartidoTermina(partido);
         thenDevuelveVistaPartidoResultado(mav);
     }
 
     private void thenDevuelveVistaPartidoResultado(ModelAndView mav) {
-        assertThat(mav.getViewName(), equalToIgnoringCase("partido-resultado"));
+        assertThat(mav.getViewName(), equalToIgnoringCase("redirect:partido-resultado?idPartido=" + 1));
     }
 
 
     private ModelAndView whenElPartidoTermina(PartidoDTO partido) {
         return controladorPartida.irAPartido(partido.getIdPartido());
+        //hacer geter y seter en el controlador del partidoDto y setarlo antes
     }
 
     @Test

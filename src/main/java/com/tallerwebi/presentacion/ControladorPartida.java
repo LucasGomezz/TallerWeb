@@ -273,5 +273,13 @@ public class ControladorPartida {
         modelo.put("partidos", partidos);
         return new ModelAndView("historial", modelo);
     }
+
+    public PartidoDTO getPartidoNuevo() {
+        return partidoNuevo;
+    }
+
+    public void setPartidoNuevo(PartidoDTO partidoNuevo) {
+        this.partidoNuevo = partidoNuevo;
+    }
 }
 

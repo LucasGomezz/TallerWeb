@@ -6,15 +6,25 @@ import java.util.Random;
 
 public class PartidoDTO {
     private Long idPartido;
+
     private Integer puntajeJugador = 0;
+
     private Integer puntajePc = 0;
+
     private Equipo equipoJugador;
+
     private Equipo equipoPC;
+
     private Integer posicion = 1;
+
     private Integer dadoJugador;
+
     private Integer dadoPC;
+
     private Boolean tengoLaPelota = true;
+
     private Integer tienePelotaJugador = 1;
+
 
     public Integer getPuntajeJugador() {
         return puntajeJugador;
