@@ -32,6 +32,6 @@ public class ServicioPartidoTest {
        return servicioPartido.buscarPartidoGuardado();
     }
     private void thenSeRetoma(Long id){
-        assertThat(id, equalTo("1L"));
+        assertThat(id, equalTo(1L));
     }
 }
