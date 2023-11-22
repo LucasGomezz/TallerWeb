@@ -10,8 +10,8 @@
 <body class="body-partido-items">
     <div class="partido-item-todos">
         <div class="partido-item">
-                        <div th:if=" ${items} == null">
-                            <h2>No posee mejoras compradas</h2>
+                        <div th:if="${items.size() == 0}">
+                            <h2>No tenes mejoras compradas!</h2>
                         </div>
                         <div th:each="i : ${items}" th:if="${i != null}">
                             <div class="item">

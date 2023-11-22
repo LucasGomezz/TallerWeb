@@ -35,7 +35,7 @@ public class ControladorPartida {
         this.servicioEquipo = servicioEquipo;
         this.servicioPartido = servicioPartido;
         this.servicioInventario = servicioInventario;
-        this.servicioTienda=servicioTienda;
+        this.servicioTienda = servicioTienda;
     }
 
     @RequestMapping(value = "/check-guardado")
@@ -89,24 +89,29 @@ public class ControladorPartida {
     }
 
 
-    @RequestMapping(value ="/items", method = {RequestMethod.GET})
+    @RequestMapping(value = "/items", method = {RequestMethod.GET})
     public ModelAndView irAItems(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2) {
         List<Long> itemsFalse = items.traerLosFalse();
         List<Inventario> listaInventarios = new ArrayList<>();
         for (Long item : itemsFalse) {
-                listaInventarios.add(servicioInventario.buscar(item));
+            Inventario inventario = servicioInventario.buscar(item);
+            if (inventario != null) {
+                listaInventarios.add(inventario);
+            }
         }
         ModelMap modelo = new ModelMap();
+        //modelo.put("vacios", )
         modelo.put("items", listaInventarios);
         modelo.put("idEquipo1", idEquipo1);
         modelo.put("idEquipo2", idEquipo2);
         return new ModelAndView("partido-items", modelo);
     }
-    @RequestMapping(value ="/equipar", method = {RequestMethod.GET, RequestMethod.POST})
+
+    @RequestMapping(value = "/equipar", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView equiparItems(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2, @RequestParam String nombreProducto) {
         servicioInventario.consumir(servicioInventario.buscar(nombreProducto));
         items.setearTrue(nombreProducto);
-        return new ModelAndView("redirect:items?idEquipo1="+idEquipo1+"&idEquipo2="+idEquipo2);
+        return new ModelAndView("redirect:items?idEquipo1=" + idEquipo1 + "&idEquipo2=" + idEquipo2);
     }
 
     @RequestMapping(value = "/iniciarPartida", method = {RequestMethod.GET})

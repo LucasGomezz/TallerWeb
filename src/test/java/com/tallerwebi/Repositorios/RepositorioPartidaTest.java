@@ -1,21 +1,24 @@
 /*package com.tallerwebi.Repositorios;
-
 import com.tallerwebi.SpringTest;
 import com.tallerwebi.dominio.modelo.Partido;
 import com.tallerwebi.dominio.repositorio.RepositorioPartido;
-import com.tallerwebi.dominio.repositorio.impl.RepositorioPartidoImpl;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+
+import javax.transaction.Transactional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class RepositorioPartidaTest extends SpringTest {
 
-    @InjectMocks
+    @Autowired
     RepositorioPartido repositorioPartido;
 
     @Test
+    @Transactional
+    @Rollback
     public void sePuedeActualizarUnPartido() {
         Partido partido = new Partido();
         repositorioPartido.guardar(partido);
@@ -33,4 +36,5 @@ public class RepositorioPartidaTest extends SpringTest {
         Partido buscado = repositorioPartido.buscar(1L);
         assertThat(buscado, notNullValue());
     }
-}*/
+}
+*/
