@@ -42,10 +42,13 @@ a{
     text-align: center;
 }
 .galeria{
-    width: 71%;
-    max-height: 500px;
+    width: 100rem;
+    height: 45rem;
     overflow-y: auto;
-    margin:2em;
+    margin: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .card-body p{
     font-size: 1rem;
@@ -57,6 +60,11 @@ a{
 .card-producto img{
     height: 8rem;
     width: auto;
+}
+.card {
+    --bs-card-spacer-y: 2rem !important;
+    --bs-card-spacer-x: 2rem !important;
+    --bs-card-title-spacer-y: 1.5rem !important;
 }
 
 img{

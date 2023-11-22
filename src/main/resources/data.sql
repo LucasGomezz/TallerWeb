@@ -1,4 +1,4 @@
-INSERT INTO usuario (id,email,password,rol,activo, dinero) VALUES(1, 'test@unlam.edu.ar', 'test', 'ADMIN', true, 1000);
+INSERT INTO usuario (id,email,password,rol,activo, dinero) VALUES(1, 'test@unlam.edu.ar', 'test', 'ADMIN', true, 10009000);
 
 INSERT INTO jugador(nombre, drible, tiro, pase, robo, tapa, intercepcion)VALUES("Jason Tatum", 81, 83, 84, 78, 79, 76);
 INSERT INTO jugador(nombre, drible, tiro, pase, robo, tapa, intercepcion)VALUES("AL Horford",82, 80, 81,75, 80, 77);
