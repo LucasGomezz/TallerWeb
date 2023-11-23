@@ -66,7 +66,7 @@ public class ServicioTiendaImpl implements ServicioTienda {
     public Integer mostrarDinero() {
         return repositorioUsuario.mostrarDinero();
     }
-    public void modificarDinero(Integer dinero){
-        repositorioUsuario.modificarDinero(dinero, 0);
+    public void modificarDinero(Integer dinero, Long id){
+        repositorioUsuario.modificarDinero(dinero, 0, id);
     }
 }

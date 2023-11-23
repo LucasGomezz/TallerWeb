@@ -11,6 +11,10 @@ import javax.transaction.Transactional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
+
+
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration @ContextConfiguration(classes = SpringWebTestConfig.class, HibernateTestConfig.class}
 public class RepositorioPartidaTest extends SpringTest {
 
     @Autowired

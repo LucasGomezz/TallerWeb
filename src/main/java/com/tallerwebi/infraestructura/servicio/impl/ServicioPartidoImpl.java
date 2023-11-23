@@ -395,21 +395,23 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
     @Override
     public void guardarPuntajeFinal(Long id, PartidoDTO partidoDTO) {
-        buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
-        buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
-        buscarPartido(id).setGuardable(false);
+        Partido partido=buscarPartido(id);
+        partido.setPuntosUsuario(partidoDTO.getPuntajeJugador());
+        partido.setPuntosPc(partidoDTO.getPuntajePc());
+        partido.setGuardable(false);
         actualizar(id);
     }
 
     @Override
     public void guardarPartido(Long id, PartidoDTO partidoDTO) {
-        buscarPartido(id).setPuntosUsuario(partidoDTO.getPuntajeJugador());
-        buscarPartido(id).setPuntosPc(partidoDTO.getPuntajePc());
-        buscarPartido(id).setEquipoJugador(partidoDTO.getEquipoJugador());
-        buscarPartido(id).setEquipoPc(partidoDTO.getEquipoPC());
-        buscarPartido(id).setPosicion(partidoDTO.getPosicion());
-        buscarPartido(id).setTengoLaPelota(partidoDTO.getTengoLaPelota());
-        buscarPartido(id).setTienePelotaJugador(partidoDTO.getTienePelotaJugador());
+        Partido partido=buscarPartido(id);
+        partido.setPuntosUsuario(partidoDTO.getPuntajeJugador());
+        partido.setPuntosPc(partidoDTO.getPuntajePc());
+        partido.setEquipoJugador(partidoDTO.getEquipoJugador());
+        partido.setEquipoPc(partidoDTO.getEquipoPC());
+        partido.setPosicion(partidoDTO.getPosicion());
+        partido.setTengoLaPelota(partidoDTO.getTengoLaPelota());
+        partido.setTienePelotaJugador(partidoDTO.getTienePelotaJugador());
         actualizar(id);
     }
 

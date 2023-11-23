@@ -37,8 +37,8 @@ public class ServicioInventarioImpl implements ServicioInventario {
     }
 
     @Override
-    public void agregar(ProductoTienda producto, Integer dinero) {
-        repositorioInventario.agregar(producto, dinero);
+    public void agregar(ProductoTienda producto, Integer dinero, Long id) {
+        repositorioInventario.agregar(producto, dinero, id);
     }
     @Override
     public void consumir(Inventario inventario) {

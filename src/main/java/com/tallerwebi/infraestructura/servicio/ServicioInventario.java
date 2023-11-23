@@ -9,7 +9,7 @@ public interface ServicioInventario {
 
     List<Inventario> listAll();
 
-    void agregar(ProductoTienda producto, Integer dinero);
+    void agregar(ProductoTienda producto, Integer dinero, Long id);
     void consumir(Inventario inventario);
     Inventario buscar(Long idProductoInventario);
     Inventario buscar(String nombreProducto);

@@ -42,7 +42,7 @@ public class RepositorioInventarioImpl implements RepositorioInventario{
     }
 
     @Override
-    public void agregar(ProductoTienda producto, Integer dinero) {
+    public void agregar(ProductoTienda producto, Integer dinero, Long id) {
         final Session session = sessionFactory.getCurrentSession();
         Inventario inventario = new Inventario();
         Inventario productoBuscado = (Inventario) session.createCriteria(Inventario.class)
@@ -50,7 +50,7 @@ public class RepositorioInventarioImpl implements RepositorioInventario{
                 .uniqueResult();
 
         if(dinero >= producto.getPrecio()){
-            repositorioUsuario.modificarDinero(dinero, producto.getPrecio());
+            repositorioUsuario.modificarDinero(dinero, producto.getPrecio(),id);
             if(productoBuscado != null){
                 productoBuscado.setCantidad(productoBuscado.getCantidad() + 1);
                 session.update(productoBuscado);

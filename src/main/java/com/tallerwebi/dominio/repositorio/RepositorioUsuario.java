@@ -2,6 +2,8 @@ package com.tallerwebi.dominio.repositorio;
 
 import com.tallerwebi.dominio.modelo.Usuario;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface RepositorioUsuario {
 
     Usuario buscarUsuario(String email, String password);
@@ -9,6 +11,6 @@ public interface RepositorioUsuario {
     Usuario buscar(String email);
     void modificar(Usuario usuario);
     Integer mostrarDinero();
-    void modificarDinero(Integer dinero, Integer precio);
+    void modificarDinero(Integer dinero, Integer precio, Long id);
 }
 

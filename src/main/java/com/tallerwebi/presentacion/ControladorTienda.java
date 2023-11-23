@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class ControladorTienda {
     private ServicioTienda servicioTienda;
@@ -30,9 +33,10 @@ public class ControladorTienda {
     }
 
     @RequestMapping(value = "/comprar", method = RequestMethod.POST)
-    public ModelAndView comprar(@RequestParam(required = false) Long idProducto, Integer dinero) {
+    public ModelAndView comprar(@RequestParam(required = false) Long idProducto, Integer dinero, HttpServletRequest request) {
         ProductoTienda producto = servicioTienda.buscar(idProducto);
-        servicionInventario.agregar(producto, dinero);
+        Long id = (Long) request.getSession().getAttribute("id");
+        servicionInventario.agregar(producto, dinero, id);
         return new ModelAndView("redirect:/tienda");
     }
 

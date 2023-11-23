@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,14 @@ public class ControladorPartida {
         this.servicioInventario = servicioInventario;
         this.servicioTienda = servicioTienda;
     }
+   /* public ModelAndView verificar(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Long id = (Long) request.getSession().getAttribute("id");
+        if(id==null){
+            return new ModelAndView("redirect:login");
+        }
+        return null;
+    }*/
 
     @RequestMapping(value = "/check-guardado")
     public ModelAndView checkGuardado() {
@@ -232,15 +243,16 @@ public class ControladorPartida {
 
 
     @RequestMapping("/partido-resultado")
-    public ModelAndView irAlResultado(@RequestParam(required = true) Long idPartido) {
+    public ModelAndView irAlResultado(@RequestParam(required = true) Long idPartido, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
         String mensaje;
+        Long id = (Long) request.getSession().getAttribute("id");
         if (partidoNuevo.getPuntajeJugador() > partidoNuevo.getPuntajePc()) {
             mensaje = "GANASTE";
-            servicioTienda.modificarDinero(500);
+            servicioTienda.modificarDinero(500,id);
         } else {
             mensaje = "PERDISTE";
-            servicioTienda.modificarDinero(100);
+            servicioTienda.modificarDinero(100,id);
         }
         modelo.put("mensaje", mensaje);
         servicioPartido.guardarPuntajeFinal(idPartido, partidoNuevo);

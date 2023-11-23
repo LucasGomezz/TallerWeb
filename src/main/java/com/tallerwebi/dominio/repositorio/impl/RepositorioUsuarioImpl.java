@@ -8,6 +8,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Repository("repositorioUsuario")
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
@@ -55,9 +57,9 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         }
     }
     @Override
-    public void modificarDinero(Integer dinero, Integer precio) {
+    public void modificarDinero(Integer dinero, Integer precio, Long id) {
         Usuario  usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-                .add(Restrictions.eq("id", 1L))
+                .add(Restrictions.eq("id", id))
                 .uniqueResult();
         Integer dineroActual=0;
         if(precio>0){

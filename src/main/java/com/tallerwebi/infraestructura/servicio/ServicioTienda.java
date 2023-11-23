@@ -10,5 +10,5 @@ public interface ServicioTienda {
     void inicializarItemTienda();
     List<ProductoTienda> listAll();
     Integer mostrarDinero();
-    void modificarDinero(Integer dinero);
+    void modificarDinero(Integer dinero, Long id);
 }
