@@ -41,7 +41,7 @@ public class ControladorPartida {
         this.servicioTienda = servicioTienda;
     }
 
-    private Boolean verificar(@RequestParam(required = false) HttpServletRequest request){
+    public Boolean verificar(@RequestParam(required = false) HttpServletRequest request){
         Long id = (Long) request.getSession().getAttribute("id");
         if(id == null){
             return true;
@@ -85,7 +85,7 @@ public class ControladorPartida {
         modelo.put("idEquipo2", idEquipo2);
         modelo.put("equipo1", servicioEquipo.buscarEquipo(idEquipo1));
         modelo.put("equipo2", servicioEquipo.buscarEquipo(idEquipo2));
-
+        items.vaciarTodos();
 
         return new ModelAndView("elegir-equipo", modelo);
     }
@@ -142,7 +142,6 @@ public class ControladorPartida {
         partidoNuevo.getEquipoPC().getJugador2().setImagen("images/JUGADOR-VISITANTE.png");
         partidoNuevo.getEquipoJugador().getJugador1().setImagen("images/JUGADOR-LOCAL-CON-PELOTA.png");
         partidoNuevo.getEquipoJugador().getJugador2().setImagen("images/JUGADOR-LOCAL.png");
-        items.vaciarTodos();
         return new ModelAndView("redirect:partido?idPartido=" + idPartido);
     }
 
@@ -162,6 +161,7 @@ public class ControladorPartida {
         modelo.put("accionElegidaPc", servicioPartido.retornarAccionPc());
         modelo.put("adivinoLaAccionDeLaPc", servicioPartido.getVerificacion());
         modelo.put("accion", servicioPartido.getAccion());
+        modelo.put("items", items);
         partidoNuevo.setImagenes();
         if (partidoNuevo.getPuntajeJugador() < 21 && partidoNuevo.getPuntajePc() < 21) {
             return new ModelAndView("partido", modelo);
@@ -299,7 +299,7 @@ public class ControladorPartida {
     }
 
     @RequestMapping(value = "/historial", method = RequestMethod.GET)
-    public ModelAndView mostrarHistorial(@RequestParam(required = false)  HttpServletRequest request) {
+    public ModelAndView mostrarHistorial(HttpServletRequest request) {
         if (verificar(request)){
             return new ModelAndView("redirect:login");
         };

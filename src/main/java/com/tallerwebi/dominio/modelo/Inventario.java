@@ -9,7 +9,6 @@ import javax.persistence.Id;
 public class Inventario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProductoInventario;
     private String nombre;
     private String imagen;

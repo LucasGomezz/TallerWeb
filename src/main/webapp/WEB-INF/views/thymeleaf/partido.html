@@ -13,6 +13,30 @@
 <form action="guardarPartido" >
     <button type="submit" class="guardar">Guardar</button>
 </form>
+<div class="botellas">
+    <div>
+        <p class="mejoras">Mejoras</p>
+    </div>
+        <div th:if="${items.getDriblear()}">
+            <img src="images/ITEM3.png">
+        </div>
+        <div th:if="${items.getTirar()}">
+            <img src="images/ITEM.png">
+        </div>
+        <div th:if="${items.getPasar()}" >
+            <img src="images/ITEM2.png">
+        </div>
+        <div th:if="${items.getRobar()}">
+            <img src="images/ITEM4.png">
+        </div>
+        <div th:if="${items.getTapar()}">
+            <img src="images/ITEM5.png">
+        </div>
+        <div th:if="${items.getInterceptar()}">
+            <img src="images/ITEM6.png">
+        </div>
+</div>
+
 <section class="container-partido">
 
     <h1 class="score mt-3 mb-3">
@@ -178,7 +202,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 <img src="images/CANCHA.jpg" alt="cancha" class="cancha-img">

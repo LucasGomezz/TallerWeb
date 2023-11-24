@@ -14,16 +14,21 @@ import org.junit.jupiter.api.parallel.Resources;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.OneToOne;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class ControladorPartidaTest {
     ServicioTienda servicioTienda = mock(ServicioTienda.class);
     ServicioPartido servicioPartido = mock(ServicioPartido.class);
     ControladorPartida controladorPartida = new ControladorPartida(null,servicioPartido,null,servicioTienda);
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpSession session = mock(HttpSession.class);
 
     @Test
     public void siElPuntajeLlegaA21ElPartidoTermina(){
@@ -48,8 +53,8 @@ public class ControladorPartidaTest {
         partido.setIdPartido(1L);
         partido.setPuntajeJugador(21);
         partido.setPuntajePc(19);
-        partido.setEquipoJugador(equipo1);
-        partido.setEquipoPC(equipo2);
+        partido.setEquipoPC(equipo1);
+        partido.setEquipoJugador(equipo2);
         controladorPartida.setPartidoNuevo(partido);
         ModelAndView mav = whenElPartidoTermina(partido);
         thenDevuelveVistaPartidoResultado(mav);
@@ -61,7 +66,9 @@ public class ControladorPartidaTest {
 
 
     private ModelAndView whenElPartidoTermina(PartidoDTO partido) {
-        return controladorPartida.irAPartido(partido.getIdPartido());
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("id")).thenReturn(1L);
+        return controladorPartida.irAPartido(partido.getIdPartido(), request);
 
     }
 
@@ -99,7 +106,9 @@ public class ControladorPartidaTest {
 
 
     private ModelAndView whenElPartidoSigue(PartidoDTO partido) {
-        return controladorPartida.irAPartido(partido.getIdPartido());
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("id")).thenReturn(1L);
+        return controladorPartida.irAPartido(partido.getIdPartido(), request);
     }
 
 
@@ -117,4 +126,3 @@ public class ControladorPartidaTest {
     }
 
 }
-
