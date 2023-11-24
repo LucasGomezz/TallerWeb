@@ -40,14 +40,14 @@ public class ControladorPartida {
         this.servicioInventario = servicioInventario;
         this.servicioTienda = servicioTienda;
     }
-   /* public ModelAndView verificar(){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+    private Boolean verificar(@RequestParam(required = false) HttpServletRequest request){
         Long id = (Long) request.getSession().getAttribute("id");
-        if(id==null){
-            return new ModelAndView("redirect:login");
+        if(id == null){
+            return true;
         }
-        return null;
-    }*/
+        return false;
+    }
 
     @RequestMapping(value = "/check-guardado")
     public ModelAndView checkGuardado() {
@@ -75,7 +75,10 @@ public class ControladorPartida {
     }
 
     @RequestMapping(value = "/elegir-equipo", method = {RequestMethod.GET})
-    public ModelAndView elegirEquipo(@RequestParam(required = false) Long idEquipo1, @RequestParam(required = false) Long idEquipo2) {
+    public ModelAndView elegirEquipo(@RequestParam(required = false) Long idEquipo1, @RequestParam(required = false) Long idEquipo2, HttpServletRequest request) {
+        if (verificar(request)){
+            return new ModelAndView("redirect:login");
+        };
         ModelMap modelo = new ModelMap();
         modelo.put("equipos", servicioEquipo.listAll());
         modelo.put("idEquipo1", idEquipo1);
@@ -101,7 +104,10 @@ public class ControladorPartida {
 
 
     @RequestMapping(value = "/items", method = {RequestMethod.GET})
-    public ModelAndView irAItems(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2) {
+    public ModelAndView irAItems(@RequestParam(required = true) Long idEquipo1, @RequestParam(required = true) Long idEquipo2, HttpServletRequest request) {
+        if (verificar(request)){
+            return new ModelAndView("redirect:login");
+        };
         List<Long> itemsFalse = items.traerLosFalse();
         List<Inventario> listaInventarios = new ArrayList<>();
         for (Long item : itemsFalse) {
@@ -142,7 +148,10 @@ public class ControladorPartida {
 
 
     @RequestMapping(path = "/partido", method = RequestMethod.GET)
-    public ModelAndView irAPartido(@RequestParam(required = true) Long idPartido) {
+    public ModelAndView irAPartido(@RequestParam(required = true) Long idPartido, HttpServletRequest request) {
+        if (verificar(request)){
+            return new ModelAndView("redirect:login");
+        };
         //www.web.unlam.com/partido?idEquipo1=1
         //www.web.unlam.com/partido/1/2
         //@ModelAttribute= objeto entero
@@ -218,7 +227,10 @@ public class ControladorPartida {
 
 
     @RequestMapping(value = "/partido-aro", method = RequestMethod.GET)
-    public ModelAndView irAlAro(@RequestParam(required = true) Long idPartido) {
+    public ModelAndView irAlAro(@RequestParam(required = true) Long idPartido, HttpServletRequest request) {
+        if (verificar(request)){
+            return new ModelAndView("redirect:login");
+        };
         ModelMap modelo = new ModelMap();
         modelo.put("posicion", partidoNuevo.getPosicion());
         return new ModelAndView("partido-aro", modelo);
@@ -244,6 +256,9 @@ public class ControladorPartida {
 
     @RequestMapping("/partido-resultado")
     public ModelAndView irAlResultado(@RequestParam(required = true) Long idPartido, HttpServletRequest request) {
+        if (verificar(request)){
+            return new ModelAndView("redirect:login");
+        };
         ModelMap modelo = new ModelMap();
         String mensaje;
         Long id = (Long) request.getSession().getAttribute("id");
@@ -284,7 +299,10 @@ public class ControladorPartida {
     }
 
     @RequestMapping(value = "/historial", method = RequestMethod.GET)
-    public ModelAndView mostrarHistorial() {
+    public ModelAndView mostrarHistorial(@RequestParam(required = false)  HttpServletRequest request) {
+        if (verificar(request)){
+            return new ModelAndView("redirect:login");
+        };
         ModelMap modelo = new ModelMap();
         List<Partido> partidos = servicioPartido.listAll();
         modelo.put("partidos", partidos);
