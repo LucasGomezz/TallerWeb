@@ -19,3 +19,15 @@ h3{
     text-align:center;
     margin: 0.5em;
 }
+.botonComprar{
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    cursor: pointer;
+}
+
+.botonComprar img{
+    width: 4rem;
+    height: auto;
+    cursor: pointer;
+}

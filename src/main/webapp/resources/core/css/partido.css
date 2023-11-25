@@ -233,7 +233,7 @@
     padding: 1rem;
     border-style:solid;
     border-width: 2px;
-    width: 12.2em;
+    width: 15em;
 }
 .stats-jugador{
     display: flex;
@@ -345,4 +345,34 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
+}
+.celesteBotella{
+    color: #3BD0FE;
+    background-color: white;
+    font-weight: bold;
+}
+.naranjaBotella{
+    color:#FEC73B;
+    background-color: white;
+    font-weight: bold;
+}
+.verdeBotella{
+    color: #C0FE3B;
+    background-color: white;
+    font-weight: bold;
+}
+.violetaBotella{
+    color: #5F3BFE;
+    background-color: white;
+    font-weight: bold;
+}
+.rosaBotella{
+    color: #FE3B99;
+    background-color: white;
+    font-weight: bold;
+}
+.azulBotella{
+    color: #3A71FF;
+    background-color: white;
+    font-weight: bold;
 }
