@@ -172,10 +172,12 @@
     align-items: center;
     margin:20px;
 }
-.partido-item-todos{
-    display:flex;
-    flex-direction: row;
+
+.partido-item-todos {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 .img-item{
     margin-bottom:40px;
@@ -207,7 +209,7 @@
 }
 .azul{
     background-color: black;
-    color: blue;
+    color: #7979e3;
     margin-left: 0.2em;
     margin-right: 0.2em;
 }
