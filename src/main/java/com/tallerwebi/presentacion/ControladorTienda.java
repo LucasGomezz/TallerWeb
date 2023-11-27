@@ -49,9 +49,25 @@ public class ControladorTienda {
     }
 
     @RequestMapping(value = "/comprarMonedas",method = RequestMethod.POST)
-    public ModelAndView comprarMonedas(@RequestParam(required = false)Long cantidad){
+    public ModelAndView comprarMonedas(@RequestParam(required = true)Integer cantidad){
         String initPoint = servicioMercadoPago.realizarPago(cantidad);
         return new ModelAndView("redirect:" + initPoint);
+    }
+
+    @RequestMapping(value = "/compraExitosa", method = RequestMethod.GET)
+    public ModelAndView compraExitosa(@RequestParam(required = true) Integer cantidad, HttpServletRequest request){
+        ModelMap modelo = new ModelMap();
+        modelo.put("mensaje", "Su compra fue exitosa");
+        Long id = (Long)request.getSession().getAttribute("id");
+        servicioTienda.modificarDinero(cantidad, id);
+        return new ModelAndView("compra", modelo);
+    }
+
+    @RequestMapping(value = "/compraDenegada")
+    public ModelAndView compraDenegada(){
+        ModelMap modelo= new ModelMap();
+        modelo.put("mensaje", "Su compra fue rechazada");
+        return new ModelAndView("compra", modelo);
     }
 
 }

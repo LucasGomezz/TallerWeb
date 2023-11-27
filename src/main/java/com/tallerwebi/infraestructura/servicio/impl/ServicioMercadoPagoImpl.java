@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
     @Override
-    public String realizarPago(Long cantidad) {
+    public String realizarPago(Integer cantidad) {
         MercadoPagoConfig.setAccessToken("TEST-3343260709384493-112711-624fa476a769c2d2dd4586e78154be04-301994928");
 
         //Aca armamos el item que queremos que se muestre en mercadoPago
@@ -27,7 +27,7 @@ public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
                         .description("Monedas JavaDunk")
                         .pictureUrl("https://ibb.co/Rgq4JQ3")
                         .categoryId("games")
-                        .quantity(100)
+                        .quantity(cantidad)
                         .currencyId("ARS")
                         .unitPrice(new BigDecimal("1"))
                         .build();
@@ -50,8 +50,8 @@ public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
         //Agregamos los endpoints segun exito o no de la compra
         PreferenceBackUrlsRequest backUrls =
                 PreferenceBackUrlsRequest.builder()
-                        .success("http://localhost:8080/compraExitosa")
-                        .failure("http://localhost:8080/compraDenegada")
+                        .success("http://localhost:8080/spring/compraExitosa?cantidad=" + cantidad)
+                        .failure("http://localhost:8080/spring/compraDenegada")
                         .build();
 
 

@@ -61,17 +61,14 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         Usuario  usuario = (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
-        Integer dineroActual=0;
+        Integer dineroActual = 0;
         if(precio>0){
         dineroActual = dinero - precio;
         }
         else{
-          if(dinero==500){
-              dineroActual=usuario.getDinero()+500;
-          }else if(dinero==100){
-              dineroActual=usuario.getDinero()+100;
-          }
+              dineroActual = usuario.getDinero() + dinero;
         }
+
         usuario.setDinero(dineroActual);
         sessionFactory.getCurrentSession().update(usuario);
     }
